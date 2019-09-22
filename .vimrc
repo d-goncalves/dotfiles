@@ -1,43 +1,81 @@
-set nocompatible
-filetype off
+" ==================================================================
+" PLUGINS
+" ==================================================================
 
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
 
-"Vundle Plugins
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim' "Default plugin
-Plugin 'sheerun/vim-polyglot' "Syntax highlight 
-Plugin 'scrooloose/syntastic' "Help get errors
-Plugin 'vim-airline/vim-airline'
-Plugin 'SirVer/ultisnips'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdcommenter'
-" Plugin 'Valloric/YouCompleteMe'
-"://github.com/tpope?tab=repositories
-call vundle#end()
+" Snips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+Plug 'chriskempson/base16-vim' " Theme
+Plug 'scrooloose/nerdtree' " A Tree explorer
+Plug 'majutsushi/tagbar' " Display file's current Tree
+Plug 'tpope/vim-fugitive' " Git for vim
+Plug 'tpope/vim-surround' " Change surroudings of a word
+Plug 'scrooloose/nerdcommenter' " Commenting with leader key
+Plug 'christoomey/vim-tmux-navigator' " Use ctrl + hjkl to change pane
+Plug 'jiangmiao/auto-pairs' " Add pair to every Graphical Signal [{(...
+
+" Testing 
+Plug 'kien/ctrlp.vim' " Not sure if i will use it
+
+
+Plug 'wincent/command-t', {
+  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+  \ }
+
+Plug 'tpope/vim-rvm'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/denite.nvim'
+Plug 'w0rp/ale'
+Plug 'whatyouhide/vim-lengthmatters'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'artur-shaik/vim-javacomplete2'
+
+call plug#end()
+
+
+" ==================================================================
+" CORE
+" ==================================================================
 
 " Detect filetype and syntax for certain file types
-" syntax on
-filetype plugin indent on
+syntax enable
+filetype on
+colorscheme base16-ocean
+set termguicolors
+set synmaxcol=200 " Improve performance
+set number relativenumber 
+set tabstop=4
+set shiftwidth=4
+set hlsearch
+set softtabstop=0
+set ignorecase
+set smartcase
+set incsearch
+set cursorline
+set nocompatible
+set laststatus=1 " Don't really understand this yet
 
-set number relativenumber "Show relative_numbers on the left of the text and the current number of the text"
+set foldlevelstart=1
+set foldmethod=syntax
 
+let mapleader = "\<Space>"
+
+" ==================================================================
+" PLUGIN CONFIGURATION
+" ==================================================================
+
+" UltiSnips trigger configuration.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical" " UltiSnipsEdit to split window vertically.
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Tagbar 
 nmap <F8> :TagbarToggle<CR>
 
-
-" Change tab to 4 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
