@@ -1,0 +1,12 @@
+source $HOME/.config/nvim/plug-config/coc.vim
+source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/nerdcommenter.vim
+source $HOME/.config/nvim/plug-config/nvim-colorizer-lua.vim
+source $HOME/.config/nvim/plug-config/quick-scope.vim
+source $HOME/.config/nvim/plug-config/start-screen.vim
+source $HOME/.config/nvim/plug-config/switch.vim
+source $HOME/.config/nvim/plug-config/ultisnips.vim
+source $HOME/.config/nvim/plug-config/vim-airline.vim
+source $HOME/.config/nvim/plug-config/vim-multiple-cursors.vim
+source $HOME/.config/nvim/plug-config/vim-tmux-navigator.vim
+source $HOME/.config/nvim/plug-config/vista.vim
