@@ -1,4 +1,6 @@
 
+
+
 """"""""""""""""""""""""""""""""""""""
 "  ____  _             _
 " |  _ \| |_   _  __ _(_)_ __  ___
@@ -16,6 +18,8 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+    "" Icons
+    Plug 'ryanoasis/vim-devicons'
     " Language support
     Plug 'sheerun/vim-polyglot'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}    
@@ -31,6 +35,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'airblade/vim-rooter'
 
+    Plug 'tmux-plugins/vim-tmux-focus-events'
     " Startify
     Plug 'mhinz/vim-startify'
 
@@ -42,31 +47,33 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'chriskempson/base16-vim' " Theme
     Plug 'tomasiser/vim-code-dark' " Another Theme
+    Plug 'arcticicestudio/nord-vim'
     Plug 'rakr/vim-one'
-    "" Icons
-    "Plug 'ryanoasis/vim-devicons'
     
     " Usability
     Plug 'tpope/vim-surround'             " Change surroudings of a word
     Plug 'christoomey/vim-tmux-navigator' " Use ctrl + hjkl to change pane
-    Plug 'rstacruz/vim-closer'
+    " Plug 'rstacruz/vim-closer'
     Plug 'wincent/terminus'               " Increase mouse integration between Terminal, Tmux and Vim
     Plug 'unblevable/quick-scope' " Highlight a letter in every word to use f _
     Plug 'AndrewRadev/switch.vim'
-    "Plug 'scrooloose/nerdcommenter'       " Commenting with leader key
+    Plug 'scrooloose/nerdcommenter'       " Commenting with leader key
     "Plug 'ervandew/supertab'              " When click tab insert completion
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'liuchengxu/vista.vim'
     Plug 'terryma/vim-multiple-cursors'
     " Snips 
-    " Plug 'SirVer/ultisnips'
-    " Plug 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 
     "" Git configuration
-    "Plug 'airblade/vim-gitgutter' " Add git diff on the left side
-    "Plug 'tpope/vim-fugitive'     " Git for vim
-
+    Plug 'airblade/vim-gitgutter' " Add git diff on the left side
+    Plug 'tpope/vim-fugitive'     " Git for vim
+    
+    Plug 'editorconfig/editorconfig-vim'
 call plug#end()
+
+set encoding=UTF-8
 
 "let mapleader = "\<Space>"
 "
