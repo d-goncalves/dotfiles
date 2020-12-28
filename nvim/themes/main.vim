@@ -8,6 +8,10 @@ if (has("termguicolors"))
     hi LineNr ctermbg=NONE guibg=NONE
 endif
 
-colorscheme base16-ocean
+" colorscheme nord
+" colorscheme base16-ocean
+" colorscheme base16-bespin
+" colorscheme base16-pop
+colorscheme base16-default-dark
 " colorscheme base16-ocean
 " colorscheme onedark
