@@ -1,0 +1,79 @@
+#!/bin/sh
+
+# Colorize commands
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi"
+
+# Env varibles
+alias \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR"
+
+
+# Common alias! abbreviate them
+alias \
+    sv="sudo nvim" \
+    vi="nvim" \
+    vim="nvim" \
+    dps="docker ps" \
+    dc="docker-compose"
+
+# Git alias
+alias \
+    g="git" \
+    ga="git add" \
+    gb="git branch" \
+    gc="git commit" \
+    gcm="git commit -m" \
+    gd="git diff" \
+    gco="git checkout" \
+    gcob="git checkout -b" \
+    gl="git pull" \
+    gp="git push" \
+    gst="git status"
+
+# Git flow alias
+alias \
+    gf="git flow" \
+    gfi="git flow init" \
+    gff="git flow feature" \
+    gfh="git flow hotfix" \
+    gfr="git flow release" \
+    gffs="git flow feature start" \
+    gfhs="git flow hotfix start" \
+    gfrs="git flow release start" \
+    gfff="git flow feature finish" \
+    gffp="git flow feature publish" \
+    gfhf="git flow hotfix finish" \
+    gfrf="git flow release finish" \
+    gffp="git flow feature publish" \
+    gfhp="git flow hotfix publish" \
+    gfrp="git flow release publish" \
+    gffpll="git flow feature pull"
+
+alias \
+    ta="tmux attach -t" \
+    tad="tmux attach -d -t" \
+    ts="tmux new-session -s" \
+    tl="tmux list-sessions" \
+    tksv="tmux kill-server" \
+    tkss="tmux kill-session -t"
+
+# List directory contents
+alias \
+    lsa="ls -lah" \
+    l="ls -lah" \
+    ll="ls -lh" \
+    la="ls -lAh"
+
+alias \
+    ..="cd .." \
+    ...="cd ../.." \
+    ....="cd ../../.." \
+    .....="cd ../../../.." \
+    ......="cd ../../../../.." \
+    .......="cd ../../../../../.."
