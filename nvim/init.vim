@@ -1,14 +1,14 @@
-
-
-
-""""""""""""""""""""""""""""""""""""""
-"  ____  _             _
-" |  _ \| |_   _  __ _(_)_ __  ___
-" | |_) | | | | |/ _` | | '_ \/ __|
-" |  __/| | |_| | (_| | | | | \__ \
-" |_|   |_|\__,_|\__, |_|_| |_|___/
-"                |___/
-""""""""""""""""""""""""""""""""""""""
+" ▄▄▄▄▄▄▄▄▄▄▄  ▄            ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+"▐░░░░░░░░░░░▌▐░▌          ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌▐░░░░░░░░░░░▌
+"▐░█▀▀▀▀▀▀▀█░▌▐░▌          ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░▌░▌     ▐░▌▐░█▀▀▀▀▀▀▀▀▀ 
+"▐░▌       ▐░▌▐░▌          ▐░▌       ▐░▌▐░▌               ▐░▌     ▐░▌▐░▌    ▐░▌▐░▌          
+"▐░█▄▄▄▄▄▄▄█░▌▐░▌          ▐░▌       ▐░▌▐░▌ ▄▄▄▄▄▄▄▄      ▐░▌     ▐░▌ ▐░▌   ▐░▌▐░█▄▄▄▄▄▄▄▄▄ 
+"▐░░░░░░░░░░░▌▐░▌          ▐░▌       ▐░▌▐░▌▐░░░░░░░░▌     ▐░▌     ▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌
+"▐░█▀▀▀▀▀▀▀▀▀ ▐░▌          ▐░▌       ▐░▌▐░▌ ▀▀▀▀▀▀█░▌     ▐░▌     ▐░▌   ▐░▌ ▐░▌ ▀▀▀▀▀▀▀▀▀█░▌
+"▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌     ▐░▌    ▐░▌▐░▌          ▐░▌
+"▐░▌          ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌ ▄▄▄▄█░█▄▄▄▄ ▐░▌     ▐░▐░▌ ▄▄▄▄▄▄▄▄▄█░▌
+"▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌      ▐░░▌▐░░░░░░░░░░░▌
+" ▀            ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
 
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -22,7 +22,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ryanoasis/vim-devicons'
     " Language support
     Plug 'sheerun/vim-polyglot'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}    
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'mattn/emmet-vim'
 
@@ -34,6 +34,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'airblade/vim-rooter'
+    Plug 'romainl/vim-cool'
 
     Plug 'tmux-plugins/vim-tmux-focus-events'
     " Startify
@@ -43,17 +44,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
 
     " Visual Upgrades (aka Themes and colors)
-    Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'joshdick/onedark.vim'
+    Plug 'norcalli/nvim-colorizer.lua' " This doesn't work, still needs more configuration, do it when switching to nvim 0.5
     Plug 'chriskempson/base16-vim' " Theme
-    Plug 'tomasiser/vim-code-dark' " Another Theme
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'rakr/vim-one'
     
     " Usability
     Plug 'tpope/vim-surround'             " Change surroudings of a word
     Plug 'christoomey/vim-tmux-navigator' " Use ctrl + hjkl to change pane
-    " Plug 'rstacruz/vim-closer'
     Plug 'wincent/terminus'               " Increase mouse integration between Terminal, Tmux and Vim
     Plug 'unblevable/quick-scope' " Highlight a letter in every word to use f _
     Plug 'AndrewRadev/switch.vim'
@@ -62,6 +58,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'liuchengxu/vista.vim'
     Plug 'terryma/vim-multiple-cursors'
+
+    " Auto pair, Close and finish.
+    " Prefer vim-closer but conflicts with COC
+    Plug 'jiangmiao/auto-pairs'
+    " Plug 'rstacruz/vim-closer'
+
     " Snips 
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
@@ -75,31 +77,29 @@ call plug#end()
 
 set encoding=UTF-8
 
-"let mapleader = "\<Space>"
-"
-""" Font
-"" https://github.com/i-tu/Hasklig
-"" https://github.com/tonsky/FiraCode (Current)
-"" https://github.com/source-foundry/Hack
-"
-" let base16colorspace=256
-" set termguicolors
-"
-" colorscheme base16-ocean
-"" colorscheme base16-mocha
-" colorscheme codedark
-"
-""""""""""""""""""""""""""""""""""""""
-"  ____
-" / ___|  ___  _   _ _ __ ___ ___
-" \___ \ / _ \| | | | '__/ __/ _ \
-"  ___) | (_) | |_| | | | (_|  __/
-" |____/ \___/ \__,_|_|  \___\___|
-"
-""""""""""""""""""""""""""""""""""""""
-
+" ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+"▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+"▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ 
+"▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ▐░▌          
+"▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌          ▐░█▄▄▄▄▄▄▄▄▄ 
+"▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌
+" ▀▀▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░█▀▀▀▀█░█▀▀ ▐░▌          ▐░█▀▀▀▀▀▀▀▀▀ 
+"          ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌     ▐░▌  ▐░▌          ▐░▌          
+" ▄▄▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ 
+"▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+" ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
+                                                                              
 source $HOME/.config/nvim/general/main.vim
 source $HOME/.config/nvim/plug-config/main.vim
 source $HOME/.config/nvim/keys/main.vim
 source $HOME/.config/nvim/themes/main.vim
 
+
+" Font
+" https://github.com/i-tu/Hasklig
+" https://github.com/tonsky/FiraCode (Current)
+" https://github.com/source-foundry/Hack
+
+" Generate ASCII
+" SOURCE: http://patorjk.com/software/taag/
+" FONT: eletronic

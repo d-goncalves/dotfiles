@@ -2,21 +2,19 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "css",
         "markdown",
-        "javascript",
         "graphql",
         "yaml",
         "json",
         "python",
-        "typescript",
-        "javascript"
+        "coc-snippets"
     ],
-    "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true,
-    "python.jediEnabled": false,
-    "python.linting.lintOnSave": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.messageTarget": "echo",
+    "diagnostic.enableMessage": "always",
+    "diagnostic.virtualTextCurrentLineOnly": false,
     "snippets.ultisnips.directories": [
         "UltiSnips",
-        "~/.config/nvim/utils/snips"
+        "~/.config/nvim/snips"
     ],
     "languageserver": {
         "intelephense": {
@@ -43,5 +41,9 @@
         ],
         "v": "open:vsplit",
         "h": "open:split"
-    }
+    },
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.jediEnabled": false,
+    "python.linting.lintOnSave": true
 }
