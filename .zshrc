@@ -58,7 +58,8 @@ source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source ~/.zsh/aliasrc
 
 autoload -Uz compinit
-compinit
+compinit -d "$HOME/.zsh/.zcompdump"
+HISTFILE="$HOME/.zsh/.zsh_history"
 _comp_options+=(globdots)
 
 # Still need to double check this
