@@ -32,7 +32,7 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
 set number relativenumber               " Line numbers
-set showtabline=2                       " Always show tabs
+set showtabline=1                       " Always show tabs
 set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
@@ -55,6 +55,8 @@ set incsearch
 set shortmess+=c
 cmap w!! w !sudo tee %
 
+highlight clear SignColumn                " Change the column on the left to match theme color 
+set showtabline=0                         " Disable the top tab line
 " set nowrap                              " Display long lines as just one line
 " set cmdheight=2                         " More space for displaying messages
 " set cursorline                          " Enable highlighting of the current line

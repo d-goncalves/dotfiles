@@ -33,6 +33,8 @@
     "explorer.width": 30,
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
+    "explorer.git.showIgnored": true,
+    "explorer.file.showHiddenFiles": true,
     "explorer.keyMappings.global": {
         "<cr>": [
             "expandable?",
@@ -45,5 +47,7 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.jediEnabled": false,
-    "python.linting.lintOnSave": true
+    "python.linting.lintOnSave": true,
+    "clangd.path": "/home/goncalves-diogo/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+    "coc.preferences.extensionUpdateCheck": "daily"
 }

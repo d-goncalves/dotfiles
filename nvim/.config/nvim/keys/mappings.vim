@@ -14,9 +14,6 @@
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
-" Use jk to enter normal mode
-inoremap jk <Esc>
-
 " Use alt + hjkl to resize windows
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
@@ -43,8 +40,6 @@ nnoremap <C-s> :w<CR>
 nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
-" <TAB>: completion.
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Better tabbing
 vnoremap < <gv
@@ -83,6 +78,9 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 map <C-f> :Files<CR>
 map <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
-nnoremap <leader>t :Tags<CR>
+nnoremap <leader>s :Rg<CR>
 nnoremap <leader>m :Marks<CR>
+
+" Terminal Mode
+" map ESC to exist terminal mode
+tnoremap <Esc> <C-\><C-n>
