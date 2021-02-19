@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Colorize commands
+# TODO: This is linux specific, make it so 
 alias \
 	ls="ls -hN --color=auto --group-directories-first" \
 	grep="grep --color=auto" \
@@ -55,6 +56,7 @@ alias \
     gfrp="git flow release publish" \
     gffpll="git flow feature pull"
 
+# Tmux alias
 alias \
     ta="tmux attach -t" \
     tad="tmux attach -d -t" \
@@ -70,6 +72,7 @@ alias \
     ll="ls -lh" \
     la="ls -lAh"
 
+# change directory backwards
 alias \
     ..="cd .." \
     ...="cd ../.." \

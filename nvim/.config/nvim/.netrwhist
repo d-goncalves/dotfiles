@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/goncalves-diogo/Zotero'
+let g:netrw_dirhist_1='/home/goncalves-diogo/Code/dotfiles/zsh/.zsh'
 let g:netrw_dirhist_0='/home/goncalves-diogo/Code/ma-apps'
 let g:netrw_dirhist_9='/home/goncalves-diogo/Code/ma-apps/apps/marketing-automation'
 let g:netrw_dirhist_8='/home/goncalves-diogo/Code/ma-apps/apps'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_6='/home/goncalves-diogo/Code/ma-engine'
 let g:netrw_dirhist_5='/home/goncalves-diogo/Code/ma-apps'
 let g:netrw_dirhist_4='/home/goncalves-diogo/Code/ma-apps/apps'
 let g:netrw_dirhist_3='/home/goncalves-diogo/Code/ma-apps/hooks'
-let g:netrw_dirhist_2='/home/goncalves-diogo/Code/ma-apps'
-let g:netrw_dirhist_1='/home/goncalves-diogo/Code/ma-apps/hooks'

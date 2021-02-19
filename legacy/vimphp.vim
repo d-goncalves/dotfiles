@@ -51,17 +51,6 @@ Plug 'mattn/emmet-vim'               " emmet support
 Plug 'editorconfig/editorconfig-vim' " editorconfig support
 
 
-" Include Phpactor
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-
-" Require ncm2 and this plugin
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'phpactor/ncm2-phpactor'
-
-Plug 'ervandew/supertab'
-Plug 'mhinz/vim-startify'
-Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -97,8 +86,7 @@ set foldmethod=syntax
 
 let mapleader = "\<Space>"
 
-" ==================================================================
-" PLUGIN CONFIGURATION
+" ================================================================== PLUGIN CONFIGURATION
 " ==================================================================
 
 " UltiSnips trigger configuration.
@@ -115,19 +103,8 @@ nmap <F8> :TagbarToggle<CR>
 
 "autocmd vimenter * NERDTree " Begin nerdTree when vim opens.
 
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-
-if !has('gui_running')
-  set t_Co=256
-endif
-
-let g:lightline = { 'colorscheme': 'wombat', }
-call deoplete#custom#option('ignore_sources', {'php': ['omni']})
-
 set foldmethod=indent   
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
