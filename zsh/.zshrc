@@ -1,10 +1,16 @@
 # PATH
 ZSH_DIRECTORY="$HOME/.zsh"
-BEEVO_PATH="$HOME/Code/helperscripts"
+HELPER_SCRIPTS_PATH="$HOME/Code/helperscripts"
 FZF_PATH="/usr/share/doc/fzf/examples"
 
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim' # SSH remote editor
+else
+   export EDITOR='nvim' # Local editor
+fi
+
 # COMPANY: Beevo configs
-source $BEEVO_PATH/docker_bash/.beevo_bash
+source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
 
 # FZF
 # TODO: check if these examples can be added to the repo
@@ -37,11 +43,6 @@ ENABLE_CORRECTION="true" # Enable command auto-correction.
 COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion.
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS as dirty (Performance)
 
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim' # SSH remote editor
-else
-   export EDITOR='nvim' # Local editor
-fi
 
 # Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line

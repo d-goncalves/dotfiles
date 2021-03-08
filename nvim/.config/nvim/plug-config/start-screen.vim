@@ -1,11 +1,11 @@
-
 let g:startify_bookmarks = [
-        \ { 'ma': '~/Code/ma-apps' },
-        \ { 'en': '~/Code/ma-engine' },
-        \ { 'd1': '~/Code/docker-beevo/html/delta' },
         \ { 'b': '~/Code/docker-beevo' },
-        \ { 'vim': '~/.config/nvim/init.vim' },
-        \ { 'zsh': '~/.zshrc' },
+        \ { 'd1': '~/Code/docker-beevo/html/delta' },
+        \ { 'en': '~/Code/ma-engine' },
+        \ { 'ma': '~/Code/ma-apps' },
+        \ { 'mf': '~/Code/ma-frontend' },
         \ { 'term': '~/.config/alacritty/alacritty.yml' },
         \ { 'tmux': '~/.tmux.conf' },
+        \ { 'vim': '~/.config/nvim/init.vim' },
+        \ { 'zsh': '~/.zshrc' },
         \ ]

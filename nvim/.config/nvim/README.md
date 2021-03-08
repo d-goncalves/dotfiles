@@ -9,16 +9,16 @@ Redo documentation regarding the plugins and reorganize it
 ## Plugins
 
 General overview of how every plugin configuration is being used.
- - [] Coc.nvim 
- - [] vim-polyglot (Also check if this still makes sense) 
- - [] emmmet-vim 
+ - [] Coc.nvim
+ - [] vim-polyglot (Also check if this still makes sense)
+ - [] emmmet-vim
  - [] vim-airline
  - [] FZF
  - [] vim-rooter
  - [] vim-cool
- - [] vim-tmux-focus-events 
+ - [] vim-tmux-focus-events
  - [] vim-startify
- - [] vim-which-key 
+ - [] vim-which-key
  - [] nvim-colorizer.lua
  - [] vim-surround
  - [] vim-tmux-navigator
@@ -39,7 +39,7 @@ General overview of how every plugin configuration is being used.
 
 ## General
 
-The settings.vim file still need to be added more documentation 
+The settings.vim file still need to be added more documentation
 
 ## Themes
 

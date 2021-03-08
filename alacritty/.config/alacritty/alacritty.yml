@@ -1,25 +1,3 @@
-               #AAA               lllllll                                                           iiii          tttt               tttt                               
-              #A:::A              l:::::l                                                          i::::i      ttt:::t            ttt:::t                               
-             #A:::::A             l:::::l                                                           iiii       t:::::t            t:::::t                               
-            #A:::::::A            l:::::l                                                                      t:::::t            t:::::t                               
-           #A:::::::::A            l::::l   aaaaaaaaaaaaa      ccccccccccccccccrrrrr   rrrrrrrrr  iiiiiiittttttt:::::tttttttttttttt:::::tttttttyyyyyyy           yyyyyyy
-          #A:::::A:::::A           l::::l   a::::::::::::a   cc:::::::::::::::cr::::rrr:::::::::r i:::::it:::::::::::::::::tt:::::::::::::::::t y:::::y         y:::::y 
-         #A:::::A A:::::A          l::::l   aaaaaaaaa:::::a c:::::::::::::::::cr:::::::::::::::::r i::::it:::::::::::::::::tt:::::::::::::::::t  y:::::y       y:::::y  
-        #A:::::A   A:::::A         l::::l            a::::ac:::::::cccccc:::::crr::::::rrrrr::::::ri::::itttttt:::::::tttttttttttt:::::::tttttt   y:::::y     y:::::y   
-       #A:::::A     A:::::A        l::::l     aaaaaaa:::::ac::::::c     ccccccc r:::::r     r:::::ri::::i      t:::::t            t:::::t          y:::::y   y:::::y    
-      #A:::::AAAAAAAAA:::::A       l::::l   aa::::::::::::ac:::::c              r:::::r     rrrrrrri::::i      t:::::t            t:::::t           y:::::y y:::::y     
-     #A:::::::::::::::::::::A      l::::l  a::::aaaa::::::ac:::::c              r:::::r            i::::i      t:::::t            t:::::t            y:::::y:::::y      
-    #A:::::AAAAAAAAAAAAA:::::A     l::::l a::::a    a:::::ac::::::c     ccccccc r:::::r            i::::i      t:::::t    tttttt  t:::::t    tttttt   y:::::::::y       
-   #A:::::A             A:::::A   l::::::la::::a    a:::::ac:::::::cccccc:::::c r:::::r           i::::::i     t::::::tttt:::::t  t::::::tttt:::::t    y:::::::y        
-  #A:::::A               A:::::A  l::::::la:::::aaaa::::::a c:::::::::::::::::c r:::::r           i::::::i     tt::::::::::::::t  tt::::::::::::::t     y:::::y         
- #A:::::A                 A:::::A l::::::l a::::::::::aa:::a cc:::::::::::::::c r:::::r           i::::::i       tt:::::::::::tt    tt:::::::::::tt    y:::::y          
-#AAAAAAA                   AAAAAAAllllllll  aaaaaaaaaa  aaaa   cccccccccccccccc rrrrrrr           iiiiiiii         ttttttttttt        ttttttttttt     y:::::y           
-                                                                                                                                                    #y:::::y            
-                                                                                                                                                   #y:::::y             
-                                                                                                                                                  #y:::::y              
-                                                                                                                                                 #y:::::y               
-                                                                                                                                                #yyyyyyy                
-
 # Add another file to import
 #import:
 #  - /path/to/alacritty.yml
@@ -44,19 +22,19 @@ window:
 # Font configuration
 font:
   normal:
-    family: Fira Code
+    family: MesloLGS NF
     style: Light
 
   bold:
-    family: Fira Code
+    family: MesloLGS NF
     style: Bold
 
   italic:
-    family: Fira Code
+    family: MesloLGS NF
     style: Italic
 
   bold_italic:
-    family: Fira Code
+    family: MesloLGS NF
     style: Bold Italic
 
   size: 12.0
@@ -88,15 +66,36 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+    background: '#171717'
+    foreground: '#dedacf'
 
     dim_foreground: '#828482'
     bright_foreground: '#eaeaea'
 
+  normal:
+    black:   '#000000'
+    red:     '#ff615a'
+    green:   '#60ff80'
+    yellow:  '#ebf96c'
+    blue:    '#2d99f6'
+    magenta: '#e86aff'
+    cyan:    '#82fff7'
+    white:   '#dedacf'
+
+  # Bright colors
+  bright:
+    black:   '#313131'
+    red:     '#ff3c20'
+    green:   '#4dff80'
+    yellow:  '#ebf91c'
+    blue:    '#1380ff'
+    magenta: '#ddaaff'
+    cyan:    '#b7fff9'
+    white:   '#ffffff'
+
   cursor:
-    text: CellBackground # Can also be hexadecimal
-    cursor: CellForeground # Can also be hexadecimal
+    text: CellBackground
+    cursor: '#eee5b9'
 
   vi_mode_cursor:
     text: CellBackground # Can also be hexadecimal
@@ -118,49 +117,6 @@ colors:
   selection:
     text: CellBackground
     background: CellForeground
-
-  # Normal colors
-  normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
-
-  # Bright colors
-  bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
-
-  # Dim colors
-  dim:
-    black:   '#131415'
-    red:     '#864343'
-    green:   '#777c44'
-    yellow:  '#9e824c'
-    blue:    '#556a7d'
-    magenta: '#75617b'
-    cyan:    '#5b7d78'
-    white:   '#828482'
-
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '#ff00ff' }`
-  #
-  #indexed_colors: []
 
 
 # Background opacity

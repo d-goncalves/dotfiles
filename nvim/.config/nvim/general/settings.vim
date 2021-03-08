@@ -1,14 +1,4 @@
-" ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
-"▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
-"▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀  ▀▀▀▀█░█▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░▌░▌     ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ 
-"▐░▌          ▐░▌               ▐░▌          ▐░▌          ▐░▌     ▐░▌▐░▌    ▐░▌▐░▌          ▐░▌          
-"▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌          ▐░▌          ▐░▌     ▐░▌ ▐░▌   ▐░▌▐░▌ ▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ 
-"▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌          ▐░▌          ▐░▌     ▐░▌  ▐░▌  ▐░▌▐░▌▐░░░░░░░░▌▐░░░░░░░░░░░▌
-" ▀▀▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀      ▐░▌          ▐░▌          ▐░▌     ▐░▌   ▐░▌ ▐░▌▐░▌ ▀▀▀▀▀▀█░▌ ▀▀▀▀▀▀▀▀▀█░▌
-"          ▐░▌▐░▌               ▐░▌          ▐░▌          ▐░▌     ▐░▌    ▐░▌▐░▌▐░▌       ▐░▌          ▐░▌
-" ▄▄▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄      ▐░▌          ▐░▌      ▄▄▄▄█░█▄▄▄▄ ▐░▌     ▐░▐░▌▐░█▄▄▄▄▄▄▄█░▌ ▄▄▄▄▄▄▄▄▄█░▌
-"▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌          ▐░▌     ▐░░░░░░░░░░░▌▐░▌      ▐░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
-" ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀       ▀            ▀       ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
+" Settings
 
 let g:mapleader = "\<Space>"            " set leader key
 syntax enable                           " Enables syntax highlighing
@@ -42,11 +32,10 @@ set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set autochdir                           " Your working directory will always be the same as your working directory
 set scrolloff=4
-set signcolumn=no
 set colorcolumn=120
 set title
-set iskeyword-=_
-set iskeyword-=-                      	" treat dash separated words as a word text object"
+set iskeyword+=_
+set iskeyword+=-                      	" treat dash separated words as a word text object"
 set hlsearch
 set softtabstop=0
 set ignorecase
@@ -54,18 +43,34 @@ set smartcase
 set incsearch
 set shortmess+=c
 cmap w!! w !sudo tee %
+set foldmethod=syntax                   " Fold method follows syntax specific
+set foldlevel=99
+set cursorline                          " Enable highlighting of the current line
+set nocompatible
+set cmdheight=1                         " Reduce command line height size to 1
+highlight clear SignColumn              " Change the column on the left to match theme color
+set showtabline=0                       " Disable the top tab line
+"set nowrap                            " Display long lines as just one line
+"set signcolumn=no                     " Git column
 
-highlight clear SignColumn                " Change the column on the left to match theme color 
-set showtabline=0                         " Disable the top tab line
-" set nowrap                              " Display long lines as just one line
-" set cmdheight=2                         " More space for displaying messages
-" set cursorline                          " Enable highlighting of the current line
-" set background=dark                     " tell vim what the background color looks like
-" set nocompatible
+"highlight SignColumn guibg=blue ctermbg=white " Edit the sign column properties
+
+" Display Red for trailling spaces
+highlight ShowTrailingWhitespace ctermbg=Red guibg=Red
+
+"hi LineNr ctermbg=NONE guibg=NONE
+
+" Go into normal mode after 5 seconds on inactivity
+au CursorHoldI * stopinsert
+au InsertEnter * let updaterestore=&updatetime | set updatetime=5000
+au InsertLeave * let &updatetime=updaterestore
+
+
+
+" FOLD SETTINGS
 " set foldlevelstart=1
 " set foldmethod=syntax
-" set foldmethod=indent   
+" set foldmethod=indent
 " set foldnestmax=10
 " set nofoldenable
 " set foldlevel=2
-" highlight SignColumn guibg=blue ctermbg=white

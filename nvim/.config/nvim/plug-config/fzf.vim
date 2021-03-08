@@ -1,7 +1,7 @@
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
+  \ 'ctrl-h': 'split',
   \ 'ctrl-v': 'vsplit' }
 
 " Enable per-command history.
@@ -12,7 +12,17 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 let g:fzf_tags_command = 'ctags -R'
 " Border color
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+let g:fzf_layout = {
+            \ 'up':'~90%',
+            \ 'window': {
+                      \ 'width': 0.8,
+                      \ 'height': 0.8,
+                      \ 'yoffset':0.5,
+                      \ 'xoffset': 0.5,
+                      \ 'highlight': 'Todo',
+                      \ 'border': 'sharp'
+            \}
+\ }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline '
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
@@ -66,7 +76,7 @@ command! -bang -nargs=* GGrep
 " Files + devicons + floating fzf
 function! FzfFilePreview()
   let l:fzf_files_options = '--preview "bat --theme="gruvbox" --style=numbers,changes --color always {3..-1} | head -200" --expect=ctrl-v,ctrl-x'
-  " --theme="OneHalfDark" 
+  " --theme="OneHalfDark"
   let s:files_status = {}
 
   function! s:cacheGitStatus()
