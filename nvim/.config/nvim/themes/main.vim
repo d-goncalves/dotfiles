@@ -8,6 +8,7 @@ set termguicolors
 let g:srcery_italic = 1
 set background=dark
 
-colorscheme srcery
+colorscheme base16-helios
+"colorscheme srcery
 "colorscheme gruvbox
 "colorscheme edge

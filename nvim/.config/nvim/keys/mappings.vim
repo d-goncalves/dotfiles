@@ -73,6 +73,7 @@ nnoremap <leader>fr :Rg<CR>
 nnoremap <leader>fa :Ag<CR>
 nnoremap <leader>fs :RG<CR>
 nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>C :Colors<CR>
 
 " COC configuration
 

@@ -31,13 +31,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Visual Upgrades
     Plug 'ryanoasis/vim-devicons'      " Icons
     Plug 'norcalli/nvim-colorizer.lua' " Confure for color codes to be displayed with real colors #412 #000 #fff
-
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
     " Themes
     "Plug 'ajmwagar/vim-deus'
     "Plug 'aradunovic/perun.vim'
     "Plug 'ayu-theme/ayu-vim'
     "Plug 'b4skyx/serenade'
-    "Plug 'chriskempson/base16-vim'     " All the possible themes
     "Plug 'jdsimcoe/abstract.vim'
     "Plug 'lithammer/vim-eighties'
     "Plug 'marciomazza/vim-brogrammer-theme'
@@ -45,16 +44,22 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     "Plug 'sainnhe/forest-night'
     "Plug 'srushti/my.vim'
     "Plug 'vim-scripts/wombat256.vim'
-    "Plug 'morhetz/gruvbox'             " Gruvbox theme
+    Plug 'morhetz/gruvbox'             " Gruvbox theme
     Plug 'srcery-colors/srcery-vim'
     Plug 'sainnhe/edge'
-
+    Plug 'chriskempson/base16-vim'
+    Plug 'rktjmp/lush.nvim'
 
     " Usability
     Plug 'AndrewRadev/switch.vim'         " TODO: configure this, dictionary of antonyms (e.g. True <-> False)
     Plug 'scrooloose/nerdcommenter'       " Commenting with leader key (e.g. <leader> c <space>)
     Plug 'tpope/vim-surround'             " Change surroudings of a word
     Plug 'terryma/vim-multiple-cursors'
+    Plug 'markonm/traces.vim'
+
+    " Online dictionary
+    " NOTE: Not working because of legal issues / Find alternative
+    "Plug 'beloglazov/vim-online-thesaurus' " Online dictionary
 
     " Tmux and terminal integration
     Plug 'wincent/terminus'               " Increase mouse integration between Terminal, Tmux and Vim
