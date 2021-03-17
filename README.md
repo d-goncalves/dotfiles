@@ -140,3 +140,4 @@ zsh
  - [ ] Create a script to change the font.
  - [ ] On `.zsh` create a script folder with some of existing plugins in them.
  - [ ] Test and improve the usage of scripts.
+ - [ ] Add alacritty settings
