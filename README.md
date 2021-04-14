@@ -39,6 +39,22 @@ FONT: eletronic
 1. Inside ~/dotfiles/ run: `stow nvim`, `stow tmux`, `stow zsh`, `stow alacritty` **NOTE:** this will replace already existing dotfiles.
 1. Go to and run `~/.zsh/install.sh`.
 1. There might be some more dependencies like vim-plug, coc.nvim and fzf.nvim. This will be dealt with a plugin in the future.
+1.
+```
+sudo apt install zsh
+
+sudo apt install neovim
+
+sudo apt install tmux
+
+pip3 install pynvim
+
+sudo apt install nodejs
+
+install tpm tmux
+
+chsh -s $(which zsh)
+```
 
 
 ## Neovim
@@ -141,3 +157,8 @@ zsh
  - [ ] On `.zsh` create a script folder with some of existing plugins in them.
  - [ ] Test and improve the usage of scripts.
  - [ ] Add alacritty settings
+
+## Firefox
+
+https://addons.mozilla.org/en-US/firefox/addon/science-theme-by-m-donna/
+

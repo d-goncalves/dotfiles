@@ -15,4 +15,4 @@ let g:airline_right_sep = ''
 "
 let g:airline_theme = 'base16_gruvbox_dark_hard'
 
-set noshowmode " Disable default insert message on the bottom
+"set noshowmode " Disable default insert message on the bottom

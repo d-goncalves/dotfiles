@@ -1,6 +1,6 @@
 # PATH
 ZSH_DIRECTORY="$HOME/.zsh"
-HELPER_SCRIPTS_PATH="$HOME/Code/helperscripts"
+HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
 FZF_PATH="/usr/share/doc/fzf/examples"
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -31,7 +31,7 @@ source $ZSH_DIRECTORY/aliasrc
 # Colors and Prompt
 export TERM=xterm-256color
 autoload -U colors && colors	# Load colors
-PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%~%{$fg[red]%}]$(git_super_status)%{$fg[yellow]%}->' # Custom Prompt
+PROMPT='%B%{$fg[cyan]%}%~$(git_super_status)%{$fg[green]%} ❯ ' # Custom Prompt
 setopt autocd		# Automatically cd into typed directory
 stty stop undef		# Disable ctrl-s to freeze terminal
 
@@ -43,7 +43,6 @@ ENABLE_CORRECTION="true" # Enable command auto-correction.
 COMPLETION_WAITING_DOTS="true" # Display red dots whilst waiting for completion.
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS as dirty (Performance)
 
-
 # Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -52,3 +51,6 @@ compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 HISTFILE="$HOME/.zsh/.zsh_history" # change history file path
 _comp_options+=(globdots)
 autoload -Uz compinit
+
+#eval "$(starship init zsh)"
+export PATH=$HOME/scripts/:$PATH

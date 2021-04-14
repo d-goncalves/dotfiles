@@ -15,9 +15,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-
     " FuzzyFinder
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'    " Fzf integration
@@ -32,6 +29,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ryanoasis/vim-devicons'      " Icons
     Plug 'norcalli/nvim-colorizer.lua' " Confure for color codes to be displayed with real colors #412 #000 #fff
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'nvim-treesitter/playground'  " Icons
+
     " Themes
     "Plug 'ajmwagar/vim-deus'
     "Plug 'aradunovic/perun.vim'
@@ -40,15 +39,24 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     "Plug 'jdsimcoe/abstract.vim'
     "Plug 'lithammer/vim-eighties'
     "Plug 'marciomazza/vim-brogrammer-theme'
-    "Plug 'mhartington/oceanic-next'
     "Plug 'sainnhe/forest-night'
     "Plug 'srushti/my.vim'
     "Plug 'vim-scripts/wombat256.vim'
+    Plug 'mhartington/oceanic-next'
+    Plug 'tomasiser/vim-code-dark'
     Plug 'morhetz/gruvbox'             " Gruvbox theme
     Plug 'srcery-colors/srcery-vim'
     Plug 'sainnhe/edge'
     Plug 'chriskempson/base16-vim'
     Plug 'rktjmp/lush.nvim'
+    Plug 'Th3Whit3Wolf/one-nvim'
+    Plug 'sainnhe/sonokai'
+
+    " Special theme
+    " This doesn't seem to work properly
+    Plug 'tjdevries/colorbuddy.vim'
+    Plug 'tjdevries/gruvbuddy.nvim'
+    Plug 'Th3Whit3Wolf/onebuddy'
 
     " Usability
     Plug 'AndrewRadev/switch.vim'         " TODO: configure this, dictionary of antonyms (e.g. True <-> False)
@@ -56,6 +64,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'             " Change surroudings of a word
     Plug 'terryma/vim-multiple-cursors'
     Plug 'markonm/traces.vim'
+    Plug 'yamatsum/nvim-cursorline'
 
     " Online dictionary
     " NOTE: Not working because of legal issues / Find alternative
@@ -87,16 +96,37 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'plasticboy/vim-markdown'
     Plug 'godlygeek/tabular'
 
+    " Database usage
+    Plug 'tpope/vim-dadbod'
+    Plug 'kristijanhusak/vim-dadbod-ui'
+
     " Show Trailing Whitespace
     Plug 'vim-scripts/ShowTrailingWhitespace'
 
     Plug 'editorconfig/editorconfig-vim'
 
+    " Games
+    Plug 'ThePrimeagen/vim-be-good' " Requires vim 0.5+
+    Plug 'alec-gibson/nvim-tetris'
+    Plug 'AndrewRadev/splitjoin.vim'
     "Plug 'liuchengxu/vista.vim'
 call plug#end()
 
 " Source everything
 source $HOME/.config/nvim/plug-config/main.vim
-source $HOME/.config/nvim/themes/main.vim
 source $HOME/.config/nvim/general/main.vim
 source $HOME/.config/nvim/keys/main.vim
+
+"autcmd vimenter * hi Normal guibg=NONE ctermbg=NONE  " Conflict with nvim-cursorline
+highlight clear LineNR
+autocmd ColorScheme * highlight! link SignColumn LineNr
+
+lua require'nvim-treesitter.configs'.setup {highlight = { enable = true }}
+
+" Add this improve JEST testing
+" TODO: https://github.com/rcarriga/vim-ultest
+
+" Theme configuration
+"lua require('colorbuddy').colorscheme('gruvbuddy', 'light')
+set termguicolors
+colorscheme sonokai
