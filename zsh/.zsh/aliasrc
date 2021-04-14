@@ -3,9 +3,9 @@
 # Colorize commands
 # TODO: This is linux specific, make it so
 alias \
-	ls="ls -hN --color=auto --group-directories-first" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
+	ls="ls -G" \
+	grep="grep" \
+	diff="diff" \
 	ccat="highlight --out-format=ansi"
 
 # Env varibles
@@ -67,10 +67,10 @@ alias \
 
 # List directory contents
 alias \
-    lsa="ls -lah" \
-    l="ls -lah" \
-    ll="ls -lh" \
-    la="ls -lAh"
+    lsa="ls -Glah" \
+    l="ls -Glah" \
+    ll="ls -lGh" \
+    la="ls -lGAh"
 
 # change directory backwards
 alias \
