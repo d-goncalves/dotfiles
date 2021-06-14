@@ -157,6 +157,7 @@ zsh
  - [ ] On `.zsh` create a script folder with some of existing plugins in them.
  - [ ] Test and improve the usage of scripts.
  - [ ] Add alacritty settings
+ - [ ] read this -> https://alpha2phi.medium.com/vim-neovim-managing-notes-and-todo-list-8ae8e3db6464
 
 ## Firefox
 https://addons.mozilla.org/en-US/firefox/addon/science-theme-by-m-donna/
