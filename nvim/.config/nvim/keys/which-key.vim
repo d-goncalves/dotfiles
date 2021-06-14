@@ -19,7 +19,6 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=1 noshowmode ruler
 
-"let g:which_key_map['f'] = '+Find'
 let g:which_key_map['e'] = [ ':CocCommand explorer' , 'Explorer' ]
 let g:which_key_map['c'] = [ '<Plug>NERDCommenterToggle'  , 'Comment Toggle' ]
 let g:which_key_map.f = {

@@ -159,6 +159,8 @@ zsh
  - [ ] Add alacritty settings
 
 ## Firefox
-
 https://addons.mozilla.org/en-US/firefox/addon/science-theme-by-m-donna/
+
+## Gnome GTK
+https://github.com/vinceliuice/WhiteSur-gtk-theme
 

@@ -14,9 +14,8 @@ nnoremap <M-l>    :vertical resize +2<CR>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
-" Easy CAPS
-" inoremap <c-u> <ESC>viwUi
-" nnoremap <c-u> viwU<Esc>
+" Change word to Upper -> viwU
+" Change word to Lower -> viwu
 
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
@@ -24,7 +23,6 @@ nnoremap <TAB> :bnext<CR>
 nnoremap <S-TAB> :bprevious<CR>
 
 " Alternate way to save
-nnoremap <C-s> :up<CR>
 nnoremap <C-s> :up<CR>
 " Alternate way to quit
 nnoremap <C-Q> :wq!<CR>
@@ -96,8 +94,10 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <leader>lrn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>lf  <Plug>(coc-format-selected)
-nmap <leader>lf  <Plug>(coc-format-selected)
+xmap <leader>lf  <Plug>(Prettier)
+nmap <leader>lf  <Plug>(Prettier)
+"xmap <leader>lf  <Plug>(coc-format-selected)
+"nmap <leader>lf  <Plug>(coc-format-selected)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>laap` for current paragraph
@@ -142,3 +142,6 @@ nnoremap <silent><nowait> <space>lk  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>lp  :<C-u>CocListResume<CR>
 nmap <space>e :CocCommand explorer<CR>
+
+" Test mapping
+nmap <space> tn <Plug>(ultest-next-fail)
