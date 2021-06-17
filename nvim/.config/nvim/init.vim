@@ -70,10 +70,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     "Plug 'tpope/vim-surround'           " Change surroudings of a word
     "Plug 'terryma/vim-multiple-cursors' " Multiple cursor support such as in Sublime text
     "Plug 'mattn/emmet-vim'              " Add HTML specific key combinations
-    "Plug 'plasticboy/vim-markdown'      " Markdown syntax highlight and mappings (NOTE: Must be after tabular !!)
-    "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     "Plug 'editorconfig/editorconfig-vim' "Editor config configuration (NOTE: still need to understand this)
 
+    Plug 'plasticboy/vim-markdown'      " Markdown syntax highlight and mappings (NOTE: Must be after tabular !!)
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+    " Todo Plugin || Still choosing it
+    "Plug 'vuciv/vim-bujo'
+    "Plug 'dhruvasagar/vim-dotoo'
+    Plug 'vimwiki/vimwiki'
 call plug#end()
 
 
@@ -81,6 +86,7 @@ call plug#end()
 set termguicolors
 lua require'nvim-treesitter.configs'.setup {highlight = { enable = true }}
 colorscheme onedark
+let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}]
 
 " Source everything
 source $HOME/.config/nvim/plug-config/main.vim

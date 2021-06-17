@@ -1,4 +1,4 @@
-let g:mkdp_auto_start = 0             " start window after entering the markdown buffer
+let g:mkdp_auto_start = 1             " start window after entering the markdown buffer
 let g:mkdp_auto_close = 1             " will auto close current preview window when change
 let g:mkdp_refresh_slow = 0           " will refresh markdown when save the buffer or
 let g:mkdp_command_for_global = 0     " set to 1, the MarkdownPreview command can be use for all files

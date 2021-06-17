@@ -8,6 +8,7 @@ Description of my current dotfiles, how to install it and next things comming
  - [Neovim](neovim.io)
  - FZF
  - tmux
+ - tmuxinator
  - zsh
  - alacritty
 
@@ -46,6 +47,8 @@ sudo apt install zsh
 sudo apt install neovim
 
 sudo apt install tmux
+
+sudo apt install tmuxinator
 
 pip3 install pynvim
 
