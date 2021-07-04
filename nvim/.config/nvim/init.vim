@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Language support
     Plug 'sheerun/vim-polyglot'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
     " FuzzyFinder
