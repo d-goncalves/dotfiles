@@ -1,2 +1,8 @@
 .netrwhist
 nvim/.config/nvim/autoload
+zsh/.zsh/fzf-tab
+zsh/.zsh/zsh-git-prompt
+zsh/.zsh/zsh-autosuggestions
+zsh/.zsh/zsh-syntax-highlighting
+zsh/.zsh/.zcompdump
+zsh/.zsh/.zsh_history

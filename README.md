@@ -8,6 +8,7 @@ Description of my current dotfiles, how to install it and next things comming
  - [Neovim](neovim.io)
  - FZF
  - tmux
+ - tmuxinator
  - zsh
  - alacritty
 
@@ -46,6 +47,8 @@ sudo apt install zsh
 sudo apt install neovim
 
 sudo apt install tmux
+
+sudo apt install tmuxinator
 
 pip3 install pynvim
 
@@ -157,8 +160,11 @@ zsh
  - [ ] On `.zsh` create a script folder with some of existing plugins in them.
  - [ ] Test and improve the usage of scripts.
  - [ ] Add alacritty settings
+ - [ ] read this -> https://alpha2phi.medium.com/vim-neovim-managing-notes-and-todo-list-8ae8e3db6464
 
 ## Firefox
-
 https://addons.mozilla.org/en-US/firefox/addon/science-theme-by-m-donna/
+
+## Gnome GTK
+https://github.com/vinceliuice/WhiteSur-gtk-theme
 

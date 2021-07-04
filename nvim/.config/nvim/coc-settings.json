@@ -41,7 +41,7 @@
     "diagnostic.virtualTextCurrentLineOnly": false,
     "diagnostic.errorSign": " ",
     "diagnostic.warningSign": " ",
-    "diagnostic.infoSign": "",
+    "diagnostic.infoSign": "",
     "diagnostic.hintSign": " ",
 
     "snippets.ultisnips.directories": [
@@ -81,8 +81,8 @@
     "python.linting.flake8Enabled": true,
     "python.jediEnabled": false,
     "python.linting.lintOnSave": true,
-    "clangd.path": "/Users/dgoncalves/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
-    "clangd.fallbackFlags": ["-std=c++17"],
-    "clangd.semanticHighlighting": true,
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "clangd.path": "/home/goncalves-diogo/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "clangd.fallbackFlags": ["-std:c++17"],
+    "clangd.semanticHighlighting": true
 }

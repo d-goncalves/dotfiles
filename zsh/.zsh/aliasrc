@@ -21,7 +21,9 @@ alias \
     vi="nvim" \
     vim="nvim" \
     dps="docker ps" \
-    dc="docker-compose"
+    dc="docker-compose" \
+    mux="tmuxinator" \
+    start="tmuxinator ma-apps"
 
 # Git alias
 alias \
