@@ -19,33 +19,23 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=1 noshowmode ruler
 
+let g:which_key_map.g = { 'name' : '+GoTo' }
+let g:which_key_map.G = { 'name' : '+Git' }
+let g:which_key_map.h = { 'name' : '+GitGutter' }
+let g:which_key_map.l = { 'name' : '+Language' }
+
 let g:which_key_map['e'] = [ ':CocCommand explorer' , 'Explorer' ]
 let g:which_key_map['c'] = [ '<Plug>NERDCommenterToggle'  , 'Comment Toggle' ]
+let g:which_key_map['C'] = [ '<cmd>lua require("telescope.builtin").colorscheme()'  , 'Themes' ]
+
 let g:which_key_map.f = {
       \ 'name' : '+Find' ,
-      \ "f": [ 'Files'  , 'FZF' ],
-      \ "g": [ 'GGrep', 'Git grep'],
-      \ "r": [ 'Rg', 'Ripgrep'],
-      \ "a": [ 'Ag', 'Ack grep'],
-      \ "s": [ 'RG', 'Strict Ripgrep'],
-      \ "b": [ 'Buffers', 'Buffers'],
+      \ "f": [ '<cmd>lua require("telescope.builtin").find_files()', 'FZF' ],
+      \ "g": [ '<cmd>lua require("telescope.builtin").live_grep()', 'Git grep'],
+      \ "r": [ '<cmd>lua require("telescope.builtin").buffers()', 'Ripgrep'],
+      \ "s": [ '<cmd>lua require("telescope.builtin").git_bcommits()', 'Commit History'],
       \ }
 
-let g:which_key_map.g = {
-      \ 'name' : '+GoTo' ,
-      \ }
-
-let g:which_key_map.G = {
-      \ 'name' : '+Git' ,
-      \ }
-
-let g:which_key_map.h = {
-      \ 'name' : '+GitGutter' ,
-      \ }
-
-let g:which_key_map.l = {
-      \ 'name' : '+Language' ,
-      \ }
 
 " Register which key map
 autocmd VimEnter * call which_key#register('<Space>', "g:which_key_map")

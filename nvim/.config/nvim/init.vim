@@ -13,12 +13,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Language support
     Plug 'sheerun/vim-polyglot'                            " Multiple language syntax support
     Plug 'neoclide/coc.nvim', {'branch': 'release'}        " LSP support
-    Plug 'jackguo380/vim-lsp-cxx-highlight'                " cpp language highlight
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
-    " FuzzyFinder
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
-    Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
+    " Telescope
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'fannheyward/telescope-coc.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 
     " User friendly
     Plug 'liuchengxu/vim-which-key' " Using the leader key <space> show some keybinds
@@ -28,14 +31,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ryanoasis/vim-devicons'                               " Icons
     Plug 'norcalli/nvim-colorizer.lua'                          " Display Color Codes text with color #412 #000 #fff
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
-    Plug 'nvim-treesitter/playground'                           " Treesitter icons
     Plug 'romainl/vim-cool'                                     " When using find with / after moving disable highlight
     Plug 'AndrewRadev/splitjoin.vim'                            " Add gJ and gS split or join multi line texts
     Plug 'vim-scripts/ShowTrailingWhitespace'                   " Show Trailing Whitespace
     Plug 'itchyny/vim-cursorword'                               " Highlight multiple instances of the same word when hovered
     Plug 'lukas-reineke/indent-blankline.nvim'                  " Show indention for blank lines
-    Plug 'Yggdroot/indentLine'                                  " Show line indentation
-    Plug 'navarasu/onedark.nvim'                                " Theme
+
 
     " Usability
     Plug 'scrooloose/nerdcommenter' " Commenting with leader key (e.g. <leader> c <space>)
@@ -57,38 +58,52 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-test/vim-test'                                     " Vim default test plugin
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
 
-    " Snips
-    Plug 'SirVer/ultisnips'   " Allos the usage of snippets
-    Plug 'honza/vim-snippets' " Already contains comunity snippets
 
-    " Database usage
-    Plug 'tpope/vim-dadbod'             " Allow database connect inside vim
-    Plug 'kristijanhusak/vim-dadbod-ui' " Improve the database connect visually
+    " Still trying
+    Plug 'mbbill/undotree' " Undo tree
 
-    " Usability Inprogress / Enable when needed or interesting in learning
-    "Plug 'AndrewRadev/switch.vim'       " TODO: configure this, dictionary of antonyms (e.g. True <-> False)
-    "Plug 'tpope/vim-surround'           " Change surroudings of a word
-    "Plug 'terryma/vim-multiple-cursors' " Multiple cursor support such as in Sublime text
-    "Plug 'mattn/emmet-vim'              " Add HTML specific key combinations
-    "Plug 'editorconfig/editorconfig-vim' "Editor config configuration (NOTE: still need to understand this)
+    Plug 'tomasiser/vim-code-dark'
 
-    Plug 'plasticboy/vim-markdown'      " Markdown syntax highlight and mappings (NOTE: Must be after tabular !!)
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-    " Todo Plugin || Still choosing it
-    "Plug 'vuciv/vim-bujo'
-    "Plug 'dhruvasagar/vim-dotoo'
     Plug 'vimwiki/vimwiki'
 call plug#end()
 
 
-" Theme & Visual settings
+lua << EOF
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+    }
+  }
+}
+require('telescope').load_extension('coc')
+require('telescope').load_extension('fzf')
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+  },
+}
+EOF
+
+" Theme
+set t_Co=256
 set termguicolors
-lua require'nvim-treesitter.configs'.setup {highlight = { enable = true }}
-colorscheme onedark
+set t_ut=
+colorscheme codedark
+
+
+" Vim wiki
 let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}]
 
 " Source everything
 source $HOME/.config/nvim/plug-config/main.vim
-source $HOME/.config/nvim/general/main.vim
+source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keys/main.vim
