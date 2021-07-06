@@ -49,6 +49,7 @@ set nocompatible
 set cmdheight=1            " Reduce command line height size to 1
 highlight clear SignColumn " Change the column on the left to match theme color
 set showtabline=0          " Disable the top tab line
+set undofile
 "set nowrap                 " Display long lines as just one line
 "set signcolumn=no          " Git column
 

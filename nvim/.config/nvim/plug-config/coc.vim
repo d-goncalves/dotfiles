@@ -2,7 +2,6 @@
 
 " General configuration to install
 let g:coc_global_extensions = [
-                                \ 'coc-ultisnips',
                                 \ 'coc-json',
                                 \ 'coc-tsserver',
                                 \ 'coc-html',

@@ -30,13 +30,19 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Visual Upgrades
     Plug 'ryanoasis/vim-devicons'                               " Icons
     Plug 'norcalli/nvim-colorizer.lua'                          " Display Color Codes text with color #412 #000 #fff
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
     Plug 'romainl/vim-cool'                                     " When using find with / after moving disable highlight
     Plug 'AndrewRadev/splitjoin.vim'                            " Add gJ and gS split or join multi line texts
     Plug 'vim-scripts/ShowTrailingWhitespace'                   " Show Trailing Whitespace
     Plug 'itchyny/vim-cursorword'                               " Highlight multiple instances of the same word when hovered
     Plug 'lukas-reineke/indent-blankline.nvim'                  " Show indention for blank lines
 
+    " Tree sitter
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
+    Plug 'romgrk/nvim-treesitter-context'
+
+    " Dependecy
+    Plug 'Olical/aniseed', { 'tag': 'v3.19.0' }
+    Plug 'nvim-treesitter/nvim-tree-docs'
 
     " Usability
     Plug 'scrooloose/nerdcommenter' " Commenting with leader key (e.g. <leader> c <space>)
@@ -58,12 +64,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-test/vim-test'                                     " Vim default test plugin
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
 
-
-    " Still trying
-    Plug 'mbbill/undotree' " Undo tree
-
     Plug 'tomasiser/vim-code-dark'
-
 
     Plug 'vimwiki/vimwiki'
 call plug#end()
@@ -90,6 +91,16 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { },  -- list of language that will be disabled
   },
+  tree_docs = {
+    enable = true,
+    keymaps = {
+        doc_node_at_cursor = "<leader>a"
+        },
+  },
+}
+
+require'treesitter-context.config'.setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }
 EOF
 
