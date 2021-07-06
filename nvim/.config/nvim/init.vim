@@ -93,6 +93,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+
 augroup UltestRunner
     au!
     au BufWritePost * UltestNearest
@@ -110,8 +111,12 @@ source $HOME/.config/nvim/plug-config/main.vim
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keys/main.vim
 
+set termguicolors
+lua<<EOF
+    require'colorizer'.setup() -- Colorize configuration
+EOF
+
 " Theme
 set t_Co=256
-set termguicolors
 set t_ut=
 colorscheme codedark
