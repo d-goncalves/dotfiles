@@ -23,7 +23,6 @@ source $ZSH_DIRECTORY/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_DIRECTORY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH_DIRECTORY/fzf-tab/fzf-tab.plugin.zsh
 source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
-# source $ZSH_DIRECTORY/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # General alias
 source $ZSH_DIRECTORY/aliasrc
@@ -52,5 +51,4 @@ HISTFILE="$HOME/.zsh/.zsh_history" # change history file path
 _comp_options+=(globdots)
 autoload -Uz compinit
 
-#eval "$(starship init zsh)"
-export PATH=$HOME/scripts/:$PATH
+export PATH=$HOME/scripts/:$PATH # Add scripts to current path
