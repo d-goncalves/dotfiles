@@ -93,12 +93,14 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" Theme
-set t_Co=256
-set termguicolors
-set t_ut=
-colorscheme codedark
+augroup UltestRunner
+    au!
+    au BufWritePost * UltestNearest
+augroup END
 
+let test#python#pytest#options = "--color=yes"
+let test#javascript#jest#options = "--color=always"
+let g:ultest_use_pty = 1
 
 " Vim wiki
 let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}]
@@ -107,3 +109,9 @@ let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}]
 source $HOME/.config/nvim/plug-config/main.vim
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keys/main.vim
+
+" Theme
+set t_Co=256
+set termguicolors
+set t_ut=
+colorscheme codedark

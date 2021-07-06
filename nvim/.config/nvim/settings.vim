@@ -52,24 +52,10 @@ set showtabline=0          " Disable the top tab line
 "set nowrap                 " Display long lines as just one line
 "set signcolumn=no          " Git column
 
-highlight ShowTrailingWhitespace ctermbg=Red guibg=Red " Display Red for trailling spaces
-highlight clear LineNR " Remove diferent color from the Git column
-autocmd ColorScheme * highlight! link SignColumn LineNr " In case of no needing the Git column remove it
-
-" Go into normal mode after 5 seconds on inactivity
-au CursorHoldI * stopinsert
-au InsertEnter * let updaterestore=&updatetime | set updatetime=5000
-au InsertLeave * let &updatetime=updaterestore
-
-augroup UltestRunner
-    au!
-    au BufWritePost * UltestNearest
-augroup END
-
-let test#python#pytest#options = "--color=yes"
-let test#javascript#jest#options = "--color=always"
-let g:ultest_use_pty = 1
-
 " Fold Settings
 set foldmethod=indent      " Fold method follows syntax specific
 set foldlevelstart=99
+
+highlight ShowTrailingWhitespace ctermbg=Red guibg=Red " Display Red for trailling spaces
+highlight clear LineNR " Remove diferent color from the Git column
+autocmd ColorScheme * highlight! link SignColumn LineNr " In case of no needing the Git column remove it
