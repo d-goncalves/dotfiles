@@ -91,12 +91,6 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { },  -- list of language that will be disabled
   },
-  tree_docs = {
-    enable = true,
-    keymaps = {
-        doc_node_at_cursor = "<leader>a"
-        },
-  },
 }
 
 require'treesitter-context.config'.setup{
