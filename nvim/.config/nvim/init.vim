@@ -22,7 +22,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'fannheyward/telescope-coc.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
-
     " User friendly
     Plug 'liuchengxu/vim-which-key' " Using the leader key <space> show some keybinds
     Plug 'mhinz/vim-startify'       " Project start menu with cowsay
@@ -70,7 +69,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 call plug#end()
 
 
+set termguicolors
+
 lua << EOF
+-- Telescope setup
 require('telescope').setup {
   extensions = {
     fzf = {
@@ -82,9 +84,8 @@ require('telescope').setup {
 }
 require('telescope').load_extension('coc')
 require('telescope').load_extension('fzf')
-EOF
 
-lua <<EOF
+-- Tree sitter configuration
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
   highlight = {
@@ -96,6 +97,9 @@ require'nvim-treesitter.configs'.setup {
 require'treesitter-context.config'.setup{
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }
+
+-- Requires set termguicolors
+require'colorizer'.setup() -- Colorize configuration
 EOF
 
 
@@ -116,12 +120,8 @@ source $HOME/.config/nvim/plug-config/main.vim
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keys/main.vim
 
-set termguicolors
-lua<<EOF
-    require'colorizer'.setup() -- Colorize configuration
-EOF
-
 " Theme
+set termguicolors
 set t_Co=256
 set t_ut=
 colorscheme codedark
