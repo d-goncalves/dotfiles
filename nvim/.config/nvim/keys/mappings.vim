@@ -62,16 +62,20 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>Gd :Gvdiff<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
+nnoremap <leader>Gc <cmd>lua require('telescope.builtin').git_bcommits()<cr>
 
-" FZF configuration
-map <C-f> :Files<CR>
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fg :GGrep<CR>
-nnoremap <leader>fr :Rg<CR>
-nnoremap <leader>fa :Ag<CR>
-nnoremap <leader>fs :RG<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>C :Colors<CR>
+" Using lua functions
+" Still need to get a strict search (
+" ex: grep abc must only match exatcly abc
+" )
+
+map <C-f> <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').git_bcommits()<cr>
+nnoremap <leader>C <cmd>lua require('telescope.builtin').colorscheme()<cr>
 
 " COC configuration
 

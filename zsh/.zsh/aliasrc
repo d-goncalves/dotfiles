@@ -37,7 +37,8 @@ alias \
     gcob="git checkout -b" \
     gl="git pull" \
     gp="git push" \
-    gst="git status"
+    gst="git status" \
+    gittree="git log --graph --oneline --all"
 
 # Git flow alias
 alias \

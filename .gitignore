@@ -1,5 +1,9 @@
+
+# Neovim ignore files
 .netrwhist
 nvim/.config/nvim/autoload
+
+# ZSH ignore
 zsh/.zsh/fzf-tab
 zsh/.zsh/zsh-git-prompt
 zsh/.zsh/zsh-autosuggestions

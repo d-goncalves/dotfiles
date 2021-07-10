@@ -1,6 +1,13 @@
 source $HOME/.config/nvim/plug-config/coc.vim
-source $HOME/.config/nvim/plug-config/fzf.vim
-source $HOME/.config/nvim/plug-config/markdow-preview.vim
-source $HOME/.config/nvim/plug-config/nvim-colorizer-lua.vim
-source $HOME/.config/nvim/plug-config/start-screen.vim
-source $HOME/.config/nvim/plug-config/ultisnips.vim
+
+let g:startify_bookmarks = [
+        \ { 'b': '~/code/docker-beevo' },
+        \ { 'd1': '~/code/docker-beevo/html/delta' },
+        \ { 'en': '~/code/ma-engine' },
+        \ { 'ma': '~/code/ma-apps' },
+        \ { 'mf': '~/code/ma-frontend' },
+        \ { 'term': '~/.config/alacritty/alacritty.yml' },
+        \ { 'tmux': '~/.tmux.conf' },
+        \ { 'vim': '~/.config/nvim/init.vim' },
+        \ { 'zsh': '~/.zshrc' },
+        \ ]
