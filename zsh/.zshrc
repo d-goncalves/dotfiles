@@ -1,20 +1,30 @@
 # PATH
 ZSH_DIRECTORY="$HOME/.zsh"
+HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
+ZDOTDIR="$HOME/.zsh"
+
+echo $OSTYPE
 
 # OS specific configuration
-
+# WARN: if this doesn't work be carefull with the * at the end
 if [[ "OSTYPE" == "linux-gnu" ]];then
+    echo 'Inside linux'
     # TODO: Check a easier way to install FZF
     FZF_PATH="/usr/share/doc/fzf/examples"
     source $FZF_PATH/key-bindings.zsh
     source $FZF_PATH/completion.zsh
     export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-fi
 
-if [[ "OSTYPE" == "linux-gnu" ]];then
     # COMPANY configuration only on linux
     HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
     source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
+fi
+
+if [[ `uname` == "Darwin" ]];then
+    echo "OSX"
+    #FZF_PATH="/usr/local/share/zsh/site-functions/"
+    source $ZSH_DIRECTORY/completion.zsh
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 fi
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -31,6 +41,9 @@ source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
 
 # General alias
 source $ZSH_DIRECTORY/aliasrc
+
+# Add my custom script to current path
+export PATH=$HOME/scripts/:$PATH
 
 # Colors and Prompt
 export TERM=xterm-256color
@@ -51,9 +64,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
-HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
-_comp_options+=(globdots)
 autoload -Uz compinit
-
-export PATH=$HOME/scripts/:$PATH # Add scripts to current path
+compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
+_comp_options+=(globdots)
