@@ -78,10 +78,10 @@ alias \
 
 # List directory contents
 alias \
-    lsa="ls -Glah" \
-    l="ls -Glah" \
-    ll="ls -lGh" \
-    la="ls -lGAh"
+    lsa="ls -lah" \
+    l="ls -lah" \
+    ll="ls -lh" \
+    la="ls -lAh"
 
 # change directory backwards
 alias \
