@@ -11,8 +11,8 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Language support
-    Plug 'sheerun/vim-polyglot'                            " Multiple language syntax support
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}        " LSP support
+    Plug 'sheerun/vim-polyglot'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
     " Telescope

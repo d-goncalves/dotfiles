@@ -3,35 +3,16 @@ ZSH_DIRECTORY="$HOME/.zsh"
 HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
 ZDOTDIR="$HOME/.zsh"
 
-echo $OSTYPE
-
-# OS specific configuration
-# WARN: if this doesn't work be carefull with the * at the end
-if [[ "OSTYPE" == "linux-gnu" ]];then
-    echo 'Inside linux'
-    # TODO: Check a easier way to install FZF
-    FZF_PATH="/usr/share/doc/fzf/examples"
-    source $FZF_PATH/key-bindings.zsh
-    source $FZF_PATH/completion.zsh
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-
-    # COMPANY configuration only on linux
-    HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
-    source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
-fi
-
-if [[ `uname` == "Darwin" ]];then
-    echo "OSX"
-    #FZF_PATH="/usr/local/share/zsh/site-functions/"
-    source $ZSH_DIRECTORY/completion.zsh
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-fi
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim' # SSH remote editor
 else
    export EDITOR='nvim' # Local editor
 fi
+
+# Configure completion
+source $ZSH_DIRECTORY/completion.zsh
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # Plugin sourcing
 source $ZSH_DIRECTORY/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -67,3 +48,14 @@ bindkey '^e' edit-command-line
 autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 _comp_options+=(globdots)
+
+export PATH=$HOME/scripts/:$PATH # Add scripts to current path
+
+# OS specific configuration
+# On linux load Company related information
+if [[ "OSTYPE" == "linux-gnu"* ]]; then
+
+    # COMPANY configuration only on linux
+    HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
+    source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
+fi

@@ -1,3 +1,11 @@
+# NOTE:
+# WARN:
+
+# This file is a pure copy of fzf completion on the FZF repo
+# link: https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
+
+
+
 #     ____      ____
 #    / __/___  / __/
 #   / /_/_  / / /_

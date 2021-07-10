@@ -1,13 +1,13 @@
+
+# Neovim ignore files
 .netrwhist
 nvim/.config/nvim/autoload
 
-
-
-
+# ZSH ignore
+zsh/.zsh/fzf-tab
+zsh/.zsh/zsh-git-prompt
+zsh/.zsh/zsh-autosuggestions
+zsh/.zsh/zsh-syntax-highlighting
 zsh/.zsh/.zcompdump
 zsh/.zsh/.zsh_history
-zsh/.zsh/fzf-tab/
-zsh/.zsh/zsh-git-prompt
-zsh/.zsh/zsh-syntax-highlighting/
-zsh/.zsh/zsh-autosuggestions
 
