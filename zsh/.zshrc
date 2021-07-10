@@ -51,9 +51,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
 _comp_options+=(globdots)
-autoload -Uz compinit
 
 export PATH=$HOME/scripts/:$PATH # Add scripts to current path
