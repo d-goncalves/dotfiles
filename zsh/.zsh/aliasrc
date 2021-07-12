@@ -7,8 +7,8 @@ if [[ "$OSTYPE" == "darwin"* ]];then
         grep="grep" \
         diff="diff" \
         ccat="highlight --out-format=ansi"
-elif [[ "OSTYPE" == "linux-gnu"* ]]; then
-    echo "linux"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias \
         ls="ls -hN --color=auto --group-directories-first" \
         grep="grep --color=auto" \
         diff="diff --color=auto" \
