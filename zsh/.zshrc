@@ -53,7 +53,7 @@ export PATH=$HOME/scripts/:$PATH # Add scripts to current path
 
 # OS specific configuration
 # On linux load Company related information
-if [[ "OSTYPE" == "linux-gnu"* ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     # COMPANY configuration only on linux
     HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
