@@ -59,6 +59,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'airblade/vim-gitgutter' " Add git diff on the left side
     Plug 'tpope/vim-fugitive'     " Git for vim
 
+    Plug 'kkoomen/vim-doge'
     " Test usage
     Plug 'vim-test/vim-test'                                     " Vim default test plugin
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
