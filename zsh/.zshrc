@@ -25,6 +25,7 @@ source $ZSH_DIRECTORY/aliasrc
 
 # Add my custom script to current path
 export PATH=$HOME/scripts/:$PATH
+export PATH=$HOME/spells/bash/:$PATH
 
 # Colors and Prompt
 export TERM=xterm-256color
