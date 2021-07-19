@@ -39,47 +39,53 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
     Plug 'romgrk/nvim-treesitter-context'
 
-    " Dependecy
-    Plug 'Olical/aniseed', { 'tag': 'v3.19.0' }
-    Plug 'nvim-treesitter/nvim-tree-docs'
-
     " Usability
     Plug 'scrooloose/nerdcommenter' " Commenting with leader key (e.g. <leader> c <space>)
     Plug 'markonm/traces.vim'       " Find&Replace is shown as it's being done
     Plug 'jiangmiao/auto-pairs'     " Auto pair, Close and finish. Prefer vim-closer but conflicts with COC
     Plug 'airblade/vim-rooter'      " Changes vim working directory to the project
-    Plug 'godlygeek/tabular'        " Use :Tab (e.g :Tab /\" to rearrange comments)
+    Plug 'tpope/vim-repeat'         " Improve support for dot commands
+    Plug 'junegunn/vim-easy-align'  " With ga allow to align stuff
+    Plug 'kkoomen/vim-doge'         " Generate documenation with <leader> d
+    Plug 'andymass/vim-matchup'     " Extends % to jump between functions
+    Plug 'folke/todo-comments.nvim' " Highlight comments
+    Plug 'vimwiki/vimwiki'          " Personal wiki space. Used to keep todo list
+    Plug 'ggandor/lightspeed.nvim'  " Add motion with the s key
 
     " Tmux and terminal integration
     Plug 'wincent/terminus'                   " Increase mouse integration between Terminal, Tmux and Vim
     Plug 'christoomey/vim-tmux-navigator'     " Use ctrl + hjkl to change pane
     Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux and vim event focus
+    Plug 'vifm/vifm.vim'                      " File manager inside nvim
 
     " Git configuration
-    Plug 'airblade/vim-gitgutter' " Add git diff on the left side
     Plug 'tpope/vim-fugitive'     " Git for vim
+    Plug 'lewis6991/gitsigns.nvim'
 
-    Plug 'kkoomen/vim-doge'
     " Test usage
     Plug 'vim-test/vim-test'                                     " Vim default test plugin
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
 
-    Plug 'tomasiser/vim-code-dark'
-
-    Plug 'vimwiki/vimwiki'
+    " Theme configuration
+    Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
 call plug#end()
 
-
 set termguicolors
+set t_Co=256
+set t_ut=
+colorscheme onehalfdark
 
+" Lua plugin configuration
 lua << EOF
 -- Telescope setup
 require('telescope').setup {
+  -- TODO: Here create a new command search where fuzzy is false
+  -- TODO: Take a deeper look into showing dotfiles and the home search directory
   extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
+   fzf = {
+    fuzzy = true,                    -- false will only do exact matching
+    override_generic_sorter = false, -- override the generic sorter
+    override_file_sorter = true,     -- override the file sorter
     }
   }
 }
@@ -93,6 +99,11 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { },  -- list of language that will be disabled
   },
+
+    matchup = {
+        enable = true,              -- mandatory, false will disable the whole extension
+        disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+      },
 }
 
 require'treesitter-context.config'.setup{
@@ -101,8 +112,13 @@ require'treesitter-context.config'.setup{
 
 -- Requires set termguicolors
 require'colorizer'.setup() -- Colorize configuration
+require('gitsigns').setup()
+require("todo-comments").setup ()
+
 EOF
 
+
+" Unit test configuration
 
 augroup UltestRunner
     au!
@@ -113,16 +129,10 @@ let test#python#pytest#options = "--color=yes"
 let test#javascript#jest#options = "--color=always"
 let g:ultest_use_pty = 1
 
-" Vim wiki
-let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}]
+let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}] " Vim wiki
+let g:indent_blankline_char = '│' " Indent blank line confiugration
 
 " Source everything
 source $HOME/.config/nvim/plug-config/main.vim
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/keys/main.vim
-
-" Theme
-set termguicolors
-set t_Co=256
-set t_ut=
-colorscheme codedark
