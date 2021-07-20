@@ -94,7 +94,8 @@ require('telescope').load_extension('fzf')
 
 -- Tree sitter configuration
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
+  -- TODO: Install dockerfile and cuda syntax
+  ensure_installed = { "typescript", "json", "c", "cpp", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { },  -- list of language that will be disabled
