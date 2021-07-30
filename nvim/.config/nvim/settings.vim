@@ -53,9 +53,25 @@ set undofile
 set wrap                   " Display long lines as just one line
 
 " Fold Settings
-set foldmethod=indent      " Fold method follows syntax specific
-set foldlevelstart=99
+set foldmethod=syntax      " Fold method follows syntax specific
+"set foldlevelstart=99
 
 highlight ShowTrailingWhitespace ctermbg=Red guibg=Red " Display Red for trailling spaces
 highlight clear LineNR " Remove diferent color from the Git column
 autocmd ColorScheme * highlight! link SignColumn LineNr " In case of no needing the Git column remove it
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac

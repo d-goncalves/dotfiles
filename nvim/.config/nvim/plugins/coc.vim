@@ -54,7 +54,7 @@ let g:coc_explorer_global_presets = {
                                 \ }
 
 " Configuration
-"let g:UltiSnipsExpandTrigger = "<nop>"
+let g:UltiSnipsExpandTrigger = "<nop>"
 " Make <CR> auto-select the first completion item and notify coc.nvim
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 

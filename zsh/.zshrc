@@ -44,7 +44,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS
 
 # Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey -e # for emacs
+bindkey '^v' edit-command-line
 
 autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path

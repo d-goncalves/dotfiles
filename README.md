@@ -168,3 +168,33 @@ https://addons.mozilla.org/en-US/firefox/addon/science-theme-by-m-donna/
 ## Gnome GTK
 https://github.com/vinceliuice/WhiteSur-gtk-theme
 
+## TIPS:
+
+
+Change inside curly brances = ciB
+Change inside regular brances = cib
+
+zt, zz, zb: scroll so that the current position of the cursor is moved to the top, middle or bottom of the screen
+
+'. jumps to the last modified line. `. jumps to the exact position of last modification
+
+== will auto-indent the current line.  Select text in visual mode, then = to auto-indent the selected lines.
+
+gUU   : uppercase line
+Vu    : lowercase line
+VU    : uppercase line
+g~~   : flip case line
+vEU   : Upper Case Word
+vE~   : Flip Case Word
+ggguG : lowercase entire file
+
+Troll:
+set rl!  : reverse lines right to left (toggles)
+:g/^/m0  : reverse lines top to bottom (toggles)
+
+\* # g* g#          : find word under cursor (<cword>) (forwards/backwards)
+: %                 : match brackets {}[]()
+guu                 : lowercase line
+
+<C-O>            : retrace your movements in file (starting from most recent)
+<C-I>            : retrace your movements in file (reverse direction)

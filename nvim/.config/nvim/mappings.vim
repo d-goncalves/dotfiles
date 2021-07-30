@@ -1,5 +1,15 @@
 "Mappings
 
+" Remove h/j/k/l
+nnoremap <Left>  :echoe Move<CR>
+nnoremap <Right> :echoe Move<CR>
+nnoremap <Up>    :echoe Move<CR>
+nnoremap <Down>  :echoe Move<CR>
+inoremap <Left>  <ESC>:echoe Move<CR>
+inoremap <Right> <ESC>:echoe Move<CR>
+inoremap <Up>    <ESC>:echoe Move<CR>
+inoremap <Down>  <ESC>:echoe Move<CR>
+
 " Use alt + hjkl to resize windows
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
@@ -15,10 +25,21 @@ nnoremap <C-c> <Esc>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" TAB in general mode will move to text buffer
-"nnoremap <TAB> :bnext<CR>
-" SHIFT-TAB will go back
-"nnoremap <S-TAB> :bprevious<CR>
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
 
 " Alternate way to save
 nnoremap <C-s> :up<CR>
@@ -39,15 +60,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Remove h/j/k/l
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 
 " Terminal Mode
@@ -125,12 +137,18 @@ nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>lp  :<C-u>CocListResume<CR>
-nmap <space>e :CocCommand explorer<CR>
+nnoremap <space>e :CocCommand explorer<CR>
 
 " Test mapping
-nmap <leader> tn <Plug>(ultest-next-fail)
+nnoremap <leader> tn <Plug>(ultest-next-fail)
 
 " Get Telescope TODO list
-nmap <leader>t :TodoQuickFix<cr>
+nnoremap <leader>t :TodoQuickFix<cr>
 
-nmap <leader>m :Vifm<cr>
+nnoremap <leader>m :Vifm<cr>
+
+" NOTE: g_ same as my mapping for 0
+" nnoremap _ g_
+
+" Map gw to change current word with next
+nnoremap <silent> gw    ma"_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<cr>`a
