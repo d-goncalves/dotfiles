@@ -3,29 +3,11 @@ ZSH_DIRECTORY="$HOME/.zsh"
 HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
 ZDOTDIR="$HOME/.zsh"
 
-
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim' # SSH remote editor
 else
    export EDITOR='nvim' # Local editor
 fi
-
-# Configure completion
-source $ZSH_DIRECTORY/completion.zsh
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-
-# Plugin sourcing
-source $ZSH_DIRECTORY/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH_DIRECTORY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH_DIRECTORY/fzf-tab/fzf-tab.plugin.zsh
-source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
-
-# General alias
-source $ZSH_DIRECTORY/aliasrc
-
-# Add my custom script to current path
-export PATH=$HOME/scripts/:$PATH
-export PATH=$HOME/spells/bash/:$PATH
 
 # Colors and Prompt
 export TERM=xterm-256color
@@ -51,7 +33,8 @@ autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 _comp_options+=(globdots)
 
-export PATH=$HOME/scripts/:$PATH # Add scripts to current path
+# Add my custom script to current path
+export PATH=$HOME/spells/bash/:$PATH
 
 # OS specific configuration
 # On linux load Company related information
@@ -61,3 +44,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
     source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
 fi
+
+# Configure completion
+source $ZSH_DIRECTORY/completion.zsh
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+# Plugin sourcing
+source $ZSH_DIRECTORY/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_DIRECTORY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH_DIRECTORY/fzf-tab/fzf-tab.plugin.zsh
+source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
+
+# General alias
+source $ZSH_DIRECTORY/aliasrc
