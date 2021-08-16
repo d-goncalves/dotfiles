@@ -67,7 +67,6 @@ export PATH=$HOME/spells/bash/:$PATH
 # Check if the machine if of work type
 # For Linux load company related information
 if [[ "$WORK" == "work" ]]; then
-    echo "abc"
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
         source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
