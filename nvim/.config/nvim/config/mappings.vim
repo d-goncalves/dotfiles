@@ -159,6 +159,7 @@ nnoremap <space>e :CocCommand explorer<CR>
 " TODO: Check if it's worth going back to FZF
 
 " TODO: Use Telescope to grep current word
+" Not really needed, i can use g* to find the word in the curent directory
 " Grep the under cursor with leader
 " nnoremap <leader>g :silent execute "grep! -r " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>
 
