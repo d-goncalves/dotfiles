@@ -40,10 +40,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'nvim-lua/plenary.nvim'
 
     " User friendly
-    " TODO: Update vim-which-key configuration to new mappings
     Plug 'liuchengxu/vim-which-key' " Using the leader key <space> show some keybinds
-    " TODO: Make the plugin OS indepentendent
-    " If on windows it might take some work to get this to work properly
     Plug 'mhinz/vim-startify'       " Project start menu with cowsay
 
 
@@ -113,7 +110,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'arzg/vim-colors-xcode'            " Xcode theme
 
 
-    ""Editor config configuration (NOTE: still need to understand this)
+    " Editor config configuration (TODO: still need to understand this)
     "Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
