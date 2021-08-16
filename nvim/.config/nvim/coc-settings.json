@@ -75,7 +75,7 @@
     "python.linting.flake8Enabled": true,
     "python.jediEnabled": false,
     "python.linting.lintOnSave": true,
-    "clangd.path": "/home/goncalves-diogo/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+    "clangd.path": "/Users/dgoncalves/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
     "coc.preferences.extensionUpdateCheck": "daily",
     "clangd.semanticHighlighting": true
 }

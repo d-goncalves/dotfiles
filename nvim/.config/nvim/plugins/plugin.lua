@@ -1,9 +1,17 @@
-require'colorizer'.setup() -- Colorize configuration
+-- General Lua Plugin configuration
+
+-- GitSigns configuration {{{
+
 require('gitsigns').setup()
 
--- TODO: Change this format to follow the general file structure
+--}}}
+-- Colorize {{{
 
--- {{{ Telescope setup
+require'colorizer'.setup() -- Colorize configuration
+
+--}}}
+-- Telescope {{{
+
 require('telescope').setup {
   extensions = {
    fzf = {
@@ -17,7 +25,8 @@ require('telescope').load_extension('coc')
 require('telescope').load_extension('fzf')
 
 -- }}}
--- Tree sitter configuration
+-- Treesitter {{{
+            --
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
   highlight = {
@@ -34,6 +43,8 @@ require'treesitter-context.config'.setup{
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }
 
+-- }}}
+-- Todo Comments {{{
 require("todo-comments").setup {
     keywords = {
         FIX  = { icon = " ", color = "#ff1212", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
@@ -64,3 +75,4 @@ require("todo-comments").setup {
         pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]],
     },
 }
+-- }}}

@@ -31,6 +31,9 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
+    " FuzzyFinder
+     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
+     Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
     " TODO: Here create a new command search where fuzzy is false
     " TODO: Take a deeper look into showing dotfiles and the home search directory
     " Telescope

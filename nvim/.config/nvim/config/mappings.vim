@@ -210,11 +210,31 @@ nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 " }}}
+" Plugin: Fzf {{{
+
+" To find the word under the cursor in the current buffer use g*
+map <C-f> :Files<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GGrep<CR>
+nnoremap <leader>fr :Rg<CR>
+nnoremap <leader>fa :Ag<CR>
+nnoremap <leader>fs :RG<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>C :Colors<CR>
+
+" }}}
 
 " Compilation: Cpp {{{
-" TODO: Not working properly on ubuntu, i think it works on mac need to double check
-autocmd vimEnter *.cpp nnoremap <F8> :w <CR> :split <BAR> !clear ; g++ --std=c++17 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
-"nmap <leader>r :new | 0read ! ./run.sh
+
+" For more Complex compilation processes it might be useful to build something
+" more robust -> https://github.com/skywind3000/asyncrun.vim
+
+autocmd filetype cpp nnoremap <F8> :w <BAR> :Shell g++ --std=c++17 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline) abort
+    exe 'split | terminal '. a:cmdline
+endfunction
 " }}}
 
 " Terminal {{{
