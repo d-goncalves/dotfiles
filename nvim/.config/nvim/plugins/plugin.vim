@@ -12,19 +12,31 @@ let g:indent_blankline_char = '│' " Indent blank line confiugration
 " }}}
 " Plugin: Startify  {{{
 
-" General bookmarks
-" TODO: Create OS specific path
-let g:startify_bookmarks = [
-        \ { 'b': '~/code/docker-beevo' },
-        \ { 'd1': '~/code/docker-beevo/html/delta' },
-        \ { 'en': '~/code/ma-engine' },
-        \ { 'ma': '~/code/ma-apps' },
-        \ { 'mf': '~/code/ma-frontend' },
-        \ { 'term': '~/.config/alacritty/alacritty.yml' },
-        \ { 'tmux': '~/.tmux.conf' },
-        \ { 'vim': '~/.config/nvim/init.vim' },
-        \ { 'zsh': '~/.zshrc' },
-        \ ]
+if has("mac")
+    let g:startify_bookmarks = [
+                \ { 'term': '~/.config/alacritty/alacritty.yml' },
+                \ { 'tmux': '~/.tmux.conf' },
+                \ { 'vim': '~/.config/nvim/init.vim' },
+                \ { 'zsh': '~/.zshrc' },
+                \ ]
+elseif has("win32")
+    "all Windows, ie win32,win64
+elseif has("win32unix")
+    "Cygwin
+elseif has("linux")
+    let g:startify_bookmarks = [
+                \ { 'b': '~/code/docker-beevo' },
+                \ { 'd1': '~/code/docker-beevo/html/delta' },
+                \ { 'en': '~/code/ma-engine' },
+                \ { 'ma': '~/code/ma-apps' },
+                \ { 'mf': '~/code/ma-frontend' },
+                \ { 'term': '~/.config/alacritty/alacritty.yml' },
+                \ { 'tmux': '~/.tmux.conf' },
+                \ { 'vim': '~/.config/nvim/init.vim' },
+                \ { 'zsh': '~/.zshrc' },
+                \ ]
+    "Linux
+end
 
 " }}}
 " Plugin: Crease {{{
