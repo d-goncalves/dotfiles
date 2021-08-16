@@ -10,21 +10,6 @@ require('gitsigns').setup()
 require'colorizer'.setup() -- Colorize configuration
 
 --}}}
--- Telescope {{{
-
-require('telescope').setup {
-  extensions = {
-   fzf = {
-    fuzzy = true,                    -- false will only do exact matching
-    override_generic_sorter = false, -- override the generic sorter
-    override_file_sorter = true,     -- override the file sorter
-    }
-  }
-}
-require('telescope').load_extension('coc')
-require('telescope').load_extension('fzf')
-
--- }}}
 -- Treesitter {{{
             --
 require'nvim-treesitter.configs'.setup {

@@ -34,14 +34,10 @@ call plug#begin(data_dir . 'autoload/plugged')
     " FuzzyFinder
      Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
      Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
-    " TODO: Here create a new command search where fuzzy is false
-    " TODO: Take a deeper look into showing dotfiles and the home search directory
-    " Telescope
+
+    " Dependencies
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'fannheyward/telescope-coc.nvim'
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
     " User friendly
     " TODO: Update vim-which-key configuration to new mappings

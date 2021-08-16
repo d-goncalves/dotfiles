@@ -7,7 +7,7 @@ let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}] " Vim wiki
 " }}}
 " Plugin: Indent blankline {{{
 
-" let g:indent_blankline_char = '│' " Indent blank line confiugration
+let g:indent_blankline_char = '│' " Indent blank line confiugration
 
 " }}}
 " Plugin: Startify  {{{
@@ -75,12 +75,12 @@ let g:which_key_map.C = 'Themes'
 
 let g:which_key_map.f = {
       \ 'name' : '+Find' ,
-      \ "f": [ ':Telescope find_files', 'Files' ],
-      \ "g": [ ':Telescope live_grep', 'Git'],
-      \ "r": [ ':Telescope grep_string', 'Grep'],
-      \ "s": [ ':Telescope grep_string', 'TODO: Strict'],
-      \ "b": [ ':Telescope buffers ', 'Buffers'],
-      \ "h": [ ':Telescope git_bcommits', 'Commit History'],
+      \ "f": [ ':Files', 'Files' ],
+      \ "g": [ ':GGrep', 'Git'],
+      \ "r": [ ':Rg', 'Rg'],
+      \ "a": [ ':Ag', 'Ag'],
+      \ "s": [ ':RG', 'Strict Grep'],
+      \ "b": [ ':Buffers', 'Buffers'],
       \ }
 
 " Register which key map

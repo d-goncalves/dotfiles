@@ -155,30 +155,11 @@ nnoremap <silent><nowait> <leader>lp  :<C-u>CocListResume<CR>
 nnoremap <space>e :CocCommand explorer<CR>
 
 " }}}
-" Plugin: Telescope {{{
-" TODO: Check if it's worth going back to FZF
-
-" TODO: Use Telescope to grep current word
-" Not really needed, i can use g* to find the word in the curent directory
-" Grep the under cursor with leader
-" nnoremap <leader>g :silent execute "grep! -r " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>
-
-" TODO: Still need to get a strict search ( ex: grep abc must only match exatcly abc )
-" TODO: Figure out why it isn't showing any results most of the times
-nnoremap <leader>Gc <cmd>lua require('telescope.builtin').git_bcommits()<cr>
-map <C-f> <cmd>lua require('telescope.builtin').find_files()<CR>
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').git_bcommits()<cr>
-nnoremap <leader>C <cmd>lua require('telescope.builtin').colorscheme()<cr>
-
-" }}}
 " Plugin: Todo-comments {{{
+
 " Get Telescope TODO list
 nnoremap <leader>t :TodoQuickFix<cr>
-nnoremap <leader>ft :TodoTelescope<cr>
+
 " }}}
 " Plugin: EasyAlign {{{
 
