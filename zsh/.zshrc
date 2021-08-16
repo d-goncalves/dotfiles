@@ -3,6 +3,9 @@ ZSH_DIRECTORY="$HOME/.zsh"
 HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
 ZDOTDIR="$HOME/.zsh"
 
+# Define machine enviroment variables
+source $ZSH_DIRECTORY/environment.zsh
+
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim' # SSH remote editor
 else
@@ -26,8 +29,33 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS
 
 # Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-bindkey -e # for emacs
 bindkey '^v' edit-command-line
+bindkey -v # for vi
+KEYTIMEOUT=5 # Remove mode switching delay.
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+
+precmd_functions+=(_fix_cursor) # Add fix cursor to precmd
+bindkey jk vi-cmd-mode # Typing jk will get into vim mode
 
 autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
@@ -36,13 +64,14 @@ _comp_options+=(globdots)
 # Add my custom script to current path
 export PATH=$HOME/spells/bash/:$PATH
 
-# OS specific configuration
-# On linux load Company related information
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-
-    # COMPANY configuration only on linux
-    HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
-    source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
+# Check if the machine if of work type
+# For Linux load company related information
+if [[ "$WORK" == "work" ]]; then
+    echo "abc"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
+        source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
+    fi
 fi
 
 # Configure completion

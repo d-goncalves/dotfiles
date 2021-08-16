@@ -1,19 +1,20 @@
 #!/bin/sh
 
 # Colorize commands
+# OSX specific configuraion
 if [[ "$OSTYPE" == "darwin"* ]];then
     alias \
         ls="ls -G" \
         grep="grep" \
         diff="diff" \
         ccat="highlight --out-format=ansi"
+# Linux specific configuraion ( TESTED ON UBUNTU )
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias \
         ls="ls -hN --color=auto --group-directories-first" \
         grep="grep --color=auto" \
         diff="diff --color=auto" \
         ccat="highlight --out-format=ansi"
-
 fi
 
 # Env varibles
