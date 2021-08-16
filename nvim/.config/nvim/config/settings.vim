@@ -1,4 +1,5 @@
 " Settings
+" TODO: Refactor this file to follow the structure
 
 let g:mapleader = "\<Space>" " set leader key
 
@@ -52,8 +53,12 @@ set showtabline=0          " Disable the top tab line
 set undofile
 set wrap                   " Display long lines as just one line
 
+" set silent (no beep)
+set vb t_vb=".
+
+" TODO: Learn how to properly use folds
 " Fold Settings
-set foldmethod=syntax      " Fold method follows syntax specific
+"set foldmethod=syntax      " Fold method follows syntax specific
 "set foldlevelstart=99
 
 highlight ShowTrailingWhitespace ctermbg=Red guibg=Red " Display Red for trailling spaces

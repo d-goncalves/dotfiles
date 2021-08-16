@@ -1,6 +1,8 @@
-" Plugins
+" Main
 
 set encoding=UTF-8
+
+" Plugin manager configuration {{{
 
 let $HOMECONFIG=stdpath('config')
 
@@ -10,6 +12,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" }}}
+" Plugins {{{
 
 call plug#begin(data_dir . 'autoload/plugged')
 
@@ -91,25 +96,44 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'folke/todo-comments.nvim'            " Highlight comments
     Plug 'vimwiki/vimwiki'                     " Personal wiki space. Used to keep todo list
     Plug 'ggandor/lightspeed.nvim'             " Add motion with the s key
+    Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-sleuth'
+    Plug 'scr1pt0r/crease.vim'
+
+
+    " TODO: Configure this to switch properly
+    "Plug 'AndrewRadev/switch.vim'       " TODO: configure this, dictionary of antonyms (e.g. True <-> False)
+    " TODO: Configure this if i use HTML
+    "Plug 'mattn/emmet-vim'              " Add HTML specific key combinations
+
+    " TODO: Config This
+    Plug 'lvim-tech/lvim-helper'
 
     " Themes
     Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
     Plug 'arzg/vim-colors-xcode'            " Xcode theme
 
+
+    ""Editor config configuration (NOTE: still need to understand this)
+    "Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()
+
+" }}}
+" Theme {{{
 
 set termguicolors
 set t_Co=256
 set t_ut=
 colorscheme onehalfdark
 
-" SOURCE EVERYTHING
-" Plugin Configuration
+" }}}
+" Source files {{{
+
 luafile $HOMECONFIG/plugins/plugin.lua
 source $HOMECONFIG/plugins/plugin.vim
-source $HOMECONFIG/plugins/coc.vim
-" General settings
-source $HOMECONFIG/settings.vim
-" Keymapping configuration
-source $HOMECONFIG/mappings.vim
-source $HOMECONFIG/plugins/which-key.vim
+source $HOMECONFIG/config/settings.vim
+source $HOMECONFIG/config/mappings.vim
+source $HOMECONFIG/config/filetype.vim
+
+" }}}

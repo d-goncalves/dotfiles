@@ -1,8 +1,9 @@
 require'colorizer'.setup() -- Colorize configuration
 require('gitsigns').setup()
 
+-- TODO: Change this format to follow the general file structure
 
--- Telescope setup
+-- {{{ Telescope setup
 require('telescope').setup {
   extensions = {
    fzf = {
@@ -15,6 +16,7 @@ require('telescope').setup {
 require('telescope').load_extension('coc')
 require('telescope').load_extension('fzf')
 
+-- }}}
 -- Tree sitter configuration
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
