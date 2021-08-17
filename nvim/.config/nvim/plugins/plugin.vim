@@ -5,6 +5,21 @@
 let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}] " Vim wiki
 
 " }}}
+" Plugin: EditorConfig {{{
+
+" Exclude Fugitive due to conflicts
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" }}}
+" Plugin: Switch {{{
+
+" Default mapping is gs
+let g:switch_custom_definitions =
+    \ [
+    \   ['foo', 'bar', 'baz']
+    \ ]
+
+" }}}
 " Plugin: Indent blankline {{{
 
 let g:indent_blankline_char = '│' " Indent blank line confiugration
@@ -55,6 +70,7 @@ augroup END
 let test#python#pytest#options = "--color=yes"
 let test#javascript#jest#options = "--color=always"
 let g:ultest_use_pty = 1
+let g:ultest_running_sign =	"⏯"
 
 " }}}
 " Plugin: WhichKey {{{
@@ -117,6 +133,7 @@ let g:coc_global_extensions = [
                                 \ 'coc-sh',
                                 \ 'coc-explorer',
                                 \ 'coc-snippets',
+                                \ 'coc-eslint',
                                 \ 'coc-yank'
                                 \ ]
 
@@ -164,6 +181,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>
 " Show documentation with K
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" TODO: Must ensure that tab completion works like DoGe ( Tabs work properly )
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :

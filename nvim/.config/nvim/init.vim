@@ -18,54 +18,68 @@ endif
 
 call plug#begin(data_dir . 'autoload/plugged')
 
-    " TODO: Still need more configuration
-    " TODO: Must ensure that tab completion works like DoGe
-    " Snips
+    " Snippets {{{
+
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
 
-    " TODO: look into this https://github.com/neoclide/coc-eslint
-    " TODO: Add eslint & prettier to autosave in certain files
-    " Language support
+    " }}}
+    " Language {{{
+
     Plug 'sheerun/vim-polyglot'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
-    " FuzzyFinder
+    " }}}
+    " FuzzyFinder {{{
+
      Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
      Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
 
-    " Dependencies
+    " }}}
+    " Dependencies {{{
+
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
-    " User friendly
-    Plug 'liuchengxu/vim-which-key' " Using the leader key <space> show some keybinds
-    Plug 'mhinz/vim-startify'       " Project start menu with cowsay
+    " }}}
+    " Database {{{
 
-
-    " Database configuration, Usage: ':DBUI'
+    " Usage ':DBUI'
     Plug 'tpope/vim-dadbod'
     Plug 'kristijanhusak/vim-dadbod-completion'
     Plug 'kristijanhusak/vim-dadbod-ui'
 
-    " Tree sitter
+    " }}}
+    " Tree sitter {{{
+
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
     Plug 'romgrk/nvim-treesitter-context'
 
-    " File Explorer
-    Plug 'vifm/vifm.vim'    " File manager inside nvim
+    " }}}
+    " Git {{{
 
-    " Git configuration
     Plug 'tpope/vim-fugitive'      " Git for vim
     Plug 'lewis6991/gitsigns.nvim' " Add git Sign to Version Control changes
 
-    " Vim unit test configuration
+    " }}}
+    " Unit Test {{{
+
     Plug 'vim-test/vim-test'                                     " Vim default test plugin
     Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
 
+    " }}}
+    " Themes {{{
+
+    Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
+    Plug 'arzg/vim-colors-xcode'            " Xcode theme
+
+    " }}}
+
     " TODO: Double check everything here
-    " Visual Upgrades
+    " Visual Upgrades {{{
+
     Plug 'ryanoasis/vim-devicons'              " Icons
     Plug 'norcalli/nvim-colorizer.lua'         " Display Color Codes text with color #412 #000 #fff
     Plug 'romainl/vim-cool'                    " When using find with / after moving disable highlight
@@ -95,23 +109,22 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-sleuth'
     Plug 'scr1pt0r/crease.vim'
+    Plug 'liuchengxu/vim-which-key' " Using the leader key <space> show some keybinds
+    Plug 'mhinz/vim-startify'       " Project start menu with cowsay
+    Plug 'vifm/vifm.vim'    " File manager inside nvim
 
+    Plug 'AndrewRadev/switch.vim'       " dictionary of antonyms (e.g. True <-> False)
+    Plug 'editorconfig/editorconfig-vim' " Editor config configuration
+    Plug 'lvim-tech/lvim-helper'
 
-    " TODO: Configure this to switch properly
-    "Plug 'AndrewRadev/switch.vim'       " TODO: configure this, dictionary of antonyms (e.g. True <-> False)
+    " WARN: This plugin is not fully developed yet
+    " Still need to add this to which-key
+    Plug 'ThePrimeagen/refactoring.nvim' " Refactor functionalities, such as remove code for a function
+
     " TODO: Configure this if i use HTML
     "Plug 'mattn/emmet-vim'              " Add HTML specific key combinations
 
-    " TODO: Config This
-    Plug 'lvim-tech/lvim-helper'
-
-    " Themes
-    Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
-    Plug 'arzg/vim-colors-xcode'            " Xcode theme
-
-
-    " Editor config configuration (TODO: still need to understand this)
-    "Plug 'editorconfig/editorconfig-vim'
+    " }}}
 
 call plug#end()
 
