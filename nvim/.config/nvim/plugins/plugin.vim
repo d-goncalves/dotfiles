@@ -27,7 +27,7 @@ let g:indent_blankline_char = '│' " Indent blank line confiugration
 " }}}
 " Plugin: Startify  {{{
 
-if has("mac")
+if has("macunix")
     let g:startify_bookmarks = [
                 \ { 'term': '~/.config/alacritty/alacritty.yml' },
                 \ { 'tmux': '~/.tmux.conf' },
@@ -38,7 +38,7 @@ elseif has("win32")
     "all Windows, ie win32,win64
 elseif has("win32unix")
     "Cygwin
-elseif has("linux")
+elseif has("unix")
     let g:startify_bookmarks = [
                 \ { 'b': '~/code/docker-beevo' },
                 \ { 'd1': '~/code/docker-beevo/html/delta' },

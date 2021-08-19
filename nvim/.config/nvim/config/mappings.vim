@@ -217,6 +217,15 @@ function! s:RunShellCommand(cmdline) abort
     exe 'split | terminal '. a:cmdline
 endfunction
 " }}}
+" Compilation: Bash {{{
+
+autocmd filetype sh nnoremap <F8> :w <BAR> :Shell ./% <CR>
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline) abort
+    exe 'split | terminal '. a:cmdline
+endfunction
+" }}}
 
 " Terminal {{{
 

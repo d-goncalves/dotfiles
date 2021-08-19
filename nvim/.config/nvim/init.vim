@@ -74,6 +74,7 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
     Plug 'arzg/vim-colors-xcode'            " Xcode theme
+    Plug 'ghifarit53/tokyonight-vim'
 
     " }}}
 
@@ -134,7 +135,7 @@ call plug#end()
 set termguicolors
 set t_Co=256
 set t_ut=
-colorscheme onehalfdark
+colorscheme tokyonight
 
 " }}}
 " Source files {{{
