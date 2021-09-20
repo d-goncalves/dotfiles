@@ -66,10 +66,13 @@ require("todo-comments").setup {
 local home = os.getenv('HOME')
 local lvim_helper_bindings = require('lvim-helper.bindings');
 
--- TODO: Add vim tips from READ.md
--- for example g* to search current word in buffer
 require('lvim-helper').setup({
     files = {
+        home .. '/.config/nvim/docs/caseSensitive.md',
+        home .. '/.config/nvim/docs/changeText.md',
+        home .. '/.config/nvim/docs/fileMoviment.md',
+        home .. '/.config/nvim/docs/moveFile.md',
+        home .. '/.config/nvim/docs/search.md',
         home .. '/.config/nvim/docs/tmux.md',
     }
 })
@@ -117,4 +120,15 @@ end
 vim.api.nvim_set_keymap("v", "<Leader>re", [[ <Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
 vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
 vim.api.nvim_set_keymap("v", "<Leader>rt", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
+--}}}
+-- Rainbow Brackets {{{
+require'nvim-treesitter.configs'.setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
 --}}}

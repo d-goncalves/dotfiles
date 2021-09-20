@@ -13,3 +13,17 @@ FZF the whole pane for information
 
 Change between panes
 `KeyCombo => <C-a>(hjkl/arrowkeys) (prefix + hjkl)`
+
+```
+C-? means control followed by ?
+
+C-a -> prefix
+C-r -> refresh source
+C-c -> new window
+C-n -> next window
+C-p -> previous window
+C-l -> last window
+C-s -> choose session
+C-w -> choose window
+C-k -> Kill window
+```

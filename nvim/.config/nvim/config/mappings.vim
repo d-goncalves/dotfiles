@@ -38,12 +38,12 @@ nnoremap _ g_
 " }}}
 " Editor: Move line {{{
 
-nnoremap <M-j> :m .+1<CR>==
-nnoremap <M-k> :m .-2<CR>==
-inoremap <M-j> <Esc>:m .+1<CR>==gi
-inoremap <M-k> <Esc>:m .-2<CR>==gi
-vnoremap <M-j> :m '>+1<CR>gv=gv
-vnoremap <M-k> :m '<-2<CR>gv=gv
+nnoremap <Up> :m .+1<CR>==
+nnoremap <Down> :m .-2<CR>==
+inoremap <Up> <Esc>:m .+1<CR>==gi
+inoremap <Down> <Esc>:m .-2<CR>==gi
+vnoremap <Up> :m '>+1<CR>gv=gv
+vnoremap <Down> :m '<-2<CR>gv=gv
 
 " }}}
 " Editor: Save and Quit {{{
@@ -95,6 +95,11 @@ nnoremap <silent> g:    maA:<esc>`a
 
 " }}}
 
+" Plugin: LvimHelper {{{
+
+nnoremap <leader>H :LvimHelper<cr>
+
+" }}}
 " Plugin: Coc {{{
 " COC Mappings
 
@@ -172,6 +177,7 @@ nmap ga <Plug>(EasyAlign)
 
 " Fugitive Conflict Resolution
 nnoremap <leader>Gd :Gvdiff<CR>
+nnoremap <leader>Gh :0Gclog<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 

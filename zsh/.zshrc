@@ -68,8 +68,10 @@ export PATH=$HOME/spells/bash/:$PATH
 # For Linux load company related information
 if [[ "$WORK" == "work" ]]; then
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        HELPER_SCRIPTS_PATH="$HOME/code/helperscripts"
-        source $HELPER_SCRIPTS_PATH/docker_bash/.beevo_bash
+        HELPER_SCRIPTS_BEEVO_PATH="$HOME/code/helperscripts"
+        source $HELPER_SCRIPTS_BEEVO_PATH/docker_bash/.beevo_bash
+        HELPER_SCRIPTS_MA_PATH="$HOME/code/ma-helper-scripts"
+        source $HELPER_SCRIPTS_MA_PATH/bash/.ma_bash
     fi
 fi
 

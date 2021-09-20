@@ -39,6 +39,7 @@ elseif has("win32")
 elseif has("win32unix")
     "Cygwin
 elseif has("unix")
+    echo "unix"
     let g:startify_bookmarks = [
                 \ { 'b': '~/code/docker-beevo' },
                 \ { 'd1': '~/code/docker-beevo/html/delta' },
@@ -109,6 +110,13 @@ let g:which_key_map.f = {
       \ "a": [ ':Ag', 'Ag'],
       \ "s": [ ':RG', 'Strict Grep'],
       \ "b": [ ':Buffers', 'Buffers'],
+      \ }
+
+let g:which_key_map.r = {
+      \ 'name' : '+Refactor' ,
+      \ "e": [ '', 'Function' ],
+      \ "f": [ '', 'Funtion to file'],
+      \ "t": [ ':lua M.refactors()', 'List'],
       \ }
 
 " Register which key map
