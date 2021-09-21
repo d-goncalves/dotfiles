@@ -140,6 +140,12 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'vimwiki/vimwiki'                     " Personal wiki space. Used to keep todo list
 
     " }}}
+    " Writing focus {{{
+
+    Plug 'junegunn/limelight.vim'
+    Plug 'junegunn/goyo.vim'
+
+    " }}}
     " Trial {{{
 
     Plug 'tpope/vim-unimpaired'                " NOTE: Not using this
@@ -157,7 +163,8 @@ set termguicolors
 set t_Co=256
 set t_ut=
 
-colorscheme tokyonight
+colorscheme onehalfdark
+" colorscheme tokyonight
 
 " set background=dark
 " colorscheme hybrid_reverse

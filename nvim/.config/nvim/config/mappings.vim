@@ -94,6 +94,11 @@ nnoremap <silent> g.    maA.<esc>`a
 nnoremap <silent> g:    maA:<esc>`a
 
 " }}}
+" Editor/Plugin: Focus mode {{{
+
+nnoremap <leader>mf :Goyo<cr>:LimeLight<cr>
+
+" }}}
 
 " Plugin: LvimHelper {{{
 
