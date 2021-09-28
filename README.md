@@ -4,6 +4,9 @@ Description of my current dotfiles, how to install it and next things comming
 
 ## General configuration
 
+Current OS: Ubuntu 20.04
+Try: EndeavourOS
+
 #### Tools used:
  - [Neovim](neovim.io)
  - FZF
@@ -51,9 +54,21 @@ install tpm tmux
 chsh -s $(which zsh)
 ```
 
+#### Browser configuration:
+1. Install browser extenstion
+    - [ ] Browser Extension
+    - [ ] I don't care about cookies
+    - [ ] Panorama Tab Groups
+    - [ ] Refined Bitbucket
+    - [ ] uBlock Origin
+    - [ ] Unhook - remove youtube recommended videos
+    - [ ] Vimium
+    - [ ] Youtube Playback Speed Control
+    - [ ] Disconnect
+    - [ ] Dark Reader
+    - [ ] Grammarly
+
 ## TODO
 
  - [ ] Installation script (for diferent OS).
- - [ ] Create a script to change theme of all tools with a single command.
-    - [ ] This can be done with Xargs.
- - [ ] Create a script to change the font.
+ - [ ] Redo the configuration inside of desktop, still needs to be cleaned up
