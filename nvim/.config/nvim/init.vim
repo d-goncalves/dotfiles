@@ -172,10 +172,10 @@ colorscheme onehalfdark
 " }}}
 " Source files {{{
 
-luafile $HOMECONFIG/plugins/plugin.lua
 source $HOMECONFIG/plugins/plugin.vim
 source $HOMECONFIG/config/settings.vim
 source $HOMECONFIG/config/mappings.vim
 source $HOMECONFIG/config/filetype.vim
+luafile $HOMECONFIG/plugins/plugin.lua
 
 " }}}

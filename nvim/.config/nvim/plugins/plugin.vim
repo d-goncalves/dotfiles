@@ -20,11 +20,6 @@ let g:switch_custom_definitions =
     \ ]
 
 " }}}
-" Plugin: Indent blankline {{{
-
-let g:indent_blankline_char = '│' " Indent blank line confiugration
-
-" }}}
 " Plugin: Startify  {{{
 
 if has("macunix")
