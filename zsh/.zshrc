@@ -7,17 +7,17 @@ ZDOTDIR="$HOME/.zsh"
 source $ZSH_DIRECTORY/environment.zsh
 
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim' # SSH remote editor
+   export EDITOR='vim'  # SSH remote editor
 else
    export EDITOR='nvim' # Local editor
 fi
 
 # Colors and Prompt
 export TERM=xterm-256color
-autoload -U colors && colors	# Load colors
+autoload -U colors && colors                                   # Load colors
 PROMPT='%B%{$fg[cyan]%}%~$(git_super_status)%{$fg[green]%} ❯ ' # Custom Prompt
-setopt autocd		# Automatically cd into typed directory
-stty stop undef		# Disable ctrl-s to freeze terminal
+setopt autocd                                                  # Automatically cd into typed directory
+stty stop undef                                                # Disable ctrl-s to freeze terminal
 
 # General settings
 CASE_SENSITIVE="true"                # case-sensitive completion
@@ -30,7 +30,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS
 # Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
-bindkey -v # for vi
+bindkey -v   # for vi
 KEYTIMEOUT=5 # Remove mode switching delay.
 
 # Change cursor shape for different vi modes.
@@ -55,7 +55,7 @@ _fix_cursor() {
 }
 
 precmd_functions+=(_fix_cursor) # Add fix cursor to precmd
-bindkey jk vi-cmd-mode # Typing jk will get into vim mode
+bindkey jk vi-cmd-mode          # Typing jk will get into vim mode
 
 autoload -Uz compinit
 compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
@@ -63,6 +63,7 @@ _comp_options+=(globdots)
 
 # Add my custom script to current path
 export PATH=$HOME/spells/bash/:$PATH
+export PATH="${PATH}:${HOME}/.local/bin/"
 
 # Check if the machine if of work type
 # For Linux load company related information

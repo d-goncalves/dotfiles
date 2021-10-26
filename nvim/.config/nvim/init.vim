@@ -151,6 +151,8 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'tpope/vim-unimpaired'                " NOTE: Not using this
     Plug 'michaeljsmith/vim-indent-object'     " NOTE: Not using this
     Plug 'terryma/vim-multiple-cursors'        " NOTE: Not using this
+    " Plug 'CRAG666/code_runner.nvim'          " NOTE: This doesn't work quite
+    " well yex
 
     " }}}
 
