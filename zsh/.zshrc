@@ -62,6 +62,7 @@ compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 _comp_options+=(globdots)
 
 # Add my custom script to current path
+export PATH=$HOME/spells/:$PATH
 export PATH=$HOME/spells/bash/:$PATH
 export PATH="${PATH}:${HOME}/.local/bin/"
 
@@ -88,3 +89,9 @@ source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
 
 # General alias
 source $ZSH_DIRECTORY/aliasrc
+
+# Set theme with theme.sh
+# Script link: https://github.com/lemnos/theme.sh
+if command -v theme.sh > /dev/null; then
+    [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
+fi

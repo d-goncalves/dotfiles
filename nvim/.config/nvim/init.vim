@@ -1,6 +1,7 @@
 " Main
 
 set encoding=UTF-8
+colorscheme peachpuff
 
 " Plugin manager configuration {{{
 
@@ -24,17 +25,18 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'honza/vim-snippets'
 
     " }}}
-    " Language {{{
-
-    Plug 'sheerun/vim-polyglot'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
-
-    " }}}
     " FuzzyFinder {{{
 
      Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
      Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
+
+    " }}}
+    " Language {{{
+
+    Plug 'sheerun/vim-polyglot'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'antoinemadec/coc-fzf'
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
     " }}}
     " Dependencies {{{
@@ -42,14 +44,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-
-    " }}}
-    " Database {{{
-
-    " Usage ':DBUI'
-    Plug 'tpope/vim-dadbod'
-    Plug 'kristijanhusak/vim-dadbod-completion'
-    Plug 'kristijanhusak/vim-dadbod-ui'
 
     " }}}
     " Tree sitter {{{
@@ -63,12 +57,6 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     Plug 'tpope/vim-fugitive'      " Git for vim
     Plug 'lewis6991/gitsigns.nvim' " Add git Sign to Version Control changes
-
-    " }}}
-    " Unit Test {{{
-
-    Plug 'vim-test/vim-test'                                     " Vim default test plugin
-    Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' } " The ultimate testing plugin for NeoVim
 
     " }}}
     " Themes {{{
@@ -120,7 +108,8 @@ call plug#begin(data_dir . 'autoload/plugged')
     " }}}
     " Generate Information {{{
 
-    Plug 'kkoomen/vim-doge'                    " Generate documenation with <leader> d
+
+    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " Generate documenation with <leader> d
     Plug 'jiangmiao/auto-pairs'                " Auto pair, Close and finish. Prefer vim-closer but conflicts with COC
     Plug 'AndrewRadev/switch.vim'              " dictionary of antonyms (e.g. True <-> False)
 
@@ -159,19 +148,6 @@ call plug#begin(data_dir . 'autoload/plugged')
 call plug#end()
 
 " }}}
-" Theme {{{
-
-set termguicolors
-set t_Co=256
-set t_ut=
-
-colorscheme onehalfdark
-" colorscheme tokyonight
-
-" set background=dark
-" colorscheme hybrid_reverse
-
-" }}}
 " Source files {{{
 
 source $HOMECONFIG/plugins/plugin.vim
@@ -181,3 +157,5 @@ source $HOMECONFIG/config/filetype.vim
 luafile $HOMECONFIG/plugins/plugin.lua
 
 " }}}
+"
+filetype on

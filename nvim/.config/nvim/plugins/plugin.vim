@@ -34,7 +34,6 @@ elseif has("win32")
 elseif has("win32unix")
     "Cygwin
 elseif has("unix")
-    echo "unix"
     let g:startify_bookmarks = [
                 \ { 'b': '~/code/docker-beevo' },
                 \ { 'd1': '~/code/docker-beevo/html/delta' },
