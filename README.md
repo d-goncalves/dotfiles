@@ -72,3 +72,4 @@ chsh -s $(which zsh)
 
  - [ ] Installation script (for diferent OS).
  - [ ] Redo the configuration inside of desktop, still needs to be cleaned up
+ - [ ] 
