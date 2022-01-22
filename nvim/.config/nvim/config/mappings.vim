@@ -187,11 +187,6 @@ nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
 " }}}
-" Plugin: Ultest {{{
-" Test mapping
-nnoremap <leader> tn <Plug>(ultest-next-fail)
-
-" }}}
 " Plugin: Vifm {{{
 nnoremap <leader>m :Vifm<cr>
 " }}}
@@ -221,7 +216,7 @@ nnoremap <leader>C :Colors<CR>
 " For more Complex compilation processes it might be useful to build something
 " more robust -> https://github.com/skywind3000/asyncrun.vim
 
-autocmd filetype cpp nnoremap <F8> :w <BAR> :Shell g++ --std=c++17 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
+autocmd filetype cpp nnoremap <F8> :w <BAR> :Shell g++ --std=c++20 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline) abort

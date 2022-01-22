@@ -19,6 +19,13 @@ endif
 
 call plug#begin(data_dir . 'autoload/plugged')
 
+    " Dependencies {{{
+
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+
+    " }}}
     " Snippets {{{
 
     Plug 'SirVer/ultisnips'
@@ -39,13 +46,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
 
     " }}}
-    " Dependencies {{{
-
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-
-    " }}}
     " Tree sitter {{{
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improved syntax highlighting
@@ -64,6 +64,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
     Plug 'arzg/vim-colors-xcode'            " Xcode theme
     Plug 'ghifarit53/tokyonight-vim'
+    " Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
     Plug 'kristijanhusak/vim-hybrid-material'
 
     " }}}
@@ -108,10 +109,8 @@ call plug#begin(data_dir . 'autoload/plugged')
     " }}}
     " Generate Information {{{
 
-
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " Generate documenation with <leader> d
     Plug 'jiangmiao/auto-pairs'                " Auto pair, Close and finish. Prefer vim-closer but conflicts with COC
-    Plug 'AndrewRadev/switch.vim'              " dictionary of antonyms (e.g. True <-> False)
 
     " }}}
     " Visual helper {{{
@@ -129,12 +128,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'vimwiki/vimwiki'                     " Personal wiki space. Used to keep todo list
 
     " }}}
-    " Writing focus {{{
-
-    Plug 'junegunn/limelight.vim'
-    Plug 'junegunn/goyo.vim'
-
-    " }}}
     " Trial {{{
 
     Plug 'tpope/vim-unimpaired'                " NOTE: Not using this
@@ -145,6 +138,7 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     " }}}
 
+    " Plug 'vhdirk/vim-cmake'
 call plug#end()
 
 " }}}
@@ -159,3 +153,7 @@ luafile $HOMECONFIG/plugins/plugin.lua
 " }}}
 "
 filetype on
+
+set termguicolors
+let g:tokyonight_style = 'night' " available: night, storm
+colorscheme tokyonight

@@ -1,34 +1,5 @@
 -- General Lua Plugin configuration
 
--- -- Plugin: Indent blankline {{{
-
--- -- vim.opt.termguicolors = true
--- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 blend=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B blend=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 blend=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 blend=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF blend=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD blend=nocombine]]
-
--- vim.opt.list = true
--- vim.opt.listchars = {
---     space = "⋅",
---     eol = "↴",
--- }
-
--- require("indent_blankline").setup {
---     space_char_blankline = " ",
---     char_highlight_list = {
---         "IndentBlanklineIndent1",
---         "IndentBlanklineIndent2",
---         "IndentBlanklineIndent3",
---         "IndentBlanklineIndent4",
---         "IndentBlanklineIndent5",
---         "IndentBlanklineIndent6",
---     },
--- }
-
--- -- }}}
 -- GitSigns configuration {{{
 
 require('gitsigns').setup()
@@ -42,7 +13,7 @@ require('gitsigns').setup()
 -- Treesitter {{{
             --
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "typescript", "json", "c", "cpp", "cuda", "dockerfile", "latex", "lua", "php", "python", "vue", "yaml"},    -- one of "all", "language", or a list of languages
+  ensure_installed = {"json", "c", "cpp", "cuda", "lua", "python", "yaml"},    -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { },  -- list of language that will be disabled

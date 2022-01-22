@@ -11,15 +11,6 @@ let g:vimwiki_list = [{'syntax': 'markdown', 'ext':'.md'}] " Vim wiki
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " }}}
-" Plugin: Switch {{{
-
-" Default mapping is gs
-let g:switch_custom_definitions =
-    \ [
-    \   ['foo', 'bar', 'baz']
-    \ ]
-
-" }}}
 " Plugin: Startify  {{{
 
 if has("macunix")
@@ -53,19 +44,6 @@ end
 
 set fillchars=fold:━
 let g:crease_foldtext = { 'default': '%f%f┫ %t ┣%=┫ %l lines ┣%f%f' }
-
-" }}}
-" Plugin: Ultest {{{
-
-augroup UltestRunner
-    au!
-    au BufWritePost * UltestNearest
-augroup END
-
-let test#python#pytest#options = "--color=yes"
-let test#javascript#jest#options = "--color=always"
-let g:ultest_use_pty = 1
-let g:ultest_running_sign =	"⏯"
 
 " }}}
 " Plugin: WhichKey {{{
@@ -123,19 +101,14 @@ autocmd VimEnter * call which_key#register('<Space>', "g:which_key_map")
 " General configuration to install
 let g:coc_global_extensions = [
                                 \ 'coc-json',
-                                \ 'coc-tsserver',
                                 \ 'coc-html',
                                 \ 'coc-css',
                                 \ 'coc-yaml',
-                                \ 'coc-docker',
-                                \ 'coc-sql',
                                 \ 'coc-python',
                                 \ 'coc-clangd',
-                                \ 'coc-phpls',
                                 \ 'coc-sh',
                                 \ 'coc-explorer',
                                 \ 'coc-snippets',
-                                \ 'coc-eslint',
                                 \ 'coc-yank'
                                 \ ]
 
