@@ -7,7 +7,7 @@ require('gitsigns').setup()
 --}}}
 ---- Colorize {{{
 
---require'colorizer'.setup() -- Colorize configuration
+require'colorizer'.setup() -- Colorize configuration
 
 ----}}}
 -- Treesitter {{{

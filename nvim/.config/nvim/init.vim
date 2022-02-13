@@ -1,7 +1,7 @@
 " Main
 
 set encoding=UTF-8
-colorscheme peachpuff
+set termguicolors
 
 " Plugin manager configuration {{{
 
@@ -66,6 +66,12 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'ghifarit53/tokyonight-vim'
     " Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
     Plug 'kristijanhusak/vim-hybrid-material'
+    Plug 'Mofiqul/vscode.nvim'
+
+    Plug 'olimorris/onedarkpro.nvim'
+    Plug 'sainnhe/edge'
+    Plug 'Th3Whit3Wolf/one-nvim'
+    Plug 'navarasu/onedark.nvim'
 
     " }}}
     " Visual Upgrades {{{
@@ -155,5 +161,16 @@ luafile $HOMECONFIG/plugins/plugin.lua
 filetype on
 
 set termguicolors
-let g:tokyonight_style = 'night' " available: night, storm
-colorscheme tokyonight
+
+" let g:vscode_style = "dark"
+" let g:vscode_transparency = 1
+" let g:vscode_italic_comment = 1
+" colorscheme vscode
+
+" let g:tokyonight_style = 'night' " available: night, storm
+" colorscheme tokyonight
+if strftime("%H") < 18
+  colorscheme one-nvim
+else
+  colorscheme onedarkpro
+endif

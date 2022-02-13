@@ -4,33 +4,67 @@
 FONT_DESTINATION="$HOME/.local/share/fonts/"
 FONT_URL="https://github.com/romkatv/dotfiles-public/blob/master/.local/share/fonts/NerdFonts/"
 
-######### Package installation #########
-apt-get install zsh
-apt-get install tmux
-apt-get install git
-apt-get install nodejs
-apt-get install ripgrep
-apt-get install fd-find
-apt-get install alacritty
-apt-get install stow
-apt-get install neovim
-# NOTE: This Neovim be outdated
+PACMAN_CMD=$(which pacman)
+APT_CMD=$(which apt-get)
+if [[ ! -z $PACMAN_CMD ]]; then
+    ######### Package installation #########
+    pacman -S zsh
+    pacman -S tmux
+    pacman -S git
+    pacman -S nodejs
+    pacman -S ripgrep
+    pacman -S fd
+    pacman -S fzf
+    pacman -S alacritty
+    pacman -S stow
+    pacman -S neovim
 
-apt-get install qbittorrent
-apt-get install vlc
+    ######### OS everyday usage #########
+    pacman -S qbittorrent
+    pacman -S vlc
 
+    ######### Python install #########
+    # Check if python3 is installed
+    if ! [ "$(which python)" ]; then
+	pacman -S python
+    fi
+    # Check if pip3 is installed
+    if ! [ "$(which pip3)" ]; then
+	pacman -S python-pip
+    fi
+    pip install pynvim
+elif [[ ! -z $APT_CMD ]]; then
 
-######### Python install #########
-# Check if python3 is installed
-if ! [ "$(which python)" ]; then
-    apt-get install python3
+    ######### Package installation #########
+    apt-get install zsh
+    apt-get install tmux
+    apt-get install git
+    apt-get install nodejs
+    apt-get install ripgrep
+    apt-get install fd-find
+    apt-get install fzf
+    apt-get install alacritty
+    apt-get install stow
+    apt-get install neovim
+    # NOTE: This Neovim be outdated
+
+    apt-get install qbittorrent
+    apt-get install vlc
+
+    ######### Python install #########
+    # Check if python3 is installed
+    if ! [ "$(which python)" ]; then
+	apt-get install python3
+    fi
+    # Check if pip3 is installed
+    if ! [ "$(which pip3)" ]; then
+	apt-get install python3-pip
+    fi
+    pip3 install pynvim
+else
+    echo "error can't install package the required packages"
+    exit 1;
 fi
-# Check if pip3 is installed
-if ! [ "$(which pip3)" ]; then
-    apt-get install python3-pip
-fi
-pip3 install pynvim
-
 
 ########## Fonts ##########
 FONT_REGULAR="MesloLGS%20NF%20Regular.ttf"

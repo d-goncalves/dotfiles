@@ -211,21 +211,23 @@ nnoremap <leader>C :Colors<CR>
 
 " }}}
 
+autocmd filetype * nnoremap <F8> :w <BAR> :Shell cd "$(VIM_ROOT)"; ./run.sh <CR>
+
 " Compilation: Cpp {{{
 
-" For more Complex compilation processes it might be useful to build something
-" more robust -> https://github.com/skywind3000/asyncrun.vim
+" " For more Complex compilation processes it might be useful to build something
+" " more robust -> https://github.com/skywind3000/asyncrun.vim
 
-autocmd filetype cpp nnoremap <F8> :w <BAR> :Shell g++ --std=c++20 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
+" autocmd filetype cpp nnoremap <F8> :w <BAR> :Shell g++ --std=c++20 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
 
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline) abort
-    exe 'split | terminal '. a:cmdline
-endfunction
-" }}}
-" Compilation: Bash {{{
+" command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+" function! s:RunShellCommand(cmdline) abort
+"     exe 'split | terminal '. a:cmdline
+" endfunction
+" " }}}
+" " Compilation: Bash {{{
 
-autocmd filetype sh nnoremap <F8> :w <BAR> :Shell ./% <CR>
+" autocmd filetype sh nnoremap <F8> :w <BAR> :Shell ./% <CR>
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline) abort
