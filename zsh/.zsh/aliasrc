@@ -27,7 +27,7 @@ alias \
 # Common alias! abbreviate them
 alias \
     sv="sudo nvim" \
-    vi="nvim" \
+    vi="vim" \
     vim="nvim" \
     dps="docker ps" \
     dc="docker-compose" \

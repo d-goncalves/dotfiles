@@ -1,6 +1,7 @@
 
 # Neovim ignore files
 .netrwhist
+.DS_Store
 nvim/.config/nvim/autoload
 
 # ZSH ignore

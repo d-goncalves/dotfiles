@@ -105,66 +105,66 @@ nnoremap <leader>mf :Goyo<cr>:LimeLight<cr>
 nnoremap <leader>H :LvimHelper<cr>
 
 " }}}
-" Plugin: Coc {{{
-" COC Mappings
+" " Plugin: Coc {{{
+" " COC Mappings
 
-" Navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> <leader>ldN <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>ldn <Plug>(coc-diagnostic-next)
+" " Navigate diagnostics
+" " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" nmap <silent> <leader>ldN <Plug>(coc-diagnostic-prev)
+" nmap <silent> <leader>ldn <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
+" " GoTo code navigation.
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> <leader>gd <Plug>(coc-definition)
+" nmap <silent> <leader>gy <Plug>(coc-type-definition)
+" nmap <silent> <leader>gi <Plug>(coc-implementation)
+" nmap <silent> <leader>gr <Plug>(coc-references)
 
-" Symbol renaming.
-nmap <leader>lrn <Plug>(coc-rename)
+" " Symbol renaming.
+" nmap <leader>lrn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>lf  <Plug>(Prettier)
-nmap <leader>lf  <Plug>(Prettier)
+" " Formatting selected code.
+" xmap <leader>lf  <Plug>(Prettier)
+" nmap <leader>lf  <Plug>(Prettier)
 
-" Applying codeAction to the selected region.
-" Example: `<leader>laap` for current paragraph
-xmap <leader>la  <Plug>(coc-codeaction-selected)
-nmap <leader>la  <Plug>(coc-codeaction-selected)
+" " Applying codeAction to the selected region.
+" " Example: `<leader>laap` for current paragraph
+" xmap <leader>la  <Plug>(coc-codeaction-selected)
+" nmap <leader>la  <Plug>(coc-codeaction-selected)
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>lac  <Plug>(coc-codeaction)
+" " Remap keys for applying codeAction to the current buffer.
+" nmap <leader>lac  <Plug>(coc-codeaction)
 
-" Apply AutoFix to problem on the current line.
-nmap <leader>lqf  <Plug>(coc-fix-current)
+" " Apply AutoFix to problem on the current line.
+" nmap <leader>lqf  <Plug>(coc-fix-current)
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <leader>ls <Plug>(coc-range-select)
-xmap <silent> <leader>ls <Plug>(coc-range-select)
+" " Use CTRL-S for selections ranges.
+" " Requires 'textDocument/selectionRange' support of language server.
+" nmap <silent> <leader>ls <Plug>(coc-range-select)
+" xmap <silent> <leader>ls <Plug>(coc-range-select)
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <leader>le  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <leader>lc  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <leader>lp  :<C-u>CocListResume<CR>
-" Use NerdTree available from COC
-nnoremap <space>e :CocCommand explorer<CR>
+" " Mappings for CoCList
+" " Show all diagnostics.
+" nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+" nnoremap <silent><nowait> <leader>le  :<C-u>CocList extensions<cr>
+" " Show commands.
+" nnoremap <silent><nowait> <leader>lc  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+" nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr>
+" " Do default action for next item.
+" nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+" nnoremap <silent><nowait> <leader>lp  :<C-u>CocListResume<CR>
+" " Use NerdTree available from COC
+" nnoremap <space>e :CocCommand explorer<CR>
 
-" }}}
+" " }}}
 " Plugin: Todo-comments {{{
 
 " Get Telescope TODO list
@@ -202,17 +202,15 @@ nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
 " }}}
-" Plugin: Fzf {{{
-
-" To find the word under the cursor in the current buffer use g*
-map <C-f> :Files<CR>
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fg :GGrep<CR>
-nnoremap <leader>fr :Rg<CR>
-nnoremap <leader>fa :Ag<CR>
-nnoremap <leader>fs :RG<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>C :Colors<CR>
+" Plugin: Telescope {{{
+"
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>C <cmd>lua require('telescope.builtin').colorscheme()<cr>
 
 " }}}
 

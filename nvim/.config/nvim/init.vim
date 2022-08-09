@@ -1,7 +1,6 @@
 " Main
 
 set encoding=UTF-8
-colorscheme peachpuff
 
 " Plugin manager configuration {{{
 
@@ -25,25 +24,33 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'honza/vim-snippets'
 
     " }}}
-    " FuzzyFinder {{{
-
-     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Install FZF
-     Plug 'junegunn/fzf.vim'                             " Fzf integration with vim
-
-    " }}}
-    " Language {{{
-
-    Plug 'sheerun/vim-polyglot'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'antoinemadec/coc-fzf'
-    Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " Code Format to .prettierrc
-
-    " }}}
     " Dependencies {{{
 
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
+    " }}}
+    " FuzzyFinder {{{
+
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+    " }}}
+    " Language {{{
+
+    Plug 'neovim/nvim-lspconfig' " Collection of configurations for built-in LSP client
+
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/nvim-cmp'
+
+    " For luasnip users.
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'folke/trouble.nvim'
 
     " }}}
     " Tree sitter {{{
@@ -66,6 +73,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'ghifarit53/tokyonight-vim'
     Plug 'kristijanhusak/vim-hybrid-material'
 
+    Plug 'Everblush/everblush.vim'
     " }}}
     " Visual Upgrades {{{
 
@@ -148,6 +156,9 @@ call plug#begin(data_dir . 'autoload/plugged')
 call plug#end()
 
 " }}}
+
+set completeopt=menu,menuone,noselect
+
 " Source files {{{
 
 source $HOMECONFIG/plugins/plugin.vim
@@ -159,3 +170,7 @@ luafile $HOMECONFIG/plugins/plugin.lua
 " }}}
 "
 filetype on
+
+set termguicolors
+colorscheme tokyonight
+

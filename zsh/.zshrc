@@ -95,3 +95,5 @@ source $ZSH_DIRECTORY/aliasrc
 if command -v theme.sh > /dev/null; then
     [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
 fi
+-e 
+alias luamake=/Users/dgoncalves/code/lsp/lua/lua-language-server/3rd/luamake/luamake
