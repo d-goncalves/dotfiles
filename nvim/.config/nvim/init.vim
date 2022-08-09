@@ -1,6 +1,10 @@
 " Main
 
 set encoding=UTF-8
+<<<<<<< HEAD
+=======
+set termguicolors
+>>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
 
 " Plugin manager configuration {{{
 
@@ -18,6 +22,13 @@ endif
 
 call plug#begin(data_dir . 'autoload/plugged')
 
+    " Dependencies {{{
+
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+
+    " }}}
     " Snippets {{{
 
     Plug 'SirVer/ultisnips'
@@ -38,6 +49,7 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     Plug 'neovim/nvim-lspconfig' " Collection of configurations for built-in LSP client
 
+<<<<<<< HEAD
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
@@ -52,6 +64,8 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
 
+=======
+>>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
     " }}}
     " Tree sitter {{{
 
@@ -71,7 +85,14 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'sonph/onehalf' , { 'rtp': 'vim' } " Theme
     Plug 'arzg/vim-colors-xcode'            " Xcode theme
     Plug 'ghifarit53/tokyonight-vim'
+    " Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
     Plug 'kristijanhusak/vim-hybrid-material'
+    Plug 'Mofiqul/vscode.nvim'
+
+    Plug 'olimorris/onedarkpro.nvim'
+    Plug 'sainnhe/edge'
+    Plug 'Th3Whit3Wolf/one-nvim'
+    Plug 'navarasu/onedark.nvim'
 
     Plug 'Everblush/everblush.vim'
     " }}}
@@ -116,10 +137,8 @@ call plug#begin(data_dir . 'autoload/plugged')
     " }}}
     " Generate Information {{{
 
-
     Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " Generate documenation with <leader> d
     Plug 'jiangmiao/auto-pairs'                " Auto pair, Close and finish. Prefer vim-closer but conflicts with COC
-    Plug 'AndrewRadev/switch.vim'              " dictionary of antonyms (e.g. True <-> False)
 
     " }}}
     " Visual helper {{{
@@ -137,12 +156,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'vimwiki/vimwiki'                     " Personal wiki space. Used to keep todo list
 
     " }}}
-    " Writing focus {{{
-
-    Plug 'junegunn/limelight.vim'
-    Plug 'junegunn/goyo.vim'
-
-    " }}}
     " Trial {{{
 
     Plug 'tpope/vim-unimpaired'                " NOTE: Not using this
@@ -153,6 +166,7 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     " }}}
 
+    " Plug 'vhdirk/vim-cmake'
 call plug#end()
 
 " }}}
@@ -172,5 +186,21 @@ luafile $HOMECONFIG/plugins/plugin.lua
 filetype on
 
 set termguicolors
+<<<<<<< HEAD
 colorscheme tokyonight
 
+=======
+
+" let g:vscode_style = "dark"
+" let g:vscode_transparency = 1
+" let g:vscode_italic_comment = 1
+" colorscheme vscode
+
+" let g:tokyonight_style = 'night' " available: night, storm
+" colorscheme tokyonight
+if strftime("%H") < 18
+  colorscheme one-nvim
+else
+  colorscheme onedarkpro
+endif
+>>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
