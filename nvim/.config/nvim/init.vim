@@ -1,10 +1,6 @@
 " Main
 
 set encoding=UTF-8
-<<<<<<< HEAD
-=======
-set termguicolors
->>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
 
 " Plugin manager configuration {{{
 
@@ -186,21 +182,4 @@ luafile $HOMECONFIG/plugins/plugin.lua
 filetype on
 
 set termguicolors
-<<<<<<< HEAD
 colorscheme tokyonight
-
-=======
-
-" let g:vscode_style = "dark"
-" let g:vscode_transparency = 1
-" let g:vscode_italic_comment = 1
-" colorscheme vscode
-
-" let g:tokyonight_style = 'night' " available: night, storm
-" colorscheme tokyonight
-if strftime("%H") < 18
-  colorscheme one-nvim
-else
-  colorscheme onedarkpro
-endif
->>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
