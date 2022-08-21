@@ -195,7 +195,6 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 --}}}
-
 -- Null ls {{{
 -- require("null-ls").setup({
 --   sources = {
@@ -205,7 +204,7 @@ require'lspconfig'.sumneko_lua.setup {
 -- })
 
 --}}}
-
+-- Nvim-cmp {{{
 -- Setup nvim-cmp.
 local cmp = require('cmp')
 
@@ -249,3 +248,4 @@ cmp.setup({
 require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
     capabilities = capabilities
 }
+--}}}

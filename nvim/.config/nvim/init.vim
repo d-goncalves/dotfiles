@@ -1,10 +1,7 @@
 " Main
 
 set encoding=UTF-8
-<<<<<<< HEAD
-=======
 set termguicolors
->>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
 
 " Plugin manager configuration {{{
 
@@ -49,7 +46,6 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     Plug 'neovim/nvim-lspconfig' " Collection of configurations for built-in LSP client
 
-<<<<<<< HEAD
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
@@ -64,8 +60,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'folke/trouble.nvim'
 
-=======
->>>>>>> 416b26048391b9643c06756d7b36475426f3de3f
     " }}}
     " Tree sitter {{{
 
@@ -161,12 +155,12 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'tpope/vim-unimpaired'                " NOTE: Not using this
     Plug 'michaeljsmith/vim-indent-object'     " NOTE: Not using this
     Plug 'terryma/vim-multiple-cursors'        " NOTE: Not using this
+    " Plug 'vhdirk/vim-cmake'
     " Plug 'CRAG666/code_runner.nvim'          " NOTE: This doesn't work quite
     " well yex
 
     " }}}
 
-    " Plug 'vhdirk/vim-cmake'
 call plug#end()
 
 " }}}
@@ -175,32 +169,15 @@ set completeopt=menu,menuone,noselect
 
 " Source files {{{
 
-source $HOMECONFIG/plugins/plugin.vim
+source $HOMECONFIG/config/plugins/plugin.vim
 source $HOMECONFIG/config/settings.vim
 source $HOMECONFIG/config/mappings.vim
 source $HOMECONFIG/config/filetype.vim
-luafile $HOMECONFIG/plugins/plugin.lua
+luafile $HOMECONFIG/config/plugins/plugin.lua
 
 " }}}
-"
+
 filetype on
 
 set termguicolors
-<<<<<<< HEAD
 colorscheme tokyonight
-
-=======
-
-" let g:vscode_style = "dark"
-" let g:vscode_transparency = 1
-" let g:vscode_italic_comment = 1
-" colorscheme vscode
-
-" let g:tokyonight_style = 'night' " available: night, storm
-" colorscheme tokyonight
-if strftime("%H") < 18
-  colorscheme one-nvim
-else
-  colorscheme onedarkpro
-endif
->>>>>>> 416b26048391b9643c06756d7b36475426f3de3f

@@ -1,5 +1,7 @@
 " Settings
 
+" General Types {{{
+
 let g:mapleader = "\<Space>" " set leader key
 
 set mouse=a                " Enable your mouse
@@ -23,6 +25,7 @@ set whichwrap+=<,>,h,l
 " set silent (no beep)
 set vb t_vb=".
 
+" }}}
 " File Type {{{
 "
 syntax enable              " Enables syntax highlighing
