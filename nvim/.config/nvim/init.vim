@@ -1,7 +1,6 @@
 " Main
 
 set encoding=UTF-8
-set termguicolors
 
 " Plugin manager configuration {{{
 
