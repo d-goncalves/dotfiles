@@ -7,7 +7,7 @@ augroup filetype_vim
 augroup END
 
 " }}}
-" FileType: lua {{{
+" FileType: Lua {{{
 augroup filetype_lua
     autocmd!
     autocmd FileType lua setlocal foldmethod=marker

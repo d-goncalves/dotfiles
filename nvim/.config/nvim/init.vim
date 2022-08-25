@@ -22,42 +22,10 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-
-    " }}}
-    " Snippets {{{
-
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-
-    " }}}
-    " Dependencies {{{
-
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
     " }}}
     " FuzzyFinder {{{
 
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-
-    " }}}
-    " Language {{{
-
-    Plug 'neovim/nvim-lspconfig' " Collection of configurations for built-in LSP client
-
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
-
-    " For luasnip users.
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-
-    Plug 'jose-elias-alvarez/null-ls.nvim'
-    Plug 'folke/trouble.nvim'
 
     " }}}
     " Tree sitter {{{
@@ -67,9 +35,36 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'p00f/nvim-ts-rainbow'
 
     " }}}
+    " Language {{{
+
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig' " Collection of configurations for built-in LSP client
+
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/cmp-calc'
+    Plug 'hrsh7th/cmp-nvim-lua'
+    Plug 'onsails/lspkind.nvim'
+
+    " For luasnip users.
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'rafamadriz/friendly-snippets'
+    Plug 'hrsh7th/cmp-calc'
+
+
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'folke/trouble.nvim'
+
+    " }}}
     " Git {{{
 
     Plug 'tpope/vim-fugitive'      " Git for vim
+    " TODO: Get togglable git diff inside vim
     Plug 'lewis6991/gitsigns.nvim' " Add git Sign to Version Control changes
 
     " }}}
@@ -91,13 +86,14 @@ call plug#begin(data_dir . 'autoload/plugged')
     " }}}
     " Visual Upgrades {{{
 
+    " TODO: Check if this needed
     Plug 'ryanoasis/vim-devicons'              " Icons
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'norcalli/nvim-colorizer.lua'         " Display Color Codes text with color #412 #000 #fff
     Plug 'vim-scripts/ShowTrailingWhitespace'  " Show Trailing Whitespace
     Plug 'itchyny/vim-cursorword'              " Highlight multiple instances of the same word when hovered
     Plug 'lukas-reineke/indent-blankline.nvim' " Show indention for blank lines
     Plug 'folke/todo-comments.nvim'            " Highlight comments
-    Plug 'scr1pt0r/crease.vim'                 " Fold text customization
 
     " }}}
     " Search {{{
@@ -137,7 +133,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     " Visual helper {{{
 
     Plug 'liuchengxu/vim-which-key'            " Using the leader key <space> show some keybinds
-    Plug 'mhinz/vim-startify'                  " Project start menu with cowsay
     Plug 'lvim-tech/lvim-helper'               " Keybinds via LvimHelper command
     Plug 'sindrets/diffview.nvim'              " VSCode like git diff
 
@@ -160,15 +155,24 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     " }}}
 
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'ahmedkhalf/project.nvim'
+
+    " TODO: Fix the path situation :h cphelper
+    Plug 'p00f/cphelper.nvim'
+
+    Plug 'justinmk/vim-gtfo'
+
 call plug#end()
 
 " }}}
 
 set completeopt=menu,menuone,noselect
 
+set termguicolors
+
 " Source files {{{
 
-source $HOMECONFIG/config/plugins/plugin.vim
 source $HOMECONFIG/config/settings.vim
 source $HOMECONFIG/config/mappings.vim
 source $HOMECONFIG/config/filetype.vim
@@ -177,6 +181,23 @@ luafile $HOMECONFIG/config/plugins/plugin.lua
 " }}}
 
 filetype on
-
-set termguicolors
 colorscheme tokyonight
+
+let cphdir = "LearningCpp/"
+
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
