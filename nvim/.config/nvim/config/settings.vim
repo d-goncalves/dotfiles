@@ -3,7 +3,7 @@
 " General Types {{{
 
 let g:mapleader = "\<Space>" " set leader key
-set termguicolors
+" set termguicolors
 set mouse=a                  " Enable your mouse
 set splitbelow               " Horizontal splits will automatically be below
 set splitright               " Vertical splits will automatically be to the right
@@ -20,7 +20,7 @@ cmap w!! w !sudo tee %
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 " Completion menu
-set completeopt=menu,menuone,noselect
+" set completeopt=menu,menuone,noselect
 
 " set silent (no beep)
 set vb t_vb=".
@@ -57,8 +57,8 @@ set softtabstop=0
 " Buffer {{{
 
 set noswapfile             " No swapfile
-set nobackup               " This is recommended by coc
-set nowritebackup          " This is recommended by coc
+set nobackup
+set nowritebackup
 set undofile
 
 " }}}
@@ -77,8 +77,8 @@ set cursorline             " Enable highlighting of the current line
 
 highlight clear SignColumn " Change the column on the left to match theme color
 highlight clear LineNR     " Remove diferent color from the Git column
-highlight ShowTrailingWhitespace ctermbg=Red guibg=Red 
-autocmd ColorScheme * highlight! link SignColumn LineNr 
+highlight ShowTrailingWhitespace ctermbg=Red guibg=Red
+autocmd ColorScheme * highlight! link SignColumn LineNr
 
 " }}}
 " Folding {{{
@@ -86,14 +86,3 @@ autocmd ColorScheme * highlight! link SignColumn LineNr
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=20
-
-" Saves the current folding state of a file
-" BUG: This fucks Telescope up
-" https://github.com/nvim-telescope/telescope.nvim/issues/559
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END
-
-" }}}
