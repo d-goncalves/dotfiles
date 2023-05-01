@@ -29,6 +29,7 @@ local function keymappings(client, bufnr)
     local keymap_g = {
         name = "LSP Goto",
         d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
+        r = { "<Cmd>lua vim.lsp.buf.references()<CR>", "References" },
         D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
         s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
         I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },

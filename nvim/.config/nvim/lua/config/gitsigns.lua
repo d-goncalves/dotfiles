@@ -3,16 +3,18 @@ local M = {}
 function M.setup()
     local whichkey = require("which-key")
 
-    require("gitsigns").setup()
+    require("gitsigns").setup({
+        current_line_blame = true
+    })
 
     local keymap_g = {
         g = {
             name = "Git",
-            b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blame" },
-            d = { "<cmd>Gitsigns toggle_deleted<cr>", "Deleted" },
-        },
+            d = {"<cmd>Gitsigns toggle_deleted<cr>", "Deleted"},
+            h = {"<cmd>0Gclog<cr>", "History"}
+        }
     }
-    whichkey.register(keymap_g, { prefix = "<leader>" })
+    whichkey.register(keymap_g, {prefix = "<leader>"})
 end
 
 return M

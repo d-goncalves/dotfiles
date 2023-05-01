@@ -1,10 +1,9 @@
-# PATH
 ZSH_DIRECTORY="$HOME/.zsh"
 HISTFILE="$HOME/.zsh/.zsh_history"  # change history file path
 ZDOTDIR="$HOME/.zsh"
 
-# Define machine enviroment variables
-source $ZSH_DIRECTORY/environment.zsh
+compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
+autoload -Uz compinit
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'  # SSH remote editor
@@ -12,73 +11,34 @@ else
    export EDITOR='nvim' # Local editor
 fi
 
-# Colors and Prompt
-export TERM=xterm-256color
 autoload -U colors && colors                                   # Load colors
-PROMPT='%B%{$fg[cyan]%}%~$(git_super_status)%{$fg[green]%} ❯ ' # Custom Prompt
-setopt autocd                                                  # Automatically cd into typed directory
+PROMPT='%B%{$fg[green]%}%~$(git_super_status)%{$fg[red]%} $ '  # Custom Prompt
 stty stop undef                                                # Disable ctrl-s to freeze terminal
 
 # General settings
-CASE_SENSITIVE="true"                # case-sensitive completion
 DISABLE_UPDATE_PROMPT="true"         # Automatically update without prompting.
 DISABLE_AUTO_TITLE="true"            # Disable auto-setting terminal title.
 ENABLE_CORRECTION="true"             # Enable command auto-correction.
 COMPLETION_WAITING_DOTS="true"       # Display red dots whilst waiting for completion.
 DISABLE_UNTRACKED_FILES_DIRTY="true" # Disable marking untracked files under VCS as dirty (Performance)
+HISTSIZE=50000
+SAVEHIST=50000
+setopt appendhistory
+setopt histignoredups
 
-# Edit current line with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
-bindkey -v   # for vi
-KEYTIMEOUT=5 # Remove mode switching delay.
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
 
 _fix_cursor() {
-   echo -ne '\e[5 q'
+    echo -ne '\e[5 q'
 }
 
 precmd_functions+=(_fix_cursor) # Add fix cursor to precmd
-bindkey jk vi-cmd-mode          # Typing jk will get into vim mode
-
-autoload -Uz compinit
-compinit -d "$HOME/.zsh/.zcompdump" # change zcompdump file path
 _comp_options+=(globdots)
 
-# Add my custom script to current path
-export PATH=$HOME/spells/:$PATH
-export PATH=$HOME/spells/bash/:$PATH
-export PATH="${PATH}:${HOME}/.local/bin/"
-
-# Check if the machine if of work type
-# For Linux load company related information
-if [[ "$WORK" == "work" ]]; then
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        HELPER_SCRIPTS_BEEVO_PATH="$HOME/code/helperscripts"
-        source $HELPER_SCRIPTS_BEEVO_PATH/docker_bash/.beevo_bash
-        HELPER_SCRIPTS_MA_PATH="$HOME/code/ma-helper-scripts"
-        source $HELPER_SCRIPTS_MA_PATH/bash/.ma_bash
-    fi
-fi
-
-# Configure completion
+# # Configure completion
 source $ZSH_DIRECTORY/completion.zsh
+source $ZSH_DIRECTORY/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # Plugin sourcing
@@ -87,12 +47,7 @@ source $ZSH_DIRECTORY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH_DIRECTORY/fzf-tab/fzf-tab.plugin.zsh
 source $ZSH_DIRECTORY/zsh-git-prompt/zshrc.sh
 
-# General alias
 source $ZSH_DIRECTORY/aliasrc
 
-# Set theme with theme.sh
-# Script link: https://github.com/lemnos/theme.sh
-if command -v theme.sh > /dev/null; then
-    [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
-fi
-
+export PATH=$HOME/.local/bin/:$PATH
+if [ -e /home/diogo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/diogo/.nix-profile/etc/profile.d/nix.sh; fi

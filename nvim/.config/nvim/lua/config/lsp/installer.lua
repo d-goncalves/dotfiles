@@ -2,25 +2,10 @@ local M = {}
 
 function M.setup()
     require("mason").setup()
-    require("mason-lspconfig").setup({
-        -- ensure_installed = {
-        --     "sumneko_lua",
-        --     "rust_analyzer",
-        --     "clangd",
-        --     "bashls",
-        --     "cmake-language-server",
-        --     "dockerfile-language-server",
-        --     "pyright",
-        --     "marksman",
-        --     "flake8",
-        --     "black",
-        --     "luacheck",
-        --     "luaformatter",
-        --     "clang-format",
-        --     "cpplint",
-        -- },
-        automatic_installation = true,
-    })
+    require("mason-lspconfig").setup()
+    require("mason-lspconfig").setup_handlers {
+        function(server_name) require("lspconfig")[server_name].setup {} end
+    }
 end
 
 return M

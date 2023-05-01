@@ -29,10 +29,6 @@ alias \
     sv="sudo nvim" \
     vi="vim" \
     vim="nvim" \
-    dps="docker ps" \
-    dc="docker-compose" \
-    mux="tmuxinator" \
-    start="tmuxinator ma-apps"
 
 # Git alias
 alias \
@@ -48,25 +44,6 @@ alias \
     gp="git push" \
     gst="git status" \
     gittree="git log --graph --oneline --all"
-
-# Git flow alias
-alias \
-    gf="git flow" \
-    gfi="git flow init" \
-    gff="git flow feature" \
-    gfh="git flow hotfix" \
-    gfr="git flow release" \
-    gffs="git flow feature start" \
-    gfhs="git flow hotfix start" \
-    gfrs="git flow release start" \
-    gfff="git flow feature finish" \
-    gffp="git flow feature publish" \
-    gfhf="git flow hotfix finish" \
-    gfrf="git flow release finish" \
-    gffp="git flow feature publish" \
-    gfhp="git flow hotfix publish" \
-    gfrp="git flow release publish" \
-    gffpll="git flow feature pull"
 
 # Tmux alias
 alias \
@@ -93,4 +70,29 @@ alias \
     ......="cd ../../../../.." \
     .......="cd ../../../../../.."
 
-alias my_internal_ip='python -c "import socket; print([l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith(\"127.\")][:1], [[(s.connect((\"8.8.8.8\", 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0])"'
+alias cat=batcat
+
+alias my_internal_ip='python3 -c "import socket; print([l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith(\"127.\")][:1], [[(s.connect((\"8.8.8.8\", 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0])"'
+
+test_terminal_color ()
+{
+awk -v term_cols="${width:-$(tput cols || echo 80)}" 'BEGIN{
+    s="/\\";
+    for (colnum = 0; colnum<term_cols; colnum++) {
+        r = 255-(colnum*255/term_cols);
+        g = (colnum*510/term_cols);
+        b = (colnum*255/term_cols);
+        if (g>255) g = 510-g;
+        printf "\033[48;2;%d;%d;%dm", r,g,b;
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+        printf "%s\033[0m", substr(s,colnum%2+1,1);
+    }
+    printf "\n";
+}'
+}
+
+alias terminal_test_colors=test_terminal_color
+alias with-cachix-key="vaultenv --secrets-file <(echo "cachix#signing-key") -- "
+
+##### Company specific mapping #####
+alias nrc="nix shell -f default.nix -c"

@@ -1,34 +1,23 @@
 local M = {}
 
 function M.setup()
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    require("mason-null-ls").setup({
+        automatic_setup = true,
+        automatic_installation = false,
 
-    require("null-ls").setup({
-        on_attach = function(client, bufnr)
-            if client.supports_method("textDocument/formatting") then
-                vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = augroup,
-                    buffer = bufnr,
-                    callback = function()
-                        vim.lsp.buf.format({ bufnr = bufnr })
-                    end,
-                })
-            end
-        end,
+        ensure_installed = {
 
-        sources = {
-            require("null-ls").builtins.diagnostics.actionlint,
-            require("null-ls").builtins.diagnostics.cppcheck,
-            require("null-ls").builtins.formatting.black,
-            require("null-ls").builtins.formatting.clang_format,
-            require("null-ls").builtins.diagnostics.flake8,
-            require("null-ls").builtins.diagnostics.selene,
-            require("null-ls").builtins.formatting.stylua,
-            require("null-ls").builtins.diagnostics.markdownlint,
-            require("null-ls").builtins.diagnostics.write_good,
         },
     })
+
+    local null_ls = require("null-ls")
+    null_ls.setup({
+        sources = {
+            null_ls.builtins.code_actions.gitsigns
+            -- Anything not supported by mason.
+        }
+    })
+    -- require 'mason-null-ls'.setup_handlers()
 end
 
 return M
