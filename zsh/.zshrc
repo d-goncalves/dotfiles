@@ -28,6 +28,7 @@ setopt histignoredups
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
+bindkey -e
 
 _fix_cursor() {
     echo -ne '\e[5 q'

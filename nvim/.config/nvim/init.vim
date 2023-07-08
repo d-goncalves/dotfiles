@@ -52,16 +52,30 @@ call plug#begin(data_dir . 'autoload/plugged')
 
     " Git
     Plug 'tpope/vim-fugitive'        " Git for vim
+    Plug 'tpope/vim-rhubarb'
     Plug 'lewis6991/gitsigns.nvim'
 
+    Plug 'johnfrankmorgan/whitespace.nvim'
     " Visual
+    Plug 'martinsione/darkplus.nvim'
+    Plug 'ribru17/bamboo.nvim'
+    Plug 'sainnhe/gruvbox-material'
+    Plug 'projekt0n/github-nvim-theme'
+    Plug 'EdenEast/nightfox.nvim'
+    Plug 'rebelot/kanagawa.nvim'
+    Plug 'ghifarit53/tokyonight-vim'
+    Plug 'tiagovla/tokyodark.nvim'
+    Plug 'sainnhe/vim-color-forest-night'
+    Plug 'xiyaowong/transparent.nvim'
     Plug 'sainnhe/gruvbox-material'
     Plug 'gruvbox-community/gruvbox'
     Plug 'luisiacc/gruvbox-baby'
     Plug 'RRethy/nvim-base16'
+
+    Plug 'pearofducks/ansible-vim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'norcalli/nvim-colorizer.lua'         " Display Color Codes text with color #412 #000 #fff
-    Plug 'vim-scripts/ShowTrailingWhitespace'  " Show Trailing Whitespace
+    " Plug 'vim-scripts/ShowTrailingWhitespace'  " Show Trailing Whitespace
     Plug 'itchyny/vim-cursorword'              " Highlight multiple instances of the same word when hovered
     Plug 'lukas-reineke/indent-blankline.nvim' " Show indention for blank lines
     Plug 'folke/todo-comments.nvim'
@@ -71,6 +85,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'markonm/traces.vim'                  " Find&Replace is shown as it's being done
     Plug 'ggandor/lightspeed.nvim'             " Add motion with the s key
 
+    Plug 'direnv/direnv.vim'
     " Functional & extend vim
     Plug 'terryma/vim-expand-region'          " Use + to increase object selection, - to decrease selection
     Plug 'tpope/vim-surround'                 " Allow to change surrounds based on text objects
@@ -101,4 +116,13 @@ source $HOMECONFIG/config/settings.vim
 source $HOMECONFIG/config/mappings.vim
 lua require('config.init').setup()
 
-colorscheme base16-gruvbox-dark-hard
+if has('termguicolors')
+    set termguicolors
+endif
+
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_better_performance = 1
+
+" au BufRead,BufNewFile *.yml.j2 set filetype=yaml.jinja2
+
+colorscheme gruvbox-material

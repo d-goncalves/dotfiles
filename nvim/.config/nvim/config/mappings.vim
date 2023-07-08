@@ -17,10 +17,10 @@ nmap ,p "0p
 nmap ,P "0P
 
 " Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -37,4 +37,6 @@ function! s:ToggleBlame()
 endfunction
 
 nnoremap <leader>gb :call <SID>ToggleBlame()<CR>
-
+" nnoremap <leader>gb :call <SID>Git blame<CR>
+" nnoremap <leader>gc :call <SNR>GBrowse(expand('<cword>'))<CR>
+" vnoremap <leader>gl :call GBrowse!<CR>

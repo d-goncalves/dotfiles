@@ -2,12 +2,7 @@ local M = {}
 
 function M.setup()
     require("mason-null-ls").setup({
-        automatic_setup = true,
-        automatic_installation = false,
-
-        ensure_installed = {
-
-        },
+        handlers = {},
     })
 
     local null_ls = require("null-ls")

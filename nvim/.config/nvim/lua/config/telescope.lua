@@ -24,8 +24,8 @@ function M.setup()
             g = { "<cmd>Telescope grep_string theme=ivy<cr>", "Grep" },
             C = { "<cmd>Telescope colorscheme theme=ivy<cr>", "Colorscheme" },
             c = { "<cmd>Telescope neoclip theme=ivy<cr>", "ClipBoard" },
-            P = { "<cmd>Telescope projects theme=ivy<cr>", "Projects" },
-            r = { "<cmd>Telescope oldfiles theme=ivy<cr>", "Recent Files" }
+            p = { "<cmd>Telescope projects theme=ivy<cr>", "Projects" },
+            h = { "<cmd>Telescope oldfiles theme=ivy<cr>", "Previous Files" }
         }
     }
 

@@ -75,10 +75,10 @@ set colorcolumn=120
 set conceallevel=0         " So that I can see `` in markdown files
 set cursorline             " Enable highlighting of the current line
 
-highlight clear SignColumn " Change the column on the left to match theme color
-highlight clear LineNR     " Remove diferent color from the Git column
-highlight ShowTrailingWhitespace ctermbg=Red guibg=Red
-autocmd ColorScheme * highlight! link SignColumn LineNr
+" highlight clear SignColumn " Change the column on the left to match theme color
+" highlight clear LineNR     " Remove diferent color from the Git column
+" highlight ShowTrailingWhitespace ctermbg=Red guibg=Red
+" autocmd ColorScheme * highlight! link SignColumn LineNr
 
 " }}}
 " Folding {{{

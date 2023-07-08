@@ -14,7 +14,8 @@ function M.setup()
     require("config.todo").setup()
     require("config.telescope").setup()
     require("config.nvim-tree").setup()
-
+    require('whitespace-nvim').setup()
+    vim.keymap.set('n', '<Leader>lt', require('whitespace-nvim').trim) -- Run this on save
 end
 
 return M
