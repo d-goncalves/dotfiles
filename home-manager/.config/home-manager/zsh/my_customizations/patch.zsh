@@ -9,7 +9,7 @@ if [[ "$OSTYPE" == "darwin"* ]];then
         grep="grep" \
         diff="diff" \
         ccat="highlight --out-format=ansi"
-# Linux specific configuraion ( TESTED ON UBUNTU )
+# Linux specific configuration ( TESTED ON UBUNTU )
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias \
         ls="ls -hN --color=auto --group-directories-first" \
@@ -70,6 +70,8 @@ awk -v term_cols="${width:-$(tput cols || echo 80)}" 'BEGIN{
 alias terminal_test_colors=test_terminal_color
 alias with-cachix-key="vaultenv --secrets-file <(echo "cachix#signing-key") -- "
 alias nrc="nix shell -f default.nix -c"
+
+export PATH=/home/diogo/.ghcup/bin/:$PATH
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'  # SSH remote editor

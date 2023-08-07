@@ -9,7 +9,7 @@
 
         plugins = [
           {
-# will source zsh-autosuggestions.plugin.zsh
+              # will source zsh-autosuggestions.plugin.zsh
               name = "zsh-autosuggestions";
               file = "zsh-autosuggestions.plugin.zsh";
               src = pkgs.fetchFromGitHub {

@@ -9,15 +9,7 @@ home-manager switch
 
 cd ~/dotfiles
 # Symlink configurations
-stow nvim
-stow tmux
-stow zsh
-
-# [ZSH] Install packages
-~/.zsh/install.sh
-
-# Change shell
-chsh -s $(which zsh)
+stow home-manager
 
 python -m ensurepip --upgrade
 /home/diogo/.nix-profile/bin/python3 -m pip install pynvim
