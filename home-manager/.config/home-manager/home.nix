@@ -64,6 +64,8 @@
         { id = "hlepfoohegkhhmjieoechaddaejaokhf"; } # Refined Github
         { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
         { id = "clngdbkpkpeebahjckkjfobafhncgmne"; } # Stylus
+        { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # Stylus
+
     ];
 
     programs.helix.enable = true;

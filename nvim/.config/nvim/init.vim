@@ -80,6 +80,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'kyazdani42/nvim-tree.lua'
 
     " Themes
+    Plug 'srcery-colors/srcery-vim'
     Plug 'martinsione/darkplus.nvim'
     Plug 'ribru17/bamboo.nvim'
     Plug 'sainnhe/gruvbox-material'
@@ -100,7 +101,4 @@ set termguicolors
 source $HOMECONFIG/config/settings.vim
 lua require('config.init').setup()
 
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_better_performance = 1
-
-colorscheme github_dark
+colorscheme srcery

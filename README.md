@@ -1,4 +1,4 @@
-[#](#) Dotfiles
+# Dotfiles
 
 Description of my current dotfiles, and how to install it
 
@@ -8,11 +8,15 @@ Current OS: Ubuntu 22.04
 
 ## Installation
 
+Option 1:
+
 1. Run `install.sh`
-   Or
+
+Option 2:
+
 1. Install nix & home-manager
 1. Install stow
-1. `$ stow home-manager`
+1. `stow home-manager`
 1. `home-manager switch`
 
 ## Neovim themes
@@ -33,7 +37,7 @@ Current OS: Ubuntu 22.04
 
 ## Theme
 
-- \[X] [srcery-colors](https://srcery-colors.github.io/)
+- \[ ] [srcery-colors](https://srcery-colors.github.io/)
 
 ## Fonts
 
@@ -43,17 +47,4 @@ Current OS: Ubuntu 22.04
 - \[ ] [Hasklig](https://github.com/i-tu/Hasklig)
 - \[ ] [FiraCode](https://github.com/tonsky/FiraCode)
 - \[ ] [Hack](https://github.com/source-foundry/Hack)
-- \[X] [MesloLGS NF](https://github.com/romkatv/dotfiles-public/blob/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf)
-
-### Browser extension
-
-- \[ ] 1password
-- \[ ] BitWarden
-- \[ ] I don't care about cookies
-- \[ ] Refined Bitbucket
-- \[ ] uBlock Origin
-- \[ ] Unhook - remove youtube recommended videos
-- \[ ] Vimium
-- \[ ] Disconnect
-- \[ ] Dark Reader
-- \[ ] Grammarly
+- \[ ] [MesloLGS NF](https://github.com/romkatv/dotfiles-public/blob/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf)
