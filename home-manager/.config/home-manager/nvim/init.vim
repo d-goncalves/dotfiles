@@ -14,7 +14,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     " Dependencies
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'kkharji/sqlite.lua'
 
     " FuzzyFinder
     Plug 'nvim-telescope/telescope.nvim',
@@ -26,11 +25,7 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'p00f/nvim-ts-rainbow'
 
     " LSP
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'jose-elias-alvarez/null-ls.nvim'
-    Plug 'jay-babu/mason-null-ls.nvim'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-calc'
@@ -46,17 +41,6 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'tpope/vim-rhubarb'
     Plug 'lewis6991/gitsigns.nvim'
 
-
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'norcalli/nvim-colorizer.lua'         " Display Color Codes text with color #412 #000 #fff
-    Plug 'johnfrankmorgan/whitespace.nvim'
-    Plug 'itchyny/vim-cursorword'              " Highlight multiple instances of the same word when hovered
-    Plug 'lukas-reineke/indent-blankline.nvim' " Show indentation for blank lines
-
-    " Search
-    Plug 'romainl/vim-cool'                    " When using find with / after moving disable highlight
-    Plug 'markonm/traces.vim'                  " Find&Replace is shown as it's being done
-
     " Functional & extend vim
     Plug 'terryma/vim-expand-region'          " Use + to increase object selection, - to decrease selection
     Plug 'tpope/vim-surround'                 " Allow to change surrounds based on text objects
@@ -68,32 +52,23 @@ call plug#begin(data_dir . 'autoload/plugged')
     Plug 'AndrewRadev/splitjoin.vim'          " Add gJ and gS split or join multi line texts
     Plug 'junegunn/vim-easy-align'            " With ga allow to align stuff
     Plug 'justinmk/vim-gtfo'                  " Add got and gof
-
+    Plug 'romainl/vim-cool'                   " When using find with / after moving disable highlight
+    Plug 'markonm/traces.vim'                 " Find&Replace is shown as it's being done
     Plug 'windwp/nvim-autopairs',
-    Plug 'AckslD/nvim-neoclip.lua'
-    Plug 'ahmedkhalf/project.nvim'
     Plug 'direnv/direnv.vim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'NvChad/nvim-colorizer.lua'          " Display Color Codes text with color #412 #000 #fff
+    Plug 'johnfrankmorgan/whitespace.nvim'
+    Plug 'itchyny/vim-cursorword'              " Highlight multiple instances of the same word when hovered
+    Plug 'lukas-reineke/indent-blankline.nvim' " Show indentation for blank lines
 
     " Tools
     Plug 'christoomey/vim-tmux-navigator'      " Allow Control hjkl to move between panes
     Plug 'folke/which-key.nvim'
-    Plug 'kyazdani42/nvim-tree.lua'
 
     " Themes
-    Plug 'srcery-colors/srcery-vim'
-    Plug 'martinsione/darkplus.nvim'
-    Plug 'ribru17/bamboo.nvim'
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'projekt0n/github-nvim-theme'
-    Plug 'EdenEast/nightfox.nvim'
-    Plug 'rebelot/kanagawa.nvim'
-    Plug 'ghifarit53/tokyonight-vim'
-    Plug 'tiagovla/tokyodark.nvim'
-    Plug 'sainnhe/vim-color-forest-night'
-    Plug 'xiyaowong/transparent.nvim'
-    Plug 'sainnhe/gruvbox-material'
     Plug 'gruvbox-community/gruvbox'
-    Plug 'luisiacc/gruvbox-baby'
+    Plug 'Everblush/nvim'
 call plug#end()
 
 set termguicolors
@@ -176,6 +151,12 @@ endfunction
 
 " Set filetype for yaml.j2 files
 au BufRead,BufNewFile *.yml.j2 set ft=yaml.jinja2
-" Source files
-"
-colorscheme srcery
+au BufRead,BufNewFile *.timer.j2 set ft=systemd.jinja2
+au BufRead,BufNewFile *.service.j2 set ft=systemd.jinja2
+au BufRead,BufNewFile *.timer set ft=systemd
+au BufRead,BufNewFile *.service set ft=systemd
+au BufRead,BufNewFile *.json.j2 set ft=json.jinja2
+
+let g:gruvbox_contrast_dark = "hard"
+autocmd User DirenvLoaded :echo 'direnv reload'
+colorscheme everblush

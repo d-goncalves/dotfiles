@@ -1,10 +1,8 @@
-{config, pkgs, ...}:
-{
+{ config, pkgs, ... }: {
   programs.tmux = {
-    enable    = true;
+    enable = true;
     baseIndex = 1;
     prefix = "C-a";
     extraConfig = builtins.readFile ./.tmux.conf;
   };
 }
-

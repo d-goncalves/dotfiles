@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   programs.neovim = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
-    extraConfig = builtins.readFile ./init.vim;
-    extraLuaConfig = builtins.readFile ./init.lua;
+    # extraConfig = builtins.readFile ./init.vim;
+    # extraLuaConfig = builtins.readFile ./init.lua;
 
     extraPackages = with pkgs; [
       tree-sitter
@@ -24,12 +23,12 @@
       lua-language-server
       # Nix
       nil
-      nixpkgs-fmt
+      nixfmt
       statix
-      # Python
-      pyright
       # python-debug
       black
+      isort
+      mypy
       # Typescript
       nodePackages.typescript-language-server
       # Web (ESLint, HTML, CSS, JSON)
