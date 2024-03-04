@@ -48,6 +48,3 @@ Option 2:
 - \[ ] [FiraCode](https://github.com/tonsky/FiraCode)
 - \[ ] [Hack](https://github.com/source-foundry/Hack)
 - \[ ] [MesloLGS NF](https://github.com/romkatv/dotfiles-public/blob/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf)
-
-
-Check disk usage ncdu
