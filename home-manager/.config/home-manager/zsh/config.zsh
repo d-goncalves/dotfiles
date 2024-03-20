@@ -49,6 +49,9 @@ alias \
 alias cat=batcat
 alias with-cachix-key="vaultenv --secrets-file <(echo "cachix#signing-key") -- "
 
+function which-hosts() {
+}
+
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'  # SSH remote editor
 else

@@ -15,19 +15,15 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
-
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    "folke/which-key.nvim",
+    { "folke/neoconf.nvim", cmd = "Neoconf" },
+    "folke/neodev.nvim",
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
-    {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup()
-        end,
-    },
-    { "folke/neoconf.nvim", cmd = "Neoconf" },
+
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.4",
@@ -91,32 +87,26 @@ require("lazy").setup({
             })
         end,
     },
-
     {
-        "williamboman/mason.nvim",
+        "dundalek/lazy-lsp.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+        },
         config = function()
-            require("mason").setup()
+            local lsp_zero = require("lsp-zero")
+
+            lsp_zero.on_attach(function(client, bufnr)
+                -- see :help lsp-zero-keybindings to learn the available actions
+                lsp_zero.default_keymaps({
+                    buffer = bufnr,
+                    preserve_mappings = false
+                })
+            end)
+
+            require("lazy-lsp").setup {}
         end,
     },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup()
-            require("mason-lspconfig").setup_handlers({
-                function(server_name)
-                    require("lspconfig")[server_name].setup({})
-                end,
-            })
-        end,
-    },
-    "neovim/nvim-lspconfig",
-    { "folke/neodev.nvim",  opts = {} },
-    {
-        "mrcjkb/haskell-tools.nvim",
-        version = "^3",
-        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    },
-
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -133,36 +123,6 @@ require("lazy").setup({
             "onsails/lspkind.nvim",
         },
     },
-    {
-        "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            "williamboman/mason.nvim",
-            "jose-elias-alvarez/null-ls.nvim",
-        },
-        config = function()
-            require("mason-null-ls").setup({
-                ensure_installed = {},
-                automatic_installation = true,
-                handlers = {},
-            })
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.nixfmt,
-                    null_ls.builtins.diagnostics.statix,
-                },
-            })
-            for type, icon in pairs({ Error = " ", Warn = " ", Hint = " ", Info = " " }) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-            end
-        end,
-    },
-
-    "tpope/vim-fugitive",
-    "tpope/vim-rhubarb",
-    "ThePrimeagen/git-worktree.nvim",
     {
         "lewis6991/gitsigns.nvim",
         config = function()
@@ -189,6 +149,21 @@ require("lazy").setup({
             whichkey.register(keymap_g, { prefix = "<leader>" })
         end,
     },
+    "tpope/vim-fugitive",
+    "tpope/vim-rhubarb",
+    "ThePrimeagen/git-worktree.nvim",
+    "terryma/vim-expand-region",
+    "tpope/vim-surround",
+    "tpope/vim-commentary",
+    "tpope/vim-repeat",
+    "coderifous/textobj-word-column.vim",
+    "andymass/vim-matchup",
+    "wellle/targets.vim",
+    "AndrewRadev/splitjoin.vim",
+    "junegunn/vim-easy-align",
+    "justinmk/vim-gtfo",
+    "romainl/vim-cool",
+    "markonm/traces.vim",
     {
         "windwp/nvim-autopairs",
         config = function()
@@ -214,19 +189,6 @@ require("lazy").setup({
             vim.keymap.set("n", "<Leader>lt", require("whitespace-nvim").trim)
         end,
     },
-
-    "terryma/vim-expand-region",
-    "tpope/vim-surround",
-    "tpope/vim-commentary",
-    "tpope/vim-repeat",
-    "coderifous/textobj-word-column.vim",
-    "andymass/vim-matchup",
-    "wellle/targets.vim",
-    "AndrewRadev/splitjoin.vim",
-    "junegunn/vim-easy-align",
-    "justinmk/vim-gtfo",
-    "romainl/vim-cool",
-    "markonm/traces.vim",
     "direnv/direnv.vim",
     "itchyny/vim-cursorword",
     "lukas-reineke/indent-blankline.nvim",
@@ -234,8 +196,6 @@ require("lazy").setup({
     "folke/which-key.nvim",
     "gruvbox-community/gruvbox",
     "Everblush/nvim",
-    "bluz71/vim-moonfly-colors",
-    "zootedb0t/citruszest.nvim",
     {
         "sekke276/dark_flat.nvim",
         config = function()
@@ -244,13 +204,16 @@ require("lazy").setup({
             })
         end,
     },
-    "dasupradyumna/midnight.nvim",
-    "yazeed1s/minimal.nvim",
     {
-        "cpea2506/one_monokai.nvim",
+        'codota/tabnine-nvim',
+        build = "./dl_binaries.sh",
         config = function()
-            require("one_monokai").setup({
-                transparent = true,
+            require('tabnine').setup({
+                disable_auto_comment = true,
+                accept_keymap = "<S-tab>",
+                debounce_ms = 800,
+                exclude_filetypes = { "TelescopePrompt", "NvimTree" },
+                log_file_path = nil, -- absolute path to Tabnine log file
             })
         end,
     },
@@ -290,8 +253,6 @@ vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.softtabstop = 0
 
--- vim.opt.formatoptions-="cro"
-
 map("", "<C-c>", "<Esc>", { noremap = true, silent = false })
 map("", "1", "^", {})
 map("", "0", "$", {})
@@ -330,72 +291,3 @@ autocmd("CursorHold", {
         vim.diagnostic.open_float(nil, opts)
     end,
 })
-
-local cmp = require("cmp")
-
-cmp.setup({
-    enabled = function()
-        -- disable autocompletion in prompt (wasn't playing good with telescope)
-        buftype = vim.api.nvim_buf_get_option(0, "buftype")
-        if buftype == "prompt" then
-            return false
-        end
-        local context = require("cmp.config.context")
-        -- disable autocompletion in comments
-        return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
-    end,
-    view = { entries = { name = "custom", selection_order = "near_cursor" } },
-    formatting = { format = require("lspkind").cmp_format({ maxwidth = 50 }) },
-    snippet = {
-        expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-        end,
-    },
-    mapping = cmp.mapping.preset.insert({
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    }),
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "calc" },
-        { name = "path" },
-        { name = "nvim_lua" },
-        { name = "cmp_cmdline" },
-        { name = "nvim_lsp_signature_help" },
-    }, { { name = "buffer" } }),
-})
-local opts = { noremap = true, silent = true }
-
--- Key mappings
-vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
--- Whichkey
-local keymap_l = {
-    l = {
-        name = "Language",
-        r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-        d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
-        i = { "<cmd>LspInfo<CR>", "Lsp Info" },
-        f = { "<cmd>lua vim.lsp.buf.format({bufnr = bufnr})<CR>", "Format Document" },
-    },
-}
-
-local keymap_g = {
-    name = "LSP Goto",
-    d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-    r = { "<Cmd>lua vim.lsp.buf.references()<CR>", "References" },
-    D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
-    I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
-}
-local whichkey = require("which-key")
-whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })
-whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
