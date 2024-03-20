@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  pluginImporter = plugin : {
+  pluginImporter = plugin: {
     name = plugin;
     file = "plugins/${plugin}/${plugin}.plugin.zsh";
     src = builtins.fetchGit {
@@ -8,7 +8,8 @@ let
       rev = "9730915910c6cc7640f8af6063ffb93becf0414a";
     };
   };
-in {
+in
+{
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -73,26 +74,26 @@ in {
           rev = "57bdda68e52a09075352b18fa3ca21abd31df4cb";
         };
       }
-    (pluginImporter "aliases")
-    (pluginImporter "colored-man-pages")
-    (pluginImporter "colorize")
-    (pluginImporter "command-not-found")
-    (pluginImporter "common-aliases")
-    (pluginImporter "copybuffer")
-    (pluginImporter "copyfile")
-    (pluginImporter "copypath")
-    (pluginImporter "fd")
-    (pluginImporter "fzf")
-    (pluginImporter "gcloud")
-    (pluginImporter "git")
-    (pluginImporter "git-prompt")
-    (pluginImporter "gitfast")
-    (pluginImporter "history")
-    (pluginImporter "man")
-    (pluginImporter "nomad")
-    (pluginImporter "sudo")
-    (pluginImporter "terraform")
-    (pluginImporter "tmux")
+      (pluginImporter "aliases")
+      (pluginImporter "colored-man-pages")
+      (pluginImporter "colorize")
+      (pluginImporter "command-not-found")
+      (pluginImporter "common-aliases")
+      (pluginImporter "copybuffer")
+      (pluginImporter "copyfile")
+      (pluginImporter "copypath")
+      (pluginImporter "fd")
+      (pluginImporter "fzf")
+      (pluginImporter "gcloud")
+      (pluginImporter "git")
+      (pluginImporter "git-prompt")
+      (pluginImporter "gitfast")
+      (pluginImporter "history")
+      (pluginImporter "man")
+      (pluginImporter "nomad")
+      (pluginImporter "sudo")
+      (pluginImporter "terraform")
+      (pluginImporter "tmux")
     ];
   };
 }

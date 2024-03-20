@@ -1,7 +1,8 @@
 { pkgs, ... }:
 let
   username = "diogo";
-in {
+in
+{
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
