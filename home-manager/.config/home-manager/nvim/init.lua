@@ -18,8 +18,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "folke/which-key.nvim",
-    { "folke/neoconf.nvim", cmd = "Neoconf" },
+    { "folke/neoconf.nvim",     cmd = "Neoconf" },
     "folke/neodev.nvim",
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
@@ -35,36 +34,24 @@ require("lazy").setup({
             "folke/which-key.nvim",
         },
         config = function()
-            require("telescope").load_extension("fzf")
             require("telescope").load_extension("project")
             require("telescope").load_extension("git_worktree")
             require("telescope").load_extension("gh")
             require("telescope").setup()
 
-            local keymap = {
-                f = {
-                    name = "Find",
-                    f = { "<cmd>Telescope git_files theme=ivy<cr>", "Find" },
-                    F = { "<cmd>Telescope find_files hidden=true theme=ivy<cr>", "FindAll" },
-                    b = { "<cmd>Telescope buffers theme=ivy<cr>", "Buffer" },
-                    t = { "<cmd>Telescope help_tags theme=ivy<cr>", "Tags" },
-                    s = { "<cmd>Telescope live_grep theme=ivy<cr>", "Grep" },
-                    g = { "<cmd>Telescope grep_string theme=ivy<cr>", "Grep" },
-                    C = { "<cmd>Telescope colorscheme theme=ivy<cr>", "Colorscheme" },
-                    c = { "<cmd>Telescope neoclip theme=ivy<cr>", "ClipBoard" },
-                    p = { "<cmd>Telescope project theme=ivy<cr>", "Projects" },
-                    h = { "<cmd>Telescope oldfiles theme=ivy<cr>", "Previous Files" },
-                },
-            }
-
             local whichkey = require("which-key")
-            whichkey.register(keymap, {
-                mode = "n",
-                prefix = "<leader>",
-                buffer = nil,
-                silent = true,
-                noremap = true,
-                nowait = false,
+            whichkey.add({
+                { "<leader>f",  group = "Find",                                        nowait = false, remap = false },
+                { "<leader>ff", "<cmd>Telescope git_files theme=ivy<cr>",              nowait = false, remap = false },
+                { "<leader>fF", "<cmd>Telescope find_files hidden=true theme=ivy<cr>", nowait = false, remap = false },
+                { "<leader>fb", "<cmd>Telescope buffers theme=ivy<cr>",                nowait = false, remap = false },
+                { "<leader>ft", "<cmd>Telescope help_tags theme=ivy<cr>",              nowait = false, remap = false },
+                { "<leader>fs", "<cmd>Telescope live_grep theme=ivy<cr>",              nowait = false, remap = false },
+                { "<leader>fg", "<cmd>Telescope grep_string theme=ivy<cr>",            nowait = false, remap = false },
+                { "<leader>fC", "<cmd>Telescope colorscheme theme=ivy<cr>",            nowait = false, remap = false },
+                { "<leader>fc", "<cmd>Telescope neoclip theme=ivy<cr>",                nowait = false, remap = false },
+                { "<leader>fp", "<cmd>Telescope project theme=ivy<cr>",                nowait = false, remap = false },
+                { "<leader>fh", "<cmd>Telescope oldfiles theme=ivy<cr>",               nowait = false, remap = false },
             })
         end,
     },
@@ -104,7 +91,12 @@ require("lazy").setup({
                 })
             end)
 
-            require("lazy-lsp").setup {}
+            require("lazy-lsp").setup {
+                excluded_servers = {
+                    "basedpyright",
+                    "pylyzer",
+                }
+            }
         end,
     },
     {
@@ -137,16 +129,13 @@ require("lazy").setup({
             end
 
             local whichkey = require("which-key")
-            local keymap_g = {
-                g = {
-                    name = "Git",
-                    b = { "<cmd>lua ToggleBlame()<CR>", "Blame" },
-                    d = { "<cmd>Gitsigns toggle_deleted<cr>", "Deleted" },
-                    h = { "<cmd>0Gclog<cr>", "History" },
-                    c = { "<cmd>.GBrowse<CR>", "Open Github" },
-                },
-            }
-            whichkey.register(keymap_g, { prefix = "<leader>" })
+            whichkey.add({
+                { "<leader>g",  group = "Git",                      nowait = false, remap = false },
+                { "<leader>gb", "<cmd>lua ToggleBlame()<CR>",       nowait = false, remap = false },
+                { "<leader>gd", "<cmd>Gitsigns toggle_deleted<cr>", nowait = false, remap = false },
+                { "<leader>gh", "<cmd>0Gclog<cr>",                  nowait = false, remap = false },
+                { "<leader>gc", "<cmd>.GBrowse<CR>",                nowait = false, remap = false },
+            })
         end,
     },
     "tpope/vim-fugitive",
@@ -170,6 +159,7 @@ require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
+    { 'echasnovski/mini.icons', version = false },
     {
         "kyazdani42/nvim-web-devicons",
         config = function()
@@ -264,7 +254,10 @@ map("n", "<C-u>", "<C-u>zz", { noremap = true, silent = false })
 map("v", "<", "<gv", { noremap = true, silent = false })
 map("v", ">", ">gv", { noremap = true, silent = false })
 map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>', { noremap = true, silent = false })
+map("n", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
+map("x", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
 
+autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.tftpl", command = "set ft=terraform.hcl" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.hcl.j2", command = "set ft=hcl.jinja2" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.timer", command = "set ft=systemd" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.service", command = "set ft=systemd" })

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -11,7 +11,6 @@
       lua-language-server
       # Nix
       nil
-      nixfmt
       statix
       # python-debug
       black
