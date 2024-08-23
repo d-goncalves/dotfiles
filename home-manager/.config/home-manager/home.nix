@@ -44,7 +44,6 @@ in {
       python-lsp-server
       python-lsp-ruff
     ])))
-    # python-lsp-server
   ];
 
   imports = [ tmux/config.nix zsh/config.nix nvim/config.nix ];
