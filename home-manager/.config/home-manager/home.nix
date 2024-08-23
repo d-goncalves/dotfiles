@@ -39,6 +39,7 @@ in {
     docker-compose-language-service
     dhall-lsp-server
     clang
+    lazygit
     (python3.withPackages (p: (with p; [
       python-lsp-server
       python-lsp-ruff
@@ -81,21 +82,6 @@ in {
 
     };
 
-    chromium = {
-      enable = true;
-      extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
-        { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
-        { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # DarkReader
-        { id = "jeoacafpbcihiomhlakheieifhpjdfeo"; } # Disconnect
-        { id = "kbfnbcaeplbcioakkpcpgfkobkghlhen"; } # Grammarly
-        { id = "gphhapmejobijbbhgpjhcjognlahblep"; } # Gnome Shell integration
-        { id = "hlepfoohegkhhmjieoechaddaejaokhf"; } # Refined Github
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
-        { id = "clngdbkpkpeebahjckkjfobafhncgmne"; } # Stylus
-        { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # no cookies
-      ];
-    };
     fzf = {
       enable = true;
       changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
