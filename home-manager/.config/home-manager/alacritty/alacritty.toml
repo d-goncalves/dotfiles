@@ -31,7 +31,8 @@ TERM = "xterm-256color"
 size = 12
 
 [font.normal]
-family = "Ubuntu Mono"
+# family = "Ubuntu Mono"
+family = "Iosevka NF"
 
 [scrolling]
 history = 100000

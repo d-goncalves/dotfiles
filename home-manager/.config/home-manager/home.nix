@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let username = "diogo";
 in {
   home = {
@@ -26,6 +26,11 @@ in {
     ghcid
     ghc
     statix
+    # postman
+    jq
+    radeontop
+    blueman
+    pulseaudio
 
     # Editor LSP/Configurations Helix configuration
     nil
@@ -35,19 +40,14 @@ in {
     terraform-ls
     bash-language-server
     marksman
-    haskell-language-server
     docker-compose-language-service
     dhall-lsp-server
     clang
     lazygit
-    (python3.withPackages (p: (with p; [
-      python-lsp-server
-      python-lsp-ruff
-    ])))
-    # python-lsp-server
+    (python3.withPackages (p: (with p; [ python-lsp-server python-lsp-ruff ])))
   ];
 
-  imports = [ tmux/config.nix zsh/config.nix nvim/config.nix ];
+  imports = [ sway/config.nix tmux/config.nix zsh/config.nix nvim/config.nix ];
 
   programs = {
 
