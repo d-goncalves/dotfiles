@@ -42,16 +42,16 @@ require("lazy").setup({
             local whichkey = require("which-key")
             whichkey.add({
                 { "<leader>f",  group = "Find",                                        nowait = false, remap = false },
-                { "<leader>ff", "<cmd>Telescope git_files theme=ivy<cr>",              nowait = false, remap = false },
-                { "<leader>fF", "<cmd>Telescope find_files hidden=true theme=ivy<cr>", nowait = false, remap = false },
-                { "<leader>fb", "<cmd>Telescope buffers theme=ivy<cr>",                nowait = false, remap = false },
-                { "<leader>ft", "<cmd>Telescope help_tags theme=ivy<cr>",              nowait = false, remap = false },
-                { "<leader>fs", "<cmd>Telescope live_grep theme=ivy<cr>",              nowait = false, remap = false },
-                { "<leader>fg", "<cmd>Telescope grep_string theme=ivy<cr>",            nowait = false, remap = false },
-                { "<leader>fC", "<cmd>Telescope colorscheme theme=ivy<cr>",            nowait = false, remap = false },
-                { "<leader>fc", "<cmd>Telescope neoclip theme=ivy<cr>",                nowait = false, remap = false },
-                { "<leader>fp", "<cmd>Telescope project theme=ivy<cr>",                nowait = false, remap = false },
-                { "<leader>fh", "<cmd>Telescope oldfiles theme=ivy<cr>",               nowait = false, remap = false },
+                { "<leader>ff", "<cmd>Telescope git_files <cr>",              nowait = false, remap = false },
+                { "<leader>fF", "<cmd>Telescope find_files hidden=true <cr>", nowait = false, remap = false },
+                { "<leader>fb", "<cmd>Telescope buffers <cr>",                nowait = false, remap = false },
+                { "<leader>ft", "<cmd>Telescope help_tags <cr>",              nowait = false, remap = false },
+                { "<leader>fs", "<cmd>Telescope live_grep <cr>",              nowait = false, remap = false },
+                { "<leader>fg", "<cmd>Telescope grep_string <cr>",            nowait = false, remap = false },
+                { "<leader>fC", "<cmd>Telescope colorscheme <cr>",            nowait = false, remap = false },
+                { "<leader>fc", "<cmd>Telescope neoclip <cr>",                nowait = false, remap = false },
+                { "<leader>fp", "<cmd>Telescope project <cr>",                nowait = false, remap = false },
+                { "<leader>fh", "<cmd>Telescope oldfiles <cr>",               nowait = false, remap = false },
             })
         end,
     },
@@ -138,6 +138,16 @@ require("lazy").setup({
             })
         end,
     },
+    {
+        "gbprod/substitute.nvim",
+        config = function()
+            require("substitute").setup()
+            vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+            vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+            vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+            vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+        end,
+    },
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
     "ThePrimeagen/git-worktree.nvim",
@@ -184,7 +194,8 @@ require("lazy").setup({
     "lukas-reineke/indent-blankline.nvim",
     "christoomey/vim-tmux-navigator",
     "folke/which-key.nvim",
-    "gruvbox-community/gruvbox",
+    -- "gruvbox-community/gruvbox",
+    "sainnhe/gruvbox-material",
     "Everblush/nvim",
     {
         "sekke276/dark_flat.nvim",
@@ -209,7 +220,7 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("dark_flat")
+vim.cmd.colorscheme("gruvbox-material")
 
 vim.opt.scrolloff = 5
 vim.opt.backup = false
@@ -229,7 +240,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("h,l")
 vim.opt.smartcase = true
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.conceallevel = 0
 vim.opt.showtabline = 0
 vim.opt.laststatus = 0
@@ -242,6 +253,7 @@ vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.softtabstop = 0
+vim.opt.autoread = true
 
 map("", "<C-c>", "<Esc>", { noremap = true, silent = false })
 map("", "1", "^", {})

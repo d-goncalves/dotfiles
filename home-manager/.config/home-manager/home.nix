@@ -52,6 +52,7 @@ in {
   programs = {
 
     home-manager.enable = true;
+    jq.enable = true;
 
     helix = {
       enable = true;
@@ -81,14 +82,12 @@ in {
       };
 
     };
-
     fzf = {
       enable = true;
       changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
       tmux.enableShellIntegration = true;
       enableZshIntegration = true;
     };
-    jq.enable = true;
     direnv = {
       enable = true;
       enableZshIntegration = true;

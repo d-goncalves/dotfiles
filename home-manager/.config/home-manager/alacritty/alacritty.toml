@@ -1,38 +1,40 @@
 live_config_reload = true
 
+# Gruvbox colorscheme
 [colors.bright]
-black = "0x808080"
-blue = "0x0066ff"
-cyan = "0x00ffff"
-green = "0x33ff00"
-magenta = "0xcc00ff"
-red = "0xfe0100"
-white = "0xFFFFFF"
-yellow = "0xfeff00"
+black   = "0x3c3836"
+red     = "0xea6962"
+green   = "0xa9b665"
+yellow  = "0xd8a657"
+blue    = "0x7daea3"
+magenta = "0xd3869b"
+cyan    = "0x89b482"
+white   = "0xd4be98"
 
 [colors.normal]
-black = "0x000000"
-blue = "0x0066ff"
-cyan = "0x00ffff"
-green = "0x33ff00"
-magenta = "0xcc00ff"
-red = "0xfe0100"
-white = "0xd0d0d0"
-yellow = "0xfeff00"
+black   = "0x3c3836"
+red     = "0xea6962"
+green   = "0xa9b665"
+yellow  = "0xd8a657"
+blue    = "0x7daea3"
+magenta = "0xd3869b"
+cyan    = "0x89b482"
+white   = "0xd4be98"
 
 [colors.primary]
-background = "0x000000"
-foreground = "0xffffff"
+background = "0x282828"
+foreground = "0xd4be98"
+
 
 [env]
 TERM = "xterm-256color"
 
 [font]
-size = 12
+size = 11
 
 [font.normal]
-# family = "Ubuntu Mono"
-family = "Iosevka NF"
+# family = "Dejavu Sans Mono"
+family = "Iosevka Nerd Font"
 
 [scrolling]
 history = 100000
@@ -44,3 +46,30 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 [window]
 decorations = "none"
 opacity = 1
+
+
+# Old colors. Pitch black
+
+# [colors.bright]
+# black = "0x808080"
+# blue = "0x0066ff"
+# cyan = "0x00ffff"
+# green = "0x33ff00"
+# magenta = "0xcc00ff"
+# red = "0xfe0100"
+# white = "0xFFFFFF"
+# yellow = "0xfeff00"
+
+# [colors.normal]
+# black = "0x000000"
+# blue = "0x0066ff"
+# cyan = "0x00ffff"
+# green = "0x33ff00"
+# magenta = "0xcc00ff"
+# red = "0xfe0100"
+# white = "0xd0d0d0"
+# yellow = "0xfeff00"
+
+# [colors.primary]
+# background = "0x000000"
+# foreground = "0xffffff"
