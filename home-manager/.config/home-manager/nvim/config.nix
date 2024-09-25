@@ -5,21 +5,31 @@
     extraLuaConfig = builtins.readFile ./init.lua;
 
     extraPackages = with pkgs; [
-      tree-sitter
-      nodejs
-      nodePackages.bash-language-server
+      # Lsp Configuration
+      ansible-language-server
+      bash-language-server
+      clang-tools
+      dhall-lsp-server
+      docker-compose-language-service
+      dockerfile-language-server-nodejs
       lua-language-server
-      # Nix
+      nginx-language-server
       nil
+      nodePackages.typescript-language-server
       statix
-      # python-debug
+      terraform-ls
+      tflint
+      yaml-language-server
+
+      # Linting/
+      (python3.withPackages (p: (with p; [ python-lsp-ruff ])))
       black
       isort
       mypy
-      # Typescript
-      nodePackages.typescript-language-server
-      ripgrep
-      fd
+      pyright
+
+      # Vim Configuration
+      nodejs
     ];
   };
 }

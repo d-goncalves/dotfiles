@@ -2,6 +2,12 @@
 # let modifier = config.wayland.windowManager.sway.config.modifier;
 let modifier = "mod4";
 in {
+  home.packages = with pkgs; [
+    blueman
+    lazygit
+    pulseaudio
+    radeontop
+  ];
   programs.swaylock = {
     enable = true;
     settings = { color = "000000"; };

@@ -10,44 +10,25 @@ in {
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
-    insomnia
-    fd
-    git
-    htop
-    nodejs
-    ripgrep
-    vlc
-    stow
-    xclip
-    delta
-    dbeaver-bin
     bat
     cargo
-    ghcid
+    dbeaver-bin
+    delta
+    fd
     ghc
-    statix
-    # postman
+    ghcid
+    git
+    htop
+    insomnia
     jq
-    radeontop
-    blueman
-    pulseaudio
-
-    # Editor LSP/Configurations Helix configuration
-    nil
-    tree-sitter
-    yaml-language-server
-    ansible-language-server
-    terraform-ls
-    bash-language-server
-    marksman
-    docker-compose-language-service
-    dhall-lsp-server
-    clang
-    lazygit
-    (python3.withPackages (p: (with p; [ python-lsp-server python-lsp-ruff ])))
+    nodejs
+    ripgrep
+    stow
+    vlc
+    xclip
   ];
 
-  imports = [ sway/config.nix tmux/config.nix zsh/config.nix nvim/config.nix ];
+  imports = [ tmux/config.nix zsh/config.nix nvim/config.nix ];
 
   programs = {
 

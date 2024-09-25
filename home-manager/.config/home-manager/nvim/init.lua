@@ -34,14 +34,15 @@ require("lazy").setup({
             "folke/which-key.nvim",
         },
         config = function()
-            require("telescope").load_extension("project")
-            require("telescope").load_extension("git_worktree")
             require("telescope").load_extension("gh")
+            require("telescope").load_extension("git_worktree")
+            require("telescope").load_extension("project")
+
             require("telescope").setup()
 
             local whichkey = require("which-key")
             whichkey.add({
-                { "<leader>f",  group = "Find",                                        nowait = false, remap = false },
+                { "<leader>fy", "<cmd>Telescope yaml_schema <cr>",            nowait = false, remap = false },
                 { "<leader>ff", "<cmd>Telescope git_files <cr>",              nowait = false, remap = false },
                 { "<leader>fF", "<cmd>Telescope find_files hidden=true <cr>", nowait = false, remap = false },
                 { "<leader>fb", "<cmd>Telescope buffers <cr>",                nowait = false, remap = false },
@@ -75,30 +76,12 @@ require("lazy").setup({
         end,
     },
     {
-        "dundalek/lazy-lsp.nvim",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
-        },
-        config = function()
-            local lsp_zero = require("lsp-zero")
-
-            lsp_zero.on_attach(function(client, bufnr)
-                -- see :help lsp-zero-keybindings to learn the available actions
-                lsp_zero.default_keymaps({
-                    buffer = bufnr,
-                    preserve_mappings = false
-                })
-            end)
-
-            require("lazy-lsp").setup {
-                excluded_servers = {
-                    "basedpyright",
-                    "pylyzer",
-                }
-            }
-        end,
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v4.x',
+        lazy = true,
+        config = false,
     },
+
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -114,6 +97,118 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
             "onsails/lspkind.nvim",
         },
+        config = function()
+            local cmp = require('cmp')
+
+            cmp.setup({
+                sources = {
+                    { name = 'nvim_lsp' },
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                }),
+                snippet = {
+                    expand = function(args)
+                        vim.snippet.expand(args.body)
+                    end,
+                },
+            })
+        end
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+        },
+        config = function()
+            local lsp_zero = require('lsp-zero')
+
+            -- lsp_attach is where you enable features that only work
+            -- if there is a language server active in the file
+            local lsp_attach = function(client, bufnr)
+                local opts = { buffer = bufnr }
+
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+                vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+                vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+                vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+                vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+                vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+                vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            end
+
+            lsp_zero.extend_lspconfig({
+                sign_text = true,
+                lsp_attach = lsp_attach,
+                capabilities = require('cmp_nvim_lsp').default_capabilities()
+            })
+            require('lspconfig').terraformls.setup {}
+            require('lspconfig').lua_ls.setup({})
+
+            require 'lspconfig'.statix.setup {}
+            require('lspconfig').pylsp.setup {}
+            require('lspconfig').pyright.setup {}
+            require 'lspconfig'.ansiblels.setup {}
+            require 'lspconfig'.bashls.setup {}
+            require 'lspconfig'.clangd.setup {}
+            require 'lspconfig'.docker_compose_language_service.setup {}
+            require 'lspconfig'.tflint.setup {}
+            require 'lspconfig'.nginx_language_server.setup {}
+            require 'lspconfig'.dockerls.setup {}
+            require 'lspconfig'.dhall_lsp_server.setup {}
+            require 'lspconfig'.nil_ls.setup {}
+            require 'lspconfig'.ts_ls.setup {}
+            require('lspconfig').yamlls.setup {
+                settings = {
+                    yaml = {
+                        schemas = {
+                            ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.k8s.yaml",
+                            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                        },
+                    },
+                }
+            }
+
+            require 'lspconfig'.lua_ls.setup {
+                on_init = function(client)
+                    if client.workspace_folders then
+                        local path = client.workspace_folders[1].name
+                        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+                            return
+                        end
+                    end
+
+                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using
+                            -- (most likely LuaJIT in the case of Neovim)
+                            version = 'LuaJIT'
+                        },
+                        -- Make the server aware of Neovim runtime files
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME
+                                -- Depending on the usage, you might want to add additional paths here.
+                                -- "${3rd}/luv/library"
+                                -- "${3rd}/busted/library",
+                            }
+                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                            -- library = vim.api.nvim_get_runtime_file("", true)
+                        }
+                    })
+                    -- Configuration ends here --
+                end,
+                settings = {
+                    Lua = {}
+                }
+            }
+        end
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -268,6 +363,21 @@ map("v", ">", ">gv", { noremap = true, silent = false })
 map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>', { noremap = true, silent = false })
 map("n", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
 map("x", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
+
+vim.filetype.add({
+    filename = {
+        ["docker-compose.yml"] = "yaml.docker-compose",
+        ["docker-compose.yaml"] = "yaml.docker-compose",
+        ["compose.yml"] = "yaml.docker-compose",
+        ["compose.yaml"] = "yaml.docker-compose",
+    },
+    pattern = {
+		[".*/.*playbook.*.ya?ml"] = "yaml.ansible",
+		[".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
+		[".*/local.ya?ml"] = "yaml.ansible",
+	},
+
+})
 
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.tftpl", command = "set ft=terraform.hcl" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.hcl.j2", command = "set ft=hcl.jinja2" })
