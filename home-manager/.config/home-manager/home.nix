@@ -11,7 +11,6 @@ in {
 
   home.packages = with pkgs; [
     bat
-    cargo
     dbeaver-bin
     delta
     fd

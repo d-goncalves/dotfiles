@@ -20,6 +20,7 @@
       terraform-ls
       tflint
       yaml-language-server
+      rust-analyzer
 
       # Linting/
       (python3.withPackages (p: (with p; [ python-lsp-ruff ])))
