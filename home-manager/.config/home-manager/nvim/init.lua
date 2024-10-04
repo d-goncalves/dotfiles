@@ -376,6 +376,8 @@ vim.filetype.add({
 		[".*/.*playbook.*.ya?ml"] = "yaml.ansible",
 		[".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
 		[".*/local.ya?ml"] = "yaml.ansible",
+		["*.yaml.j2"] = "yaml.jinja2",
+		["*.yml.j2"] = "yaml.jinja2",
 	},
 
 })
@@ -388,6 +390,7 @@ autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.timer.j2", command = "set ft
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.service.j2", command = "set ft=systemd.jinja2" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.json.j2", command = "set ft=json.jinja2" })
 autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.yml.j2", command = "set ft=yaml.jinja2" })
+autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.yaml.j2", command = "set ft=yaml.jinja2" })
 autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
