@@ -2,8 +2,8 @@
 let username = "diogo";
 in {
   home = {
-    inherit username;
-    homeDirectory = "/home/${username}";
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
     stateVersion = "23.11";
   };
 
