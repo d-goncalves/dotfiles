@@ -21,6 +21,7 @@
       tflint
       yaml-language-server
       rust-analyzer
+      typos-lsp
 
       # Linting/
       (python3.withPackages (p: (with p; [ python-lsp-ruff ])))

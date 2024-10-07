@@ -164,6 +164,7 @@ require("lazy").setup({
             require 'lspconfig'.nil_ls.setup {}
             require 'lspconfig'.ts_ls.setup {}
             require'lspconfig'.rust_analyzer.setup{}
+            require('lspconfig').typos_lsp.setup{}
             require('lspconfig').yamlls.setup {
                 settings = {
                     yaml = {
@@ -324,7 +325,7 @@ vim.opt.swapfile = false
 vim.opt.writebackup = false
 vim.opt.undofile = true
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
