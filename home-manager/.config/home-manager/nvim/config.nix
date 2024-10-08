@@ -24,7 +24,7 @@
       typos-lsp
 
       # Linting/
-      (python3.withPackages (p: (with p; [ python-lsp-ruff ])))
+      (python3.withPackages (p: (with p; [ py-spy python-lsp-ruff ])))
       black
       isort
       mypy
