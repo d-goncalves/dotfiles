@@ -1,9 +1,11 @@
 { pkgs, lib, ... }:
-let username = "diogo";
+let
+    username = "diogo";
+    homeDirectory =  "/home/diogo";
 in {
   home = {
-    username = builtins.getEnv "USER";
-    homeDirectory = builtins.getEnv "HOME";
+    inherit username;
+    inherit homeDirectory;
     stateVersion = "23.11";
   };
 
