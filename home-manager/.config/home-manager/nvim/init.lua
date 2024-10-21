@@ -293,6 +293,8 @@ require("lazy").setup({
     "folke/which-key.nvim",
     -- "gruvbox-community/gruvbox",
     "sainnhe/gruvbox-material",
+    "ellisonleao/gruvbox.nvim",
+    "luisiacc/gruvbox-baby",
     "Everblush/nvim",
     {
         "sekke276/dark_flat.nvim",
@@ -317,7 +319,9 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("gruvbox-material")
+vim.cmd.colorscheme("gruvbox")
+-- vim.cmd.colorscheme("gruvbox-material")
+-- vim.cmd.colorscheme("gruvbox-baby")
 
 vim.opt.scrolloff = 5
 vim.opt.backup = false
