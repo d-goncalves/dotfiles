@@ -74,6 +74,14 @@ in
           rev = "57bdda68e52a09075352b18fa3ca21abd31df4cb";
         };
       }
+      {
+        name = "zsh-you-should-use";
+        file = "you-should-use.plugin.zsh";
+        src = builtins.fetchGit {
+          url = "https://github.com/MichaelAquilina/zsh-you-should-use";
+          rev = "f13d39a1ae84219e4ee14e77d31bb774c91f2fe3";
+        };
+      }
       (pluginImporter "aliases")
       (pluginImporter "colored-man-pages")
       (pluginImporter "colorize")

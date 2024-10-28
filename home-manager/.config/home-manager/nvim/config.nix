@@ -22,6 +22,7 @@
       yaml-language-server
       rust-analyzer
       typos-lsp
+      ansible-lint
 
       # Linting/
       (python3.withPackages (p: (with p; [ py-spy python-lsp-ruff ])))
