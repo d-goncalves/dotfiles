@@ -296,14 +296,14 @@ require("lazy").setup({
     "ellisonleao/gruvbox.nvim",
     "luisiacc/gruvbox-baby",
     "Everblush/nvim",
-    {
-        "sekke276/dark_flat.nvim",
-        config = function()
-            require("dark_flat").setup({
-                transparent = true,
-            })
-        end,
-    },
+    -- {
+    --     "sekke276/dark_flat.nvim",
+    --     config = function()
+    --         require("dark_flat").setup({
+    --             transparent = true,
+    --         })
+    --     end,
+    -- },
     {
         'codota/tabnine-nvim',
         build = "./dl_binaries.sh",
@@ -319,11 +319,11 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("gruvbox")
+-- vim.cmd.colorscheme("gruvbox")
 -- vim.cmd.colorscheme("gruvbox-material")
 -- vim.cmd.colorscheme("gruvbox-baby")
 
-vim.lsp.set_log_level(“off”)
+vim.lsp.set_log_level("off")
 
 vim.opt.scrolloff = 5
 vim.opt.backup = false
