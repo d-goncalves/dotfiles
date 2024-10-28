@@ -99,6 +99,7 @@ require("lazy").setup({
         },
         config = function()
             local cmp = require('cmp')
+            local lspkind = require('lspkind')
 
             cmp.setup({
                 sources = {
@@ -114,6 +115,11 @@ require("lazy").setup({
                         vim.snippet.expand(args.body)
                     end,
                 },
+            formatting = {
+                format = lspkind.cmp_format({
+                  mode = 'symbol', -- show only symbol annotations
+                })
+              },
             })
         end
     },
@@ -150,7 +156,6 @@ require("lazy").setup({
             require('lspconfig').terraformls.setup {}
             require('lspconfig').lua_ls.setup({})
 
-            require 'lspconfig'.statix.setup {}
             require('lspconfig').pylsp.setup {}
             require('lspconfig').pyright.setup {}
             require 'lspconfig'.ansiblels.setup {}
@@ -319,6 +324,7 @@ require("lazy").setup({
     },
 })
 
+vim.cmd.colorscheme("retrobox")
 -- vim.cmd.colorscheme("gruvbox")
 -- vim.cmd.colorscheme("gruvbox-material")
 -- vim.cmd.colorscheme("gruvbox-baby")

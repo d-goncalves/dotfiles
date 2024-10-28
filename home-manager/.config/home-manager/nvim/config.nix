@@ -16,7 +16,6 @@
       nginx-language-server
       nil
       nodePackages.typescript-language-server
-      statix
       terraform-ls
       tflint
       yaml-language-server
