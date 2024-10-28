@@ -27,7 +27,6 @@ alias \
 # Common alias! abbreviate them
 alias \
     sv="sudo nvim" \
-    vi="vim" \
     vim="nvim" \
 
 # List directory contents

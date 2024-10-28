@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
     username = "diogo";
     homeDirectory =  "/home/diogo";
