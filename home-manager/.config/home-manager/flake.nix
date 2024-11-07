@@ -18,6 +18,7 @@
                 tmux/config.nix
                 zsh/config.nix
                 nvim/config.nix
+		        vim/config.nix
             ];
         };
     };

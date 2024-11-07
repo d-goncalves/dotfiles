@@ -296,6 +296,7 @@ require("lazy").setup({
     "lukas-reineke/indent-blankline.nvim",
     "christoomey/vim-tmux-navigator",
     "folke/which-key.nvim",
+
     -- "gruvbox-community/gruvbox",
     "sainnhe/gruvbox-material",
     "ellisonleao/gruvbox.nvim",
@@ -324,7 +325,8 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("retrobox")
+-- vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("everblush")
 -- vim.cmd.colorscheme("gruvbox")
 -- vim.cmd.colorscheme("gruvbox-material")
 -- vim.cmd.colorscheme("gruvbox-baby")
