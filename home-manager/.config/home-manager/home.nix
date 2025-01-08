@@ -27,6 +27,7 @@ in {
     stow
     vlc
     xclip
+    helix
   ];
 
   programs = {
