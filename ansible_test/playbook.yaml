@@ -1,0 +1,15 @@
+---
+- name: Display the config
+  hosts: myhosts
+  pre_tasks:
+    - name: "Check if sudo works: if this times out, you have mistyped your password"
+      ansible.builtin.command:
+        cmd: "true"
+      become: true
+      timeout: 2
+      tags:
+        - "always"
+      changed_when: false
+  roles:
+    - role: neovim
+      become: true

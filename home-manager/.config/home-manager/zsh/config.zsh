@@ -47,6 +47,7 @@ alias \
 
 alias cat=batcat
 alias with-cachix-key="vaultenv --secrets-file <(echo "cachix#signing-key") -- "
+alias gssh="gcloud compute ssh --tunnel-through-iap"
 
 function which-hosts() {
 }
@@ -90,3 +91,5 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 SSH_AUTH_SOCK=~/.1password/agent.sock
 
+
+source $HOME/.atuin/bin/env

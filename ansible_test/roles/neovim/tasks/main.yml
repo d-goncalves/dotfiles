@@ -1,0 +1,26 @@
+---
+- name: Install neovim dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ninja-build
+    - gettext
+    - cmake
+    - curl
+    - build-essential
+
+- name: Git checkout
+  ansible.builtin.git:
+    repo: 'https://github.com/neovim/neovim'
+    dest: /tmp/neovim
+    single_branch: true
+    version: master
+
+- name: Install neovim
+  community.general.make:
+    chdir: /tmp/neovim
+    target: install
+    params:
+      CMAKE_BUILD_TYPE=RelWithDebInfo
+  become: true

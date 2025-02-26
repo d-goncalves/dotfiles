@@ -115,11 +115,11 @@ require("lazy").setup({
                         vim.snippet.expand(args.body)
                     end,
                 },
-            formatting = {
-                format = lspkind.cmp_format({
-                  mode = 'symbol', -- show only symbol annotations
-                })
-              },
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = 'symbol', -- show only symbol annotations
+                    })
+                },
             })
         end
     },
@@ -168,8 +168,8 @@ require("lazy").setup({
             require 'lspconfig'.dhall_lsp_server.setup {}
             require 'lspconfig'.nil_ls.setup {}
             require 'lspconfig'.ts_ls.setup {}
-            require'lspconfig'.rust_analyzer.setup{}
-            require('lspconfig').typos_lsp.setup{}
+            require 'lspconfig'.rust_analyzer.setup {}
+            require('lspconfig').typos_lsp.setup {}
             require('lspconfig').yamlls.setup {
                 settings = {
                     yaml = {
@@ -302,14 +302,16 @@ require("lazy").setup({
     "ellisonleao/gruvbox.nvim",
     "luisiacc/gruvbox-baby",
     "Everblush/nvim",
-    -- {
-    --     "sekke276/dark_flat.nvim",
-    --     config = function()
-    --         require("dark_flat").setup({
-    --             transparent = true,
-    --         })
-    --     end,
-    -- },
+    "ficcdaf/ashen.nvim",
+    "scottmckendry/cyberdream.nvim",
+    {
+        "sekke276/dark_flat.nvim",
+        config = function()
+            require("dark_flat").setup({
+                transparent = true,
+            })
+        end,
+    },
     {
         'codota/tabnine-nvim',
         build = "./dl_binaries.sh",
@@ -325,8 +327,10 @@ require("lazy").setup({
     },
 })
 
+vim.cmd.colorscheme("dark_flat")
+-- vim.cmd.colorscheme("ashen")
 -- vim.cmd.colorscheme("retrobox")
-vim.cmd.colorscheme("everblush")
+-- vim.cmd.colorscheme("everblush")
 -- vim.cmd.colorscheme("gruvbox")
 -- vim.cmd.colorscheme("gruvbox-material")
 -- vim.cmd.colorscheme("gruvbox-baby")
@@ -355,7 +359,7 @@ vim.opt.cursorline = false
 vim.opt.conceallevel = 0
 vim.opt.showtabline = 0
 -- vim.opt.laststatus = 0
-vim.opt.statusline="%F"
+vim.opt.statusline = "%F"
 vim.opt.pumheight = 10
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -389,12 +393,12 @@ vim.filetype.add({
         ["compose.yaml"] = "yaml.docker-compose",
     },
     pattern = {
-		[".*/.*playbook.*.ya?ml"] = "yaml.ansible",
-		[".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
-		[".*/local.ya?ml"] = "yaml.ansible",
-		["*.yaml.j2"] = "yaml.jinja2",
-		["*.yml.j2"] = "yaml.jinja2",
-	},
+        [".*/.*playbook.*.ya?ml"] = "yaml.ansible",
+        [".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
+        [".*/local.ya?ml"] = "yaml.ansible",
+        ["*.yaml.j2"] = "yaml.jinja2",
+        ["*.yml.j2"] = "yaml.jinja2",
+    },
 
 })
 
