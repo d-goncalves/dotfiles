@@ -1,0 +1,13 @@
+---
+- name: Install Stow in Ubuntu
+  become: true
+  ansible.builtin.apt:
+    name:
+      - stow
+      - zsh
+    state: present
+
+- name: Run stow
+  ansible.builtin.shell: "stow test_files --target {{ ansible_env.HOME }} --verbose=2"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
