@@ -305,6 +305,14 @@ require("lazy").setup({
     "ficcdaf/ashen.nvim",
     "scottmckendry/cyberdream.nvim",
     {
+        "cpea2506/one_monokai.nvim",
+        config = function()
+            require("one_monokai").setup({
+                transparent = true,
+            })
+        end,
+    },
+    {
         "sekke276/dark_flat.nvim",
         config = function()
             require("dark_flat").setup({
@@ -327,7 +335,8 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("dark_flat")
+-- vim.cmd.colorscheme("dark_flat")
+vim.cmd.colorscheme("one_monokai")
 -- vim.cmd.colorscheme("ashen")
 -- vim.cmd.colorscheme("retrobox")
 -- vim.cmd.colorscheme("everblush")

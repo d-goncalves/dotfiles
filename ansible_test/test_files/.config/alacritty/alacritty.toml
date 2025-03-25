@@ -4,10 +4,12 @@ live_config_reload = true
 TERM = "xterm-256color"
 
 [font]
-size = 12
-
-[font.normal]
-family = "Dejavu Sans Mono"
+size = 11
+normal.family      = "Dejavu Sans Mono"
+bold.family        = "Dejavu Sans Mono"
+italic.family      = "Dejavu Sans Mono"
+bold_italic.family = "Hack Nerd Font Dejavu Sans Mono"
+# family = "Dejavu Sans Mono"
 # family = "Iosevka Nerd Font"
 # family = "Hack Nerd Font"
 # family = "BigBlueTerm437 Nerd Font"
@@ -28,7 +30,7 @@ opacity = 1
 black = "0x808080"
 blue = "0x0066ff"
 cyan = "0x00ffff"
-green = "0x33ff00"
+green = "0x11ff00"
 magenta = "0xcc00ff"
 red = "0xfe0100"
 white = "0xFFFFFF"
@@ -38,7 +40,7 @@ yellow = "0xfeff00"
 black = "0x000000"
 blue = "0x0066ff"
 cyan = "0x00ffff"
-green = "0x33ff00"
+green = "0x11ff00"
 magenta = "0xcc00ff"
 red = "0xfe0100"
 white = "0xd0d0d0"

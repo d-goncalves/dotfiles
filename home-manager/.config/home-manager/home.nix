@@ -28,6 +28,7 @@ in {
     vlc
     xclip
     helix
+    gitui
   ];
 
   programs = {
