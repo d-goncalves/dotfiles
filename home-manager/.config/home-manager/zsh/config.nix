@@ -20,6 +20,24 @@ in
     initExtra = builtins.readFile ./config.zsh;
 
     plugins = [
+      (pluginImporter "aliases")
+      (pluginImporter "colored-man-pages")
+      (pluginImporter "colorize")
+      (pluginImporter "command-not-found")
+      (pluginImporter "common-aliases")
+      (pluginImporter "copybuffer")
+      (pluginImporter "copyfile")
+      (pluginImporter "copypath")
+      (pluginImporter "fd")
+      (pluginImporter "fzf")
+      (pluginImporter "gcloud")
+      (pluginImporter "git")
+      (pluginImporter "history")
+      (pluginImporter "man")
+      (pluginImporter "nomad")
+      (pluginImporter "sudo")
+      (pluginImporter "terraform")
+      (pluginImporter "tmux")
       {
         name = "zsh-git-prompt";
         file = "zshrc.sh";
@@ -82,26 +100,8 @@ in
           rev = "f13d39a1ae84219e4ee14e77d31bb774c91f2fe3";
         };
       }
-      (pluginImporter "aliases")
-      (pluginImporter "colored-man-pages")
-      (pluginImporter "colorize")
-      (pluginImporter "command-not-found")
-      (pluginImporter "common-aliases")
-      (pluginImporter "copybuffer")
-      (pluginImporter "copyfile")
-      (pluginImporter "copypath")
-      (pluginImporter "fd")
-      (pluginImporter "fzf")
-      (pluginImporter "gcloud")
-      (pluginImporter "git")
       (pluginImporter "git-prompt")
       (pluginImporter "gitfast")
-      (pluginImporter "history")
-      (pluginImporter "man")
-      (pluginImporter "nomad")
-      (pluginImporter "sudo")
-      (pluginImporter "terraform")
-      (pluginImporter "tmux")
     ];
   };
 }

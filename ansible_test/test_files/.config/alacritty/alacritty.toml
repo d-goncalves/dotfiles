@@ -15,6 +15,9 @@ bold_italic.family = "Hack Nerd Font Dejavu Sans Mono"
 # family = "BigBlueTerm437 Nerd Font"
 # family = "ProggyClean Nerd  Font Mono"
 
+
+# testing
+
 [scrolling]
 history = 100000
 
