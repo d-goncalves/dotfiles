@@ -36,12 +36,12 @@
     chdir: /tmp/neovim
     target: install
 
-# - name: Install pynvim
-#   ansible.builtin.pip:
-#     name:
-#       - pynvim
-#     state: present
-#     executable: pip3
+      # - name: Install pynvim
+  # ansible.builtin.pip:
+    # name:
+      # - pynvim
+        # state: present
+      #     executable: pip3
 
 - name: Generate :help pages
   ansible.builtin.shell: nvim --headless -c 'helptags ALL' -c quit

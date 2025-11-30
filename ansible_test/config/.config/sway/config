@@ -3,7 +3,7 @@ font pango: Dejavu Sans Mono for Powerline Book 10
 # Set terminal
 set $terminal /usr/bin/alacritty
 set $lock swaylock -f -F -e -k -c 000001
-set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec font pango:iosevka nerd font regular 12
+set $menu dmenu_path | wofi | xargs swaymsg exec font pango:iosevka nerd font regular 12
 
 
 output * bg #000000 solid_color
@@ -11,9 +11,7 @@ smart_borders on
 gaps inner 4
 gaps outer 4
 
-# these two lines removes the titlebar
-default_border pixel 2
-default_floating_border pixel 2
+default_border none
 
 # class					 border  backgr. text    indicator child_border
 client.focused           #3c3836 #7c6f64 #1d2021 #3c3836   #3c3836
@@ -21,16 +19,6 @@ client.focused_inactive  #282828 #282828 #ddc7a1 #282828   #282828
 client.unfocused		 #282828 #282828 #ddc7a1 #282828   #282828
 client.urgent			 #d8a657 #d8a657 #1d2021 #d8a657   #d8a657
 client.placeholder		 #7daea3 #7daea3 #1d2021 #7daea3   #7daea3
-
-###### Configurable for SwayFX users ######
-#blur disable
-#blur_xray disable
-#blur_passes 0
-#blur_radius 5
-#shadows enable
-#shadow_blur_radius 10
-#corner_radius 0
-#layer_effects "waybar" shadows enable; corner_radius 0; blur disable
 
 bar {
 	swaybar_command waybar
@@ -43,12 +31,12 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $menu tofi-drun | xargs swaymsg exec --
 
-bindsym --to-code $mod+Shift+l exec $lock
+
 # common bindings
 bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
+bindsym --to-code $mod+Shift+l exec $lock
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec $HOME/.config/sway/exit_sway.sh
@@ -57,11 +45,17 @@ floating_modifier $mod normal
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
+# Screenshots
 bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
+bindsym Print exec grim -g "$(slurp -d)" - | wl-copy
 
-bindsym XF86MonBrightnessDown exec sudo brightnessctl set 10%-
-bindsym XF86MonBrightnessUp exec sudo brightnessctl set 10%+
 # more bindings
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -128,7 +122,7 @@ mode "resize" {
 }
 
 
-# Desligar e ligar o ecrã do portátil quando se fecha a tampa
+# Opening or closing the lid will reload the sway outputs
 bindswitch --reload --locked lid:on exec "[ $(swaymsg -t get_outputs | jq '. | length') -gt 1 ] && swaymsg output eDP-1 disable"
 bindswitch --reload --locked lid:off output eDP-1 enable
 
@@ -140,13 +134,10 @@ input "type:touchpad" {
     tap enabled
 }
 
-# CZ keyboard layout, caps:escape switch, lalt lwin switch
-# input type:keyboard {
-#     xkb_options altwin:swap_lalt_lwin,ctrl:nocaps
-#     repeat_delay 200
-#     repeat_rate 30
-# }
-
 input type:keyboard {
-    xkb_options ctrl:nocaps
+    xkb_layout us,pt
+    xkb_options grp:rctrl_toggle,ctrl:nocaps
 }
+
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway

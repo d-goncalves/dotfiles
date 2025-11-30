@@ -3,13 +3,17 @@
 # }
 # precmd_functions+=(_fix_cursor) # Add fix cursor to precmd
 
+ZSH_DIRECTORY="$HOME/.config/zsh"
+HISTFILE="$ZSH_DIRECTORY/.zsh_history"  # change history file path
+ZDOTDIR="$ZSH_DIRECTORY"
+
+
 if [[ "$OSTYPE" == "darwin"* ]];then
     alias \
         ls="ls -G" \
         grep="grep" \
         diff="diff" \
         ccat="highlight --out-format=ansi"
-# Linux specific configuration ( TESTED ON UBUNTU )
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias \
         ls="ls -hN --color=auto --group-directories-first" \
@@ -95,6 +99,8 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 SSH_AUTH_SOCK=~/.1password/agent.sock
+MANPAGER='nvim +Man!'
+
 
 
 source $HOME/.atuin/bin/env
