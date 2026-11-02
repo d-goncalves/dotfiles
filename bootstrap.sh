@@ -100,7 +100,7 @@ done
 
 if [ "$OS" = macos ]; then
     # Make the iTerm profile from this repo the default one. Restart iTerm to see it.
-    ITERM_PROFILE="$DOTFILES/iterm/Library/Application Support/iTerm2/DynamicProfiles/diogo.json"
+    ITERM_PROFILE="$DOTFILES/iterm/Library/Application Support/iTerm2/DynamicProfiles/cactus.json"
     ITERM_GUID="$(plutil -extract Profiles.0.Guid raw -o - "$ITERM_PROFILE")"
     log "Setting the iTerm default profile"
     run defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "$ITERM_GUID"
