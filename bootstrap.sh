@@ -8,6 +8,7 @@ usage() {
 Usage: ./bootstrap.sh [options]
 
   --extras       also install Brewfile.extras (homelab tools and so on)
+  --lsp          also install Brewfile.lsp (language servers for nvim)
   --no-brew      skip Homebrew; link configs only (for machines without admin rights)
   --no-plugins   skip cloning zsh and tmux plugins
   --no-fonts     skip downloading the terminal font (Linux)
@@ -18,10 +19,11 @@ EOF
 }
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-EXTRAS=0 BREW=1 PLUGINS=1 FONTS=1 UPDATE=0 DRY=0
+EXTRAS=0 LSP=0 BREW=1 PLUGINS=1 FONTS=1 UPDATE=0 DRY=0
 for arg in "$@"; do
     case $arg in
         --extras) EXTRAS=1 ;;
+        --lsp) LSP=1 ;;
         --no-brew) BREW=0 ;;
         --no-plugins) PLUGINS=0 ;;
         --no-fonts) FONTS=0 ;;
@@ -73,6 +75,10 @@ if [ "$BREW" = 1 ]; then
     if [ "$EXTRAS" = 1 ]; then
         log "Installing extras"
         run brew bundle --file="$DOTFILES/Brewfile.extras"
+    fi
+    if [ "$LSP" = 1 ]; then
+        log "Installing language servers"
+        run brew bundle --file="$DOTFILES/Brewfile.lsp"
     fi
 else
     log "Skipping Homebrew. Install the tools listed in Brewfile yourself."

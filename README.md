@@ -10,6 +10,7 @@ cd ~/work/dotfiles
 
 ./bootstrap.sh                 # tools (Homebrew), config links (stow), zsh and tmux plugins, terminal font (Linux)
 ./bootstrap.sh --extras        # also install Brewfile.extras (homelab and optional tools)
+./bootstrap.sh --lsp           # also install Brewfile.lsp (language servers for nvim)
 ./bootstrap.sh --no-brew       # link configs only, for machines without admin rights
 ./bootstrap.sh --no-plugins    # skip cloning the zsh and tmux plugins
 ./bootstrap.sh --no-fonts      # skip downloading the terminal font (Linux)
@@ -19,7 +20,7 @@ cd ~/work/dotfiles
 
 `bootstrap.sh` detects macOS, Linux or WSL and is safe to re-run. On macOS it links the iTerm2 profile and sets it as the default; restart iTerm to see it.
 
-Tokens, work aliases and git identity stay out of the repo, in `~/work/.zsh` (sourced by `.zshrc`) and `~/work/.gitconfig` (included by the git config).
+Tokens, work aliases and git identity stay out of the repo, in `~/work/.zsh` (sourced by `.zshrc`) and `~/work/.gitconfig` (included by the git config), which also holds commit signing and which GitHub key each repo owner uses. `~/.ssh/config` has one alias per GitHub account (`github-personal`, `github-work`), each pinned to its 1Password key.
 
 <details>
 <summary>Windows Terminal (manual step)</summary>

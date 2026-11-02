@@ -6,20 +6,6 @@ brew "helm"
 brew "fluxcd/tap/flux"
 brew "docker"
 
-# Language servers for nvim. Missing ones are skipped quietly, so install what you use.
-# Not in Homebrew: nil (nix), tflint, clangd and typescript-language-server come from elsewhere.
-brew "bash-language-server"
-brew "dhall-lsp-server"
-brew "docker-compose-langserver"
-brew "lua-language-server"
-brew "pyright"
-brew "python-lsp-server"
-brew "rust-analyzer"
-brew "terraform-ls"
-brew "ty"
-brew "typos-lsp"
-brew "yaml-language-server"
-
 # Handy extras
 brew "git-delta"
 brew "ncdu"

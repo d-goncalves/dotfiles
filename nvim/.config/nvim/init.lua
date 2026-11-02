@@ -245,7 +245,7 @@ map({ "n", "x" }, "ga", "<Plug>(EasyAlign)", { remap = true }) -- <Plug> mapping
 
 -- ── Language servers ──────────────────────────────────────────────────────────
 -- Only servers that are installed on this machine get enabled, so a missing one is skipped
--- quietly instead of raising an error (the install list is in Brewfile.extras)
+-- quietly instead of raising an error (the install list is in Brewfile.lsp)
 local language_servers = {
     "ty",
     "lua_ls",
