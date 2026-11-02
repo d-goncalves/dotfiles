@@ -1,25 +1,43 @@
 # Dotfiles
 
-Description of my current dotfiles, and how to install it
+One setup for macOS, Linux and WSL. Generic config lives here; anything specific to a machine
+(tokens, work aliases, git identity) lives in `~/work` and never touches this repo.
 
-## General configuration
+## Install
 
-Current OS: Ubuntu 22.04
+```sh
+git clone <this repo> ~/work/dotfiles
+cd ~/work/dotfiles
+./bootstrap.sh            # tools, config links and plugins
+```
 
-## Installation
+Options: `--extras` (homelab and optional tools), `--no-brew` (link configs only, for machines
+without admin rights), `--no-plugins`, `--dry-run`.
 
-Option 1:
+## How it is organised
 
-1. Run `install.sh`
+Each top-level folder is a [stow](https://www.gnu.org/software/stow/) package that mirrors `$HOME`:
 
-Option 2:
+| Package | What it holds |
+|---|---|
+| `zsh` | shell config (`~/.zshenv` points zsh at `~/.config/zsh`) |
+| `git` | generic git config and global ignore |
+| `tmux`, `nvim`, `alacritty` | tool configs |
+| `linux-desktop` | sway, waybar, wofi, mako, only linked when `sway` is installed |
 
-1. Install nix & home-manager
-1. Install stow
-1. `stow home-manager`
-1. `home-manager switch`
+`Brewfile` holds the core tools. `Brewfile.extras` holds optional ones.
+`legacy/` holds the old Nix, home-manager and Ansible setup.
 
-## Neovim themes
+## Machine-specific config
+
+| File | Purpose |
+|---|---|
+| `~/work/.zsh` | tokens, work aliases, internal hosts. Sourced by `.zshrc` when present |
+| `~/work/.gitconfig` | git identity and commit signing. Included by the generic git config |
+
+## Notes
+
+### Neovim themes
 
 - [TokyoNight](https://github.com/ghifarit53/tokyonight-vim)
 - [Vscode](https://github.com/Mofiqul/vscode.nvim)
@@ -35,11 +53,11 @@ Option 2:
 - [XCode](https://github.com/arzg/vim-colors-xcode)
 - [Hybrid Material](https://github.com/kristijanhusak/vim-hybrid-material)
 
-## Theme
+### Theme
 
 - \[ ] [srcery-colors](https://srcery-colors.github.io/)
 
-## Fonts
+### Fonts
 
 [Download fonts](https://www.nerdfonts.com/font-downloads)
 

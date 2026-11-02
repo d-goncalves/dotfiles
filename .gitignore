@@ -14,3 +14,8 @@ zsh/.zsh/.zsh_history
 
 .vscode
 .ansible
+
+# Local state that must never be committed
+.zsh_history
+.zcompdump*
+.zsh_sessions/

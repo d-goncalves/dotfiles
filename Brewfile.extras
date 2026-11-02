@@ -1,0 +1,25 @@
+# Optional tools, only installed with: ./bootstrap.sh --extras
+# Homelab and infrastructure
+brew "ansible"
+brew "terraform"
+brew "helm"
+brew "fluxcd/tap/flux"
+brew "docker"
+
+# Handy extras
+brew "git-delta"
+brew "ncdu"
+brew "nmap"
+brew "watch"
+brew "ssh-copy-id"
+brew "cmake"
+brew "graphviz"
+brew "poppler"
+brew "protobuf"
+brew "rust"
+
+# macOS only
+brew "batt" if OS.mac?
+cask "1password-cli" if OS.mac?
+cask "claude-code" if OS.mac?
+cask "libreoffice" if OS.mac?
