@@ -1,21 +1,11 @@
-
-# Neovim ignore files
-.netrwhist
 .DS_Store
-nvim/.config/nvim/autoload
-
-# ZSH ignore
-zsh/.zsh/fzf-tab
-zsh/.zsh/zsh-git-prompt
-zsh/.zsh/zsh-autosuggestions
-zsh/.zsh/zsh-syntax-highlighting
-zsh/.zsh/.zcompdump
-zsh/.zsh/.zsh_history
-
+.netrwhist
 .vscode
-.ansible
 
-# Local state that must never be committed
+# Shell state that must never be committed
 .zsh_history
 .zcompdump*
 .zsh_sessions/
+
+# Plugin clones live in ~/.local/share, never in the repo (~/.config/tmux links here)
+tmux/.config/tmux/plugins/

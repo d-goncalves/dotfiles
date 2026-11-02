@@ -1,10 +1,11 @@
-local map = vim.api.nvim_set_keymap
-local autocmd = vim.api.nvim_create_autocmd
+-- Neovim config. Plugins are managed by lazy.nvim, which bootstraps itself below.
 
 vim.g.mapleader = " "
+vim.opt.termguicolors = true -- some plugins (colorizer) check this while loading
 
+-- ── Plugin manager ────────────────────────────────────────────────────────────
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
@@ -16,95 +17,122 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- ── Plugins ───────────────────────────────────────────────────────────────────
 require("lazy").setup({
-    { "folke/neoconf.nvim",     cmd = "Neoconf" },
+    { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/lazydev.nvim",
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
+        tag = "v0.2.2",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-github.nvim",
             "nvim-telescope/telescope-project.nvim",
-            "nvim-telescope/telescope-github.nvim",
             "folke/which-key.nvim",
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function()
-            require("telescope").load_extension("gh")
-            require("telescope").load_extension("git_worktree")
-            require("telescope").load_extension("project")
-            require("telescope").setup()
-            local whichkey = require("which-key")
-            whichkey.add({
-                { "<leader>fy", "<cmd>Telescope yaml_schema <cr>",            nowait = false, remap = false },
-                { "<leader>ff", "<cmd>Telescope git_files <cr>",              nowait = false, remap = false },
-                { "<leader>fF", "<cmd>Telescope find_files hidden=true <cr>", nowait = false, remap = false },
-                { "<leader>fb", "<cmd>Telescope buffers <cr>",                nowait = false, remap = false },
-                { "<leader>ft", "<cmd>Telescope help_tags <cr>",              nowait = false, remap = false },
-                { "<leader>fs", "<cmd>Telescope live_grep <cr>",              nowait = false, remap = false },
-                { "<leader>fg", "<cmd>Telescope grep_string <cr>",            nowait = false, remap = false },
-                { "<leader>fG", "<cmd>Telescope git_status <cr>",             nowait = false, remap = false },
-                { "<leader>fC", "<cmd>Telescope colorscheme <cr>",            nowait = false, remap = false },
-                { "<leader>fc", "<cmd>Telescope neoclip <cr>",                nowait = false, remap = false },
-                { "<leader>fp", "<cmd>Telescope project <cr>",                nowait = false, remap = false },
-                { "<leader>fh", "<cmd>Telescope oldfiles <cr>",               nowait = false, remap = false },
+            local telescope = require("telescope")
+            telescope.setup()
+            telescope.load_extension("fzf")
+            telescope.load_extension("gh")
+            telescope.load_extension("git_worktree")
+            telescope.load_extension("project")
+            require("which-key").add({
+                { "<leader>fy", function() require("schema-companion").select_schema() end },
+                { "<leader>ff", "<cmd>Telescope git_files <cr>" },
+                { "<leader>fF", "<cmd>Telescope find_files hidden=true <cr>" },
+                { "<leader>fb", "<cmd>Telescope buffers <cr>" },
+                { "<leader>ft", "<cmd>Telescope help_tags <cr>" },
+                { "<leader>fs", "<cmd>Telescope live_grep <cr>" },
+                { "<leader>fg", "<cmd>Telescope grep_string <cr>" },
+                { "<leader>fG", "<cmd>Telescope git_status <cr>" },
+                { "<leader>fC", "<cmd>Telescope colorscheme <cr>" },
+                { "<leader>fc", "<cmd>Telescope neoclip <cr>" },
+                { "<leader>fp", "<cmd>Telescope project <cr>" },
+                { "<leader>fh", "<cmd>Telescope oldfiles <cr>" },
             })
         end,
     },
     {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build =
-        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-        dependencies = {},
+        "AckslD/nvim-neoclip.lua",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        config = function()
+            require("neoclip").setup()
+            require("telescope").load_extension("neoclip")
+        end,
+    },
+    {
+        "cenk1cenk2/schema-companion.nvim", -- YAML schema picker (<leader>fy); wired up in after/lsp/yamlls.lua
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {},
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        branch = "master",
+        branch = "main",
+        lazy = false, -- the main branch does not support lazy-loading
         build = ":TSUpdate",
-        -- dependencies = { "p00f/nvim-ts-rainbow", "romgrk/nvim-treesitter-context" },
         config = function()
-            require("nvim-treesitter.configs").setup({
-                -- rainbow = { enable = true, extended_mode = true, max_file_lines = nil },
-                auto_install = true,
-                highlight = { enable = true },
-                matchup = { enable = true },
+            local ts = require("nvim-treesitter")
+            ts.setup()
+
+            -- Highlighting is built into neovim. Start it for every file type that has a
+            -- parser, installing the parser first when it is missing (what auto_install did).
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    if not lang then
+                        return
+                    end
+                    local function start()
+                        if vim.api.nvim_buf_is_valid(ev.buf) then
+                            pcall(vim.treesitter.start, ev.buf, lang)
+                        end
+                    end
+                    if vim.list_contains(ts.get_installed(), lang) then
+                        start()
+                    elseif vim.list_contains(ts.get_available(), lang) then
+                        ts.install(lang):await(function()
+                            vim.schedule(start)
+                        end)
+                    end
+                end,
             })
         end,
     },
-    {
-        "neovim/nvim-lspconfig",
-    },
+    "neovim/nvim-lspconfig",
     {
         "lewis6991/gitsigns.nvim",
         config = function()
             require("gitsigns").setup({ current_line_blame = true })
 
-            function ToggleBlame()
-                if string.find(vim.bo.filetype, "fugitive") then
-                    vim.api.nvim_buf_delete(0, {})
-                else
-                    vim.cmd("Git blame")
-                end
-            end
-
-            local whichkey = require("which-key")
-            whichkey.add({
-                { "<leader>g",  group = "Git",                      nowait = false, remap = false },
-                { "<leader>gb", "<cmd>lua ToggleBlame()<CR>",       nowait = false, remap = false },
-                { "<leader>gd", "<cmd>Gitsigns toggle_deleted<cr>", nowait = false, remap = false },
-                { "<leader>gh", "<cmd>0Gclog<cr>",                  nowait = false, remap = false },
-                { "<leader>gc", "<cmd>.GBrowse<CR>",                nowait = false, remap = false },
+            require("which-key").add({
+                { "<leader>g", group = "Git" },
+                {
+                    "<leader>gb",
+                    function()
+                        if string.find(vim.bo.filetype, "fugitive") then
+                            vim.api.nvim_buf_delete(0, {})
+                        else
+                            vim.cmd("Git blame")
+                        end
+                    end,
+                },
+                { "<leader>gd", "<cmd>Gitsigns toggle_deleted<cr>" },
+                { "<leader>gh", "<cmd>0Gclog<cr>" },
+                { "<leader>gc", "<cmd>.GBrowse<CR>" },
             })
         end,
     },
     {
         "gbprod/substitute.nvim",
         config = function()
-            require("substitute").setup()
-            vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
-            vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
-            vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
-            vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+            local substitute = require("substitute")
+            substitute.setup()
+            vim.keymap.set("n", "s", substitute.operator)
+            vim.keymap.set("n", "ss", substitute.line)
+            vim.keymap.set("n", "S", substitute.eol)
+            vim.keymap.set("x", "s", substitute.visual)
         end,
     },
     "tpope/vim-fugitive",
@@ -128,9 +156,9 @@ require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
-    { 'echasnovski/mini.icons', version = false },
+    { "nvim-mini/mini.icons", version = false },
     {
-        "kyazdani42/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
         config = function()
             require("nvim-web-devicons").setup()
         end,
@@ -152,23 +180,7 @@ require("lazy").setup({
     "itchyny/vim-cursorword",
     "lukas-reineke/indent-blankline.nvim",
     "christoomey/vim-tmux-navigator",
-    "folke/which-key.nvim",
-
-    -- "gruvbox-community/gruvbox",
-    -- "sainnhe/gruvbox-material",
-    -- "ellisonleao/gruvbox.nvim",
-    -- "luisiacc/gruvbox-baby",
-    -- "Everblush/nvim",
-    -- "ficcdaf/ashen.nvim",
-    -- "scottmckendry/cyberdream.nvim",
-    -- {
-    --     "cpea2506/one_monokai.nvim",
-    --     config = function()
-    --         require("one_monokai").setup({
-    --             transparent = true,
-    --         })
-    --     end,
-    -- },
+    { "folke/which-key.nvim", opts = {} }, -- opts makes lazy.nvim call setup(), which activates the <leader> mappings added above
     {
         "sekke276/dark_flat.nvim",
         config = function()
@@ -177,8 +189,11 @@ require("lazy").setup({
             })
         end,
     },
+}, {
+    rocks = { enabled = false }, -- none of these plugins need luarocks
 })
 
+-- ── Options ───────────────────────────────────────────────────────────────────
 vim.cmd.colorscheme("dark_flat")
 vim.opt.scrolloff = 5
 vim.opt.backup = false
@@ -187,7 +202,6 @@ vim.opt.writebackup = false
 vim.opt.undofile = true
 vim.opt.number = false
 vim.opt.relativenumber = false
-vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -201,11 +215,10 @@ vim.opt.smartcase = true
 vim.opt.cursorline = false
 vim.opt.conceallevel = 0
 vim.opt.showtabline = 0
--- vim.opt.laststatus = 0
 vim.opt.statusline = "%F"
 vim.opt.pumheight = 10
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 20
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -214,38 +227,67 @@ vim.opt.expandtab = true
 vim.opt.softtabstop = 0
 vim.opt.autoread = true
 
-map("", "<C-c>", "<Esc>", { noremap = true, silent = false })
-map("", "1", "^", {})
-map("", "0", "$", {})
-map("i", "jk", "<Esc>", { noremap = true, silent = false })
-map("n", "<C-s>", ":up", { noremap = true, silent = false })
-map("n", "<C-q>", ":wq<cr>", { noremap = true, silent = false })
-map("n", "<C-d>", "<C-d>zz", { noremap = true, silent = false })
-map("n", "<C-u>", "<C-u>zz", { noremap = true, silent = false })
-map("v", "<", "<gv", { noremap = true, silent = false })
-map("v", ">", ">gv", { noremap = true, silent = false })
-map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>', { noremap = true, silent = false })
-map("n", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
-map("x", "ga", "<Plug>(EasyAlign)", { noremap = true, silent = false })
+-- ── Mappings ──────────────────────────────────────────────────────────────────
+local map = vim.keymap.set
 
+map("", "<C-c>", "<Esc>")
+map("", "1", "^", { remap = true })
+map("", "0", "$", { remap = true })
+map("i", "jk", "<Esc>")
+map("n", "<C-s>", ":up")
+map("n", "<C-q>", ":wq<cr>")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>')
+map({ "n", "x" }, "ga", "<Plug>(EasyAlign)", { remap = true }) -- <Plug> mappings need remap
 
-vim.lsp.enable('ty')
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("pylsp")
-vim.lsp.enable("pyright")
-vim.lsp.enable("ty")
-vim.lsp.enable("terraformls")
--- vim.lsp.enable("ansiblels")
-vim.lsp.enable("bashls")
-vim.lsp.enable("clangd")
-vim.lsp.enable("docker_compose_language_service")
-vim.lsp.enable("tflint")
-vim.lsp.enable("dhall_lsp_server")
-vim.lsp.enable("nil_ls")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("typos_lsp")
+-- ── Language servers ──────────────────────────────────────────────────────────
+-- Only servers that are installed on this machine get enabled, so a missing one is skipped
+-- quietly instead of raising an error (the install list is in Brewfile.extras)
+local language_servers = {
+    "ty",
+    "lua_ls",
+    "pylsp",
+    "pyright",
+    "terraformls",
+    "bashls",
+    "clangd",
+    "docker_compose_language_service",
+    "tflint",
+    "dhall_lsp_server",
+    "nil_ls",
+    "ts_ls",
+    "rust_analyzer",
+    "typos_lsp",
+    "yamlls",
+}
+vim.lsp.config("terraformls", { init_options = { ignoreSingleFileWarning = true } })
+for _, name in ipairs(language_servers) do
+    local cmd = vim.lsp.config[name] and vim.lsp.config[name].cmd
+    if type(cmd) ~= "table" or vim.fn.executable(cmd[1]) == 1 then
+        vim.lsp.enable(name)
+    end
+end
 
+vim.diagnostic.config({
+    virtual_text = true,
+    virtual_lines = { current_line = true },
+    underline = true,
+    update_in_insert = false,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client:supports_method("textDocument/completion") then
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+        end
+    end,
+})
+
+-- ── Filetypes ─────────────────────────────────────────────────────────────────
 vim.filetype.add({
     filename = {
         ["docker-compose.yml"] = "yaml.docker-compose",
@@ -260,50 +302,37 @@ vim.filetype.add({
         ["*.yaml.j2"] = "yaml.jinja2",
         ["*.yml.j2"] = "yaml.jinja2",
     },
-
 })
 
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.tftpl", command = "set ft=terraform.hcl" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.hcl.j2", command = "set ft=hcl.jinja2" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.timer", command = "set ft=systemd" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.service", command = "set ft=systemd" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.timer.j2", command = "set ft=systemd.jinja2" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.service.j2", command = "set ft=systemd.jinja2" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.json.j2", command = "set ft=json.jinja2" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.yml.j2", command = "set ft=yaml.jinja2" })
-autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.yaml.j2", command = "set ft=yaml.jinja2" })
-autocmd("CursorHold", {
-    buffer = bufnr,
+local filetype_by_pattern = {
+    { "*.tftpl", "terraform.hcl" },
+    { "*.hcl.j2", "hcl.jinja2" },
+    { "*.timer", "systemd" },
+    { "*.service", "systemd" },
+    { "*.timer.j2", "systemd.jinja2" },
+    { "*.service.j2", "systemd.jinja2" },
+    { "*.json.j2", "json.jinja2" },
+    { "*.yml.j2", "yaml.jinja2" },
+    { "*.yaml.j2", "yaml.jinja2" },
+}
+for _, entry in ipairs(filetype_by_pattern) do
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = entry[1],
+        command = "set ft=" .. entry[2],
+    })
+end
+
+-- ── Autocommands ──────────────────────────────────────────────────────────────
+-- Show the diagnostic under the cursor in a floating window
+vim.api.nvim_create_autocmd("CursorHold", {
     callback = function()
-        local opts = {
+        vim.diagnostic.open_float(nil, {
             focusable = false,
-            close_events = {
-                "BufLeave",
-                "CursorMoved",
-                "InsertEnter",
-                "FocusLost",
-            },
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
             border = "rounded",
             source = "always",
             prefix = " ",
             scope = "cursor",
-        }
-        vim.diagnostic.open_float(nil, opts)
-    end,
-})
-
-vim.diagnostic.config({
-  virtual_text = true,
-  virtual_lines = { current_line = true },
-  underline = true,
-  update_in_insert = false
-})
-
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-        end
+        })
     end,
 })

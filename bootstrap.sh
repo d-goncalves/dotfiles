@@ -10,18 +10,22 @@ Usage: ./bootstrap.sh [options]
   --extras       also install Brewfile.extras (homelab tools and so on)
   --no-brew      skip Homebrew; link configs only (for machines without admin rights)
   --no-plugins   skip cloning zsh and tmux plugins
+  --no-fonts     skip downloading the terminal font (Linux)
+  --update       only update the installed zsh and tmux plugins, then exit
   --dry-run      print what would happen, change nothing
   -h, --help     show this help
 EOF
 }
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-EXTRAS=0 BREW=1 PLUGINS=1 DRY=0
+EXTRAS=0 BREW=1 PLUGINS=1 FONTS=1 UPDATE=0 DRY=0
 for arg in "$@"; do
     case $arg in
         --extras) EXTRAS=1 ;;
         --no-brew) BREW=0 ;;
         --no-plugins) PLUGINS=0 ;;
+        --no-fonts) FONTS=0 ;;
+        --update) UPDATE=1 ;;
         --dry-run) DRY=1 ;;
         -h | --help) usage; exit 0 ;;
         *) echo "Unknown option: $arg" >&2; usage >&2; exit 1 ;;
@@ -32,6 +36,15 @@ log() { printf '\n==> %s\n' "$*"; }
 run() {
     if [ "$DRY" = 1 ]; then echo "+ $*"; else "$@"; fi
 }
+
+if [ "$UPDATE" = 1 ]; then
+    log "Updating plugins"
+    for dir in "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/*/ "${XDG_DATA_HOME:-$HOME/.local/share}"/tmux/plugins/*/; do
+        [ -d "${dir}.git" ] || continue
+        if run git -C "$dir" pull --ff-only -q; then echo "updated $(basename "$dir")"; else echo "could not update $(basename "$dir")" >&2; fi
+    done
+    exit 0
+fi
 
 case "$(uname -s)" in
     Darwin) OS=macos ;;
@@ -70,8 +83,12 @@ if ! command -v stow >/dev/null 2>&1 && [ "$DRY" = 0 ]; then
     echo "stow not found. Install it (brew install stow, or apt install stow) and re-run." >&2
     exit 1
 fi
-PACKAGES=(zsh git tmux nvim alacritty)
+PACKAGES=(zsh git tmux nvim alacritty starship)
 if command -v sway >/dev/null 2>&1; then PACKAGES+=(linux-desktop); fi
+if [ "$OS" = macos ]; then
+    PACKAGES+=(iterm)
+    run mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+fi
 run mkdir -p "$HOME/.config" "$HOME/.local/state/zsh"   # stops stow from linking the whole ~/.config
 for pkg in "${PACKAGES[@]}"; do
     if ! run stow -d "$DOTFILES" -t "$HOME" -R "$pkg"; then
@@ -81,6 +98,14 @@ for pkg in "${PACKAGES[@]}"; do
     fi
 done
 
+if [ "$OS" = macos ]; then
+    # Make the iTerm profile from this repo the default one. Restart iTerm to see it.
+    ITERM_PROFILE="$DOTFILES/iterm/Library/Application Support/iTerm2/DynamicProfiles/diogo.json"
+    ITERM_GUID="$(plutil -extract Profiles.0.Guid raw -o - "$ITERM_PROFILE")"
+    log "Setting the iTerm default profile"
+    run defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "$ITERM_GUID"
+fi
+
 if [ "$PLUGINS" = 1 ]; then
     log "Installing plugins"
     clone() { if [ ! -d "$2/.git" ]; then run git clone --depth 1 "$1" "$2"; fi; }
@@ -89,7 +114,35 @@ if [ "$PLUGINS" = 1 ]; then
     clone https://github.com/jeffreytse/zsh-vi-mode "$P/zsh-vi-mode"
     clone https://github.com/zsh-users/zsh-autosuggestions "$P/zsh-autosuggestions"
     clone https://github.com/zsh-users/zsh-syntax-highlighting "$P/zsh-syntax-highlighting"
-    clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    # tmux plugins: every `set -g @plugin 'owner/name'` line in tmux.conf (this includes tpm itself)
+    TMUX_PLUGINS="${XDG_DATA_HOME:-$HOME/.local/share}/tmux/plugins"
+    while IFS= read -r repo; do
+        clone "https://github.com/$repo" "$TMUX_PLUGINS/$(basename "$repo")"
+    done < <(sed -n "s/^set -g @plugin '\([^']*\)'.*/\1/p" "$DOTFILES/tmux/.config/tmux/tmux.conf")
+    # Git aliases (gst, ga, gco, ...) come from the oh-my-zsh git plugin; fetch only what it needs
+    if [ ! -d "$P/ohmyzsh/.git" ]; then
+        run git clone -q --depth 1 --filter=blob:none --sparse https://github.com/ohmyzsh/ohmyzsh "$P/ohmyzsh"
+        run git -C "$P/ohmyzsh" sparse-checkout set --no-cone /lib/git.zsh /plugins/git/
+    fi
+fi
+
+if [ "$FONTS" = 1 ]; then
+    case $OS in
+        linux)
+            FONT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/FiraCodeNerdFont"
+            if [ ! -d "$FONT_DIR" ]; then
+                log "Installing FiraCode Nerd Font"
+                run mkdir -p "$FONT_DIR"
+                FONT_ZIP="$(mktemp)"
+                run curl -fsSL -o "$FONT_ZIP" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+                run unzip -qo "$FONT_ZIP" -d "$FONT_DIR"
+                run rm -f "$FONT_ZIP"
+                run fc-cache -f "$FONT_DIR"
+            fi
+            ;;
+        wsl)
+            log "Font: Windows Terminal needs FiraCode Nerd Font installed on the Windows side (see README)" ;;
+    esac
 fi
 
 cat <<EOF
@@ -97,5 +150,4 @@ cat <<EOF
 Done. Next steps:
   - Machine-specific config goes in ~/work/.zsh (shell) and ~/work/.gitconfig (git identity, signing)
   - Make zsh your default shell if it isn't:  chsh -s "\$(command -v zsh)"
-  - In tmux, press prefix + I once to install its plugins
 EOF

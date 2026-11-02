@@ -1,0 +1,38 @@
+{
+  "profiles": {
+    "defaults": {
+      "colorScheme": "cactus",
+      "font": {
+        "face": "FiraCode Nerd Font Mono",
+        "size": 11
+      },
+      "opacity": 100,
+      "useAcrylic": false
+    }
+  },
+  "schemes": [
+    {
+      "name": "cactus",
+      "background": "#000000",
+      "foreground": "#b0bec4",
+      "cursorColor": "#b0bec4",
+      "selectionBackground": "#313244",
+      "black": "#1e2024",
+      "brightBlack": "#676e7b",
+      "red": "#d54e53",
+      "brightRed": "#ee2c68",
+      "green": "#3dd177",
+      "brightGreen": "#82f4a2",
+      "yellow": "#ffc900",
+      "brightYellow": "#ffe47e",
+      "blue": "#00b0ff",
+      "brightBlue": "#66d0ff",
+      "purple": "#c678dd",
+      "brightPurple": "#d7a0e7",
+      "cyan": "#64fcda",
+      "brightCyan": "#a2fde9",
+      "white": "#b0bec4",
+      "brightWhite": "#fefefe"
+    }
+  ]
+}
