@@ -136,17 +136,22 @@ if ! command -v stow >/dev/null 2>&1 && [ "$DRY" = 0 ]; then
     echo "stow not found. Install it (brew install stow, or apt install stow) and re-run." >&2
     exit 1
 fi
-# Links left behind by an older layout of this repo (a package moved or was renamed) point at nothing
-# and would block the new ones. Remove only dead links that point into this repo.
+# Links left behind by older bootstrap versions can be absolute, which Stow does not own.
+# Remove links into this repo so Stow can recreate them with its managed relative links.
 REL="${DOTFILES#"$HOME"/}"
-for dir in "$HOME" "$HOME/.config" "$HOME/.config/git" "$HOME/.config/zsh" "$HOME/.local/bin" \
+for dir in "$HOME" "$HOME/.config" "$HOME/.config/git" "$HOME/.config/zsh" \
+           "$HOME/.config/tmux" "$HOME/.config/nvim" "$HOME/.config/starship" "$HOME/.local/bin" \
            "$HOME/Library/Application Support/iTerm2/DynamicProfiles"; do
     [ -d "$dir" ] || continue
     for l in "$dir"/* "$dir"/.[!.]*; do
-        if [ -L "$l" ] && [ ! -e "$l" ]; then
+        if [ -L "$l" ]; then
             t="$(readlink "$l")"
-            while [[ $t == ../* ]]; do t="${t#../}"; done
-            case "$t" in "$REL"/*) echo "removing dead link: $l"; run rm "$l" ;; esac
+            case "$t" in
+                "$DOTFILES"/* | "$REL"/*)
+                    echo "removing old repo link: $l"
+                    run rm "$l"
+                    ;;
+            esac
         fi
     done
 done
@@ -210,19 +215,19 @@ fi
 if [ "$FONTS" = 1 ]; then
     case $OS in
         linux)
-            FONT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/FiraCodeNerdFont"
+            FONT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/JetBrainsMonoNerdFont"
             if [ ! -d "$FONT_DIR" ]; then
-                log "Installing FiraCode Nerd Font"
+                log "Installing JetBrainsMono Nerd Font"
                 run mkdir -p "$FONT_DIR"
                 FONT_ZIP="$(mktemp)"
-                run curl -fsSL -o "$FONT_ZIP" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+                run curl -fsSL -o "$FONT_ZIP" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
                 run unzip -qo "$FONT_ZIP" -d "$FONT_DIR"
                 run rm -f "$FONT_ZIP"
                 run fc-cache -f "$FONT_DIR"
             fi
             ;;
         wsl)
-            log "Font: Windows Terminal needs FiraCode Nerd Font installed on the Windows side (see README)" ;;
+            log "Font: Windows Terminal uses JetBrainsMono Nerd Font (see README)" ;;
     esac
 fi
 

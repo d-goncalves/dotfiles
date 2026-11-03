@@ -86,7 +86,7 @@ class TerminalApplyTests(unittest.TestCase):
             self.assertEqual(len(data["profiles"]["list"]), 1)
             profile = data["profiles"]["list"][0]
             self.assertEqual(profile["commandline"], "wsl.exe -d Ubuntu-26.04 --cd ~")
-            self.assertEqual(profile["font"]["face"], "FiraCode Nerd Font Mono")
+            self.assertEqual(profile["font"]["face"], "JetBrainsMono Nerd Font")
 
 
 if __name__ == "__main__":

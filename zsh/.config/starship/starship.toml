@@ -2,7 +2,8 @@
 # Colors use the terminal palette, so they follow the terminal theme (Vivid Black).
 add_newline = false
 command_timeout = 500
-format = "$directory$custom$aws$character"
+format = "$directory$custom$character"
+right_format = "$aws"
 
 [character]
 success_symbol = "[➜](bold green) "

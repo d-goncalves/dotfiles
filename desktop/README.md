@@ -18,10 +18,10 @@ Terminal and window-manager config, one folder per OS.
 
 ## Windows Terminal
 
-Inside Windows Terminal, `bootstrap.sh` (or `./bootstrap.sh --terminal`, or `windows/windows-terminal.sh`) installs FiraCode Nerd Font Mono for the current Windows user, with no admin rights, and applies the scheme and font to the Ubuntu profiles. It keeps other settings and writes a timestamped backup first. Tests: `python3 -I desktop/windows/tests/test_terminal_apply.py`.
+Inside Windows Terminal, `bootstrap.sh` (or `./bootstrap.sh --terminal`, or `windows/windows-terminal.sh`) installs JetBrainsMono Nerd Font for the current Windows user, with no admin rights, and applies the scheme and font to the Ubuntu profiles. It keeps other settings and writes a timestamped backup first. Tests: `python3 -I desktop/windows/tests/test_terminal_apply.py`.
 
 To do it by hand:
 
-1. Install FiraCode Nerd Font on Windows (the font from WSL is not visible to Windows): download `FiraCode.zip` from the [Nerd Fonts releases](https://github.com/ryanoasis/nerd-fonts/releases/latest), select the `FiraCodeNerdFontMono-*.ttf` files, right-click, Install.
+1. Install JetBrainsMono Nerd Font on Windows (the font from WSL is not visible to Windows): download `JetBrainsMono.zip` from the [Nerd Fonts releases](https://github.com/ryanoasis/nerd-fonts/releases/latest), select the `JetBrainsMonoNerdFont-*.ttf` files, right-click, Install.
 2. In Windows Terminal open Settings, then Open JSON file.
-3. Copy `palette.json` into your `schemes` list, then set `"colorScheme": "Vivid Black"` and the font (`FiraCode Nerd Font Mono`, size 11) under `profiles.defaults`. Needs Windows Terminal 1.19 or newer.
+3. Copy `palette.json` into your `schemes` list, then set `"colorScheme": "Vivid Black"` and the font (`JetBrainsMono Nerd Font`, size 11) under `profiles.defaults`. Needs Windows Terminal 1.19 or newer.

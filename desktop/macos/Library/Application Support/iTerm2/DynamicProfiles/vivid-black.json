@@ -3,8 +3,8 @@
     {
       "Name": "Vivid Black",
       "Guid": "5f0c2b1e-6a3d-4c58-9d2e-d10f0a7e4b11",
-      "Normal Font": "FiraCodeNFM-Reg 13",
-      "Non Ascii Font": "FiraCodeNFM-Reg 13",
+      "Normal Font": "JetBrainsMonoNFM-Reg 13",
+      "Non Ascii Font": "JetBrainsMonoNFM-Reg 13",
       "Use Non-ASCII Font": false,
       "ASCII Ligatures": true,
       "Minimum Contrast": 0,

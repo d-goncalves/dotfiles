@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-FONT_FACE = "FiraCode Nerd Font Mono"   # installed by install-font.ps1
+FONT_FACE = "JetBrainsMono Nerd Font"
 FONT_SIZE = 11
 
 
