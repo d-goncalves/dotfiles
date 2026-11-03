@@ -84,6 +84,17 @@ else
     log "Skipping Homebrew. Install the tools listed in Brewfile yourself."
 fi
 
+log "Preparing ~/work/config (machine-specific files, kept out of this repo)"
+WORK_CONFIG="$HOME/work/config"
+run mkdir -p "$WORK_CONFIG"
+# Older layout kept these files directly in ~/work; move them over once
+for pair in .zsh:zsh .gitconfig:.gitconfig; do
+    old="$HOME/work/${pair%%:*}" new="$WORK_CONFIG/${pair##*:}"
+    if [ -f "$old" ] && [ ! -e "$new" ]; then
+        run mv "$old" "$new"
+    fi
+done
+
 log "Linking configs with stow"
 if ! command -v stow >/dev/null 2>&1 && [ "$DRY" = 0 ]; then
     echo "stow not found. Install it (brew install stow, or apt install stow) and re-run." >&2
@@ -154,6 +165,6 @@ fi
 cat <<EOF
 
 Done. Next steps:
-  - Machine-specific config goes in ~/work/.zsh (shell) and ~/work/.gitconfig (git identity, signing)
+  - Machine-specific config goes in ~/work/config/zsh (shell) and ~/work/config/.gitconfig (git identity, signing)
   - Make zsh your default shell if it isn't:  chsh -s "\$(command -v zsh)"
 EOF

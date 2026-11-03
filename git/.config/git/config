@@ -1,4 +1,4 @@
 # Generic git config. Identity and commit signing differ per machine,
-# so they live in ~/work/.gitconfig (git silently ignores it when missing).
+# so they live in ~/work/config/.gitconfig (git silently ignores it when missing).
 [include]
-	path = ~/work/.gitconfig
+	path = ~/work/config/.gitconfig

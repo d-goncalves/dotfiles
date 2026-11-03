@@ -1,5 +1,5 @@
 # Generic zsh config: works on macOS, Linux and WSL.
-# Anything machine-specific (tokens, work aliases, internal hosts) goes in ~/work/.zsh
+# Anything machine-specific (tokens, work aliases, internal hosts) goes in ~/work/config/zsh
 
 # ── Options ───────────────────────────────────────────────────────────────────
 setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT   # `dir` cds, cd keeps a stack
@@ -97,7 +97,7 @@ command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 command -v jump >/dev/null && eval "$(jump shell zsh)"
 
 # Machine-specific config (work tokens, internal aliases). Never part of this repo.
-[[ -r $HOME/work/.zsh ]] && source "$HOME/work/.zsh"
+[[ -r $HOME/work/config/zsh ]] && source "$HOME/work/config/zsh"
 
 # ── Plugins (installed by bootstrap.sh) ───────────────────────────────────────
 plugin_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"

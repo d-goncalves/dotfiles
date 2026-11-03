@@ -20,7 +20,7 @@ cd ~/work/dotfiles
 
 `bootstrap.sh` detects macOS, Linux or WSL and is safe to re-run. On macOS it links the iTerm2 profile and sets it as the default; restart iTerm to see it.
 
-Tokens, work aliases and git identity stay out of the repo, in `~/work/.zsh` (sourced by `.zshrc`) and `~/work/.gitconfig` (included by the git config), which also holds commit signing and which GitHub key each repo owner uses. `~/.ssh/config` has one alias per GitHub account (`github-personal`, `github-work`), each pinned to its 1Password key.
+Tokens, work aliases and git identity stay out of the repo, in `~/work/config/zsh` (sourced by `.zshrc`) and `~/work/config/.gitconfig` (included by the git config), which also holds commit signing and which GitHub key each repo owner uses. `~/.ssh/config` has one alias per GitHub account (`github-personal`, `github-work`), each pinned to its 1Password key.
 
 <details>
 <summary>Windows Terminal (manual step)</summary>
