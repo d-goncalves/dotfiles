@@ -1,5 +1,7 @@
 -- Neovim config. Plugins are managed by lazy.nvim, which bootstraps itself below.
 
+vim.loader.enable()
+
 vim.g.mapleader = " "
 vim.opt.termguicolors = true -- some plugins (colorizer) check this while loading
 
@@ -22,6 +24,98 @@ require("lazy").setup({
     { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/lazydev.nvim",
     {
+        "williamboman/mason.nvim", -- installs formatters and linters (language servers come from Brewfile.lsp)
+        build = ":MasonUpdate",
+        config = function()
+            require("mason").setup({ ui = { border = "rounded" } })
+        end,
+    },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+        config = function()
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "stylua",
+                    "ruff",
+                    "prettier",
+                    "shfmt",
+                    "shellcheck",
+                    "hadolint",
+                    "yamllint",
+                },
+            })
+        end,
+    },
+    {
+        "stevearc/conform.nvim", -- format on save, and <leader>cf to format by hand
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        keys = {
+            { "<leader>cf", function() require("conform").format({ async = true, lsp_format = "fallback" }) end, desc = "Format buffer" },
+        },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "ruff_fix", "ruff_format" },
+                sh = { "shfmt" },
+                bash = { "shfmt" },
+                terraform = { "terraform_fmt" },
+                tf = { "terraform_fmt" },
+                json = { "prettier" },
+                yaml = { "prettier" },
+                markdown = { "prettier" },
+                javascript = { "prettier" },
+                typescript = { "prettier" },
+                rust = { "rustfmt" },
+            },
+            format_on_save = { timeout_ms = 1000, lsp_format = "fallback" },
+        },
+    },
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                sh = { "shellcheck" },
+                bash = { "shellcheck" },
+                dockerfile = { "hadolint" },
+                yaml = { "yamllint" },
+                terraform = { "tflint" },
+            }
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                callback = function() lint.try_lint() end,
+            })
+        end,
+    },
+    {
+        "folke/trouble.nvim",
+        cmd = "Trouble",
+        opts = {},
+        keys = {
+            { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+            { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer diagnostics" },
+            { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols" },
+            { "<leader>xr", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP references" },
+            { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix" },
+        },
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {},
+        keys = {
+            { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
+            { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo" },
+            { "<leader>Tt", "<cmd>Trouble todo<cr>", desc = "Todos (Trouble)" },
+            { "<leader>Ts", "<cmd>TodoTelescope<cr>", desc = "Todos (Telescope)" },
+        },
+    },
+    "github/copilot.vim",
+    "b0o/schemastore.nvim", -- JSON/YAML schemas; wired into yamlls under "Language servers" below
+    {
         "nvim-telescope/telescope.nvim",
         tag = "v0.2.2",
         dependencies = {
@@ -40,8 +134,8 @@ require("lazy").setup({
             telescope.load_extension("project")
             require("which-key").add({
                 { "<leader>fy", function() require("schema-companion").select_schema() end },
-                { "<leader>ff", "<cmd>Telescope git_files <cr>" },
-                { "<leader>fF", "<cmd>Telescope find_files hidden=true <cr>" },
+                { "<leader>ff", "<cmd>Telescope find_files hidden=true <cr>" },
+                { "<leader>fF", "<cmd>Telescope git_files <cr>" },
                 { "<leader>fb", "<cmd>Telescope buffers <cr>" },
                 { "<leader>ft", "<cmd>Telescope help_tags <cr>" },
                 { "<leader>fs", "<cmd>Telescope live_grep <cr>" },
@@ -100,6 +194,7 @@ require("lazy").setup({
             })
         end,
     },
+    { "nvim-treesitter/nvim-treesitter-context", opts = {} }, -- keeps the current function/class name pinned at the top
     "neovim/nvim-lspconfig",
     {
         "lewis6991/gitsigns.nvim",
@@ -215,6 +310,7 @@ vim.opt.smartcase = true
 vim.opt.cursorline = false
 vim.opt.conceallevel = 0
 vim.opt.showtabline = 0
+vim.opt.laststatus = 3
 vim.opt.statusline = "%F"
 vim.opt.pumheight = 10
 vim.opt.foldmethod = "expr"
@@ -226,6 +322,16 @@ vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.softtabstop = 0
 vim.opt.autoread = true
+vim.opt.ignorecase = true
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 250
+vim.opt.inccommand = "split"
+vim.opt.completeopt = "menu,menuone,noselect,popup"
+vim.opt.confirm = true
+vim.opt.undolevels = 10000
+vim.o.winborder = "rounded"
+vim.opt.fileformats = "unix"
+vim.opt.fileformat = "unix"
 
 -- ── Mappings ──────────────────────────────────────────────────────────────────
 local map = vim.keymap.set
@@ -262,8 +368,13 @@ local language_servers = {
     "rust_analyzer",
     "typos_lsp",
     "yamlls",
+    "groovyls",
 }
 vim.lsp.config("terraformls", { init_options = { ignoreSingleFileWarning = true } })
+local has_schemastore, schemastore = pcall(require, "schemastore")
+if has_schemastore then
+    vim.lsp.config("yamlls", { settings = { yaml = { schemas = schemastore.yaml.schemas() } } })
+end
 for _, name in ipairs(language_servers) do
     local cmd = vim.lsp.config[name] and vim.lsp.config[name].cmd
     if type(cmd) ~= "table" or vim.fn.executable(cmd[1]) == 1 then
@@ -276,7 +387,9 @@ vim.diagnostic.config({
     virtual_lines = { current_line = true },
     underline = true,
     update_in_insert = false,
+    severity_sort = true,
 })
+vim.lsp.inlay_hint.enable(true)
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)

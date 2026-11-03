@@ -23,7 +23,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 opacity = 1
 
 # Pitch black background, colors from the nvim theme dark_flat.
-# Same palette as iterm/ and terminals/windows-terminal.json
+# Its own palette (the "cactus" one); iTerm and Windows Terminal use Vivid Black, see desktop/palette.json
 [colors.primary]
 background = "#000000"
 foreground = "#b0bec4"

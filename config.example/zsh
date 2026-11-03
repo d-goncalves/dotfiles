@@ -1,0 +1,7 @@
+# Machine-specific shell config. Copied here by bootstrap.sh from config.example/zsh,
+# sourced at the end of .zshrc, and never part of the dotfiles repo (it may be public).
+# Put things here that only make sense on this machine:
+#
+#   export SOME_API_TOKEN="..."
+#   alias deploy-staging="..."
+#   [ -r "$HOME/code/config/network.sh" ] && . "$HOME/code/config/network.sh"   # proxy, internal hosts

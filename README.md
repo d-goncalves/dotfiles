@@ -1,34 +1,43 @@
 # dotfiles
 
-Shell, editor and terminal config for macOS, Linux and WSL. [GNU Stow](https://www.gnu.org/software/stow/) links it into `$HOME`, and `bootstrap.sh` installs the tools around it: zsh with the starship prompt, Neovim, tmux, git, a terminal theme called "cactus" for iTerm2, Alacritty and Windows Terminal, and sway on Linux.
+My terminal setup for **macOS, Linux and WSL**. One command installs the tools and links the config.
 
-## Usage
+**zsh** + starship prompt · **Neovim** · **tmux** · **git** · one terminal theme for iTerm2 and Windows Terminal
+
+## Quick start
 
 ```sh
-git clone https://github.com/d-goncalves/dotfiles ~/work/dotfiles
-cd ~/work/dotfiles
+git clone https://github.com/d-goncalves/dotfiles ~/dotfiles
+cd ~/dotfiles
 
-./bootstrap.sh                 # tools (Homebrew), config links (stow), zsh and tmux plugins, terminal font (Linux)
+./bootstrap.sh                 # tools (Homebrew), config links (stow), oh-my-zsh, nvim plugins, terminal font (Linux)
 ./bootstrap.sh --extras        # also install Brewfile.extras (homelab and optional tools)
 ./bootstrap.sh --lsp           # also install Brewfile.lsp (language servers for nvim)
 ./bootstrap.sh --no-brew       # link configs only, for machines without admin rights
-./bootstrap.sh --no-plugins    # skip cloning the zsh and tmux plugins
+./bootstrap.sh --no-plugins    # skip oh-my-zsh, its plugins, and the nvim plugin and tool install
 ./bootstrap.sh --no-fonts      # skip downloading the terminal font (Linux)
-./bootstrap.sh --update        # only update the installed zsh and tmux plugins
+./bootstrap.sh --terminal      # WSL: install the font and apply the theme to Windows Terminal
+./bootstrap.sh --update        # only update oh-my-zsh and the zsh plugins
 ./bootstrap.sh --dry-run       # print what would happen, change nothing
 ```
 
-`bootstrap.sh` detects macOS, Linux or WSL and is safe to re-run. On macOS it links the iTerm2 profile and sets it as the default; restart iTerm to see it.
+It installs the tools with Homebrew, links the config with [GNU Stow](https://www.gnu.org/software/stow/), and sets up oh-my-zsh and the Neovim plugins. Safe to re-run.
 
-Tokens, work aliases and git identity stay out of the repo, in `~/work/config/zsh` (sourced by `.zshrc`) and `~/work/config/.gitconfig` (included by the git config), which also holds commit signing and which GitHub key each repo owner uses. `~/.ssh/config` has one alias per GitHub account (`github-personal`, `github-work`), each pinned to its 1Password key.
+## What's inside
 
-<details>
-<summary>Windows Terminal (manual step)</summary>
+|            |                                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `zsh/`     | Shell: oh-my-zsh, starship prompt, fzf, zoxide                                                                |
+| `nvim/`    | Neovim: LSP, treesitter, telescope, format on save                                                            |
+| `tmux/`    | tmux: `ctrl-a` prefix, vim keys, shared clipboard                                                             |
+| `git/`     | git: delta diffs, rebase on pull, rerere                                                                      |
+| `desktop/` | Per-OS terminal and window manager: `macos/` iTerm2, `linux/` sway and Alacritty, `windows/` Windows Terminal |
+| `hooks/`   | git hooks that refuse commits containing secrets                                                              |
 
-1. Install FiraCode Nerd Font on Windows, since the font from WSL is not visible to Windows. Download `FiraCode.zip` from the [Nerd Fonts releases](https://github.com/ryanoasis/nerd-fonts/releases/latest), select the `FiraCodeNerdFontMono-*.ttf` files, right-click, Install. A per-user install needs no admin rights.
-2. In Windows Terminal open Settings, then Open JSON file.
-3. From `terminals/windows-terminal.json`, copy the `"schemes"` entry into your `schemes` list and the `"defaults"` keys into `profiles.defaults`. This needs Windows Terminal 1.19 or newer.
+## How it's put together
 
-The palette lives in the iTerm2, Alacritty and Windows Terminal files, so keep them in sync when you change a color.
+- **One repo, three systems.** Everything shared lives at the top level, and OS-specific config lives under `desktop/`.
+- **Machine-specific settings stay out of the repo.** Git identity, tokens and personal aliases go in `~/code/config`, created from the templates in [`config.example/`](config.example/) and never committed.
+- **Safe to publish.** Commit and push hooks block credentials and shell-history files.
 
-</details>
+MIT licensed.

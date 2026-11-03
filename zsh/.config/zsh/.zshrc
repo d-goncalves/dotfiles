@@ -1,81 +1,109 @@
-# Generic zsh config: works on macOS, Linux and WSL.
-# Anything machine-specific (tokens, work aliases, internal hosts) goes in ~/work/config/zsh
+# zsh config for macOS, Linux and WSL, built on oh-my-zsh (installed by bootstrap.sh).
+# Layers, in the order they load:
+#   1. this file (generic)
+#   2. ~/work/config/work.zsh   optional work layer, maintained separately; before oh-my-zsh so it can set env
+#   3. ~/code/config/zsh        this machine only (tokens, aliases); last, so it wins. Never in this repo.
 
-# ── Options ───────────────────────────────────────────────────────────────────
-setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT   # `dir` cds, cd keeps a stack
-setopt INTERACTIVE_COMMENTS NO_BEEP
-
-# History lives outside the repo
-HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
-mkdir -p "${HISTFILE:h}"
-HISTSIZE=50000
-SAVEHIST=50000
-setopt SHARE_HISTORY EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
-
-[[ -t 0 ]] && stty stop undef   # frees ctrl-s
+export ZSH="$HOME/.oh-my-zsh"
+typeset -U path PATH            # no duplicate entries, even in nested shells
 
 # ── Environment ───────────────────────────────────────────────────────────────
-typeset -U path PATH            # no duplicate entries, even in nested shells
+if [[ "$(uname -s)" == Darwin ]]; then
+    export LANG="${LANG:-en_US.UTF-8}"
+else
+    export LANG=C.UTF-8
+fi
+export EDITOR=nvim
+export VISUAL=nvim
+export PAGER=less
+export LESS='-FRXi'
+export MANPAGER='nvim +Man!'
+[[ -t 0 ]] && export GPG_TTY="$(tty)"
+[[ -t 0 ]] && stty stop undef   # frees ctrl-s
+[[ -n "${WSL_DISTRO_NAME:-}" ]] && export BROWSER=wsl-browser
 path=("$HOME/.local/bin" $path)
 
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'  # SSH remote editor
-else
-    export EDITOR='nvim' # Local editor
-fi
-export VISUAL=$EDITOR
-export MANPAGER='nvim +Man!'
+[[ -r "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+[[ -r "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
-# 1Password SSH agent, when it is set up on this machine
-[[ -S $HOME/.1password/agent.sock ]] && export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+# 1Password SSH agent, only when its socket exists: the Linux/WSL path, or the macOS app's own.
+# A machine without 1Password (a work PC, say) skips this and keeps its normal ssh-agent.
+for sock in "$HOME/.1password/agent.sock" "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"; do
+    if [[ -S $sock ]]; then export SSH_AUTH_SOCK="$sock"; break; fi
+done
+unset sock
+
+# Homebrew: macOS (Apple Silicon / Intel) or Linuxbrew on Linux and WSL
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+elif (( $+commands[brew] )); then
+    eval "$(brew shellenv)"
+fi
+if (( $+commands[brew] )); then
+    rustup_bin="$(brew --prefix)/opt/rustup/bin"
+    [[ -d "$rustup_bin" ]] && path=("$rustup_bin" $path)
+    unset rustup_bin
+fi
 
 # fzf: list files with fd (fast, respects .gitignore) and preview directories
-if command -v fd >/dev/null; then
+if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
     export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 fi
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-# ── Aliases ───────────────────────────────────────────────────────────────────
-alias e="$EDITOR" v="$EDITOR"
-alias sv="sudo nvim" vim="nvim"
-alias ..="cd .." ...="cd ../.." ....="cd ../../.." .....="cd ../../../.."
-alias grep="grep --color=auto"
+# ── History: lives outside the repo (~/.config/zsh can be a symlink into it) ──
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+mkdir -p "${HISTFILE:h}"
+HISTSIZE=50000
+SAVEHIST=50000
+ZSH_COMPDUMP="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/zcompdump-$ZSH_VERSION"
 
-if command -v eza >/dev/null; then
-    alias ls="eza --group-directories-first"
-    alias l="eza -lah --group-directories-first --git" lsa="l"
-    alias ll="eza -lh --group-directories-first --git"
-    alias la="eza -lAh --group-directories-first --git"
-    alias lt="eza --tree --level=2"
-elif [[ $OSTYPE == darwin* ]]; then
-    alias ls="ls -G"
-    alias lsa="ls -lah" l="ls -lah" ll="ls -lh" la="ls -lAh"
+# ── oh-my-zsh ─────────────────────────────────────────────────────────────────
+ZSH_THEME="robbyrussell"    # only a fallback: starship draws the prompt below
+HYPHEN_INSENSITIVE="true"
+zstyle ':omz:update' mode reminder
+# Start tmux in every real terminal. Skipped in IDE terminals, scripts, or with NO_TMUX=1.
+ZSH_TMUX_AUTOSTART=false
+[[ -o interactive && -t 0 && -t 1 && -z $NO_TMUX && $TERM_PROGRAM != vscode ]] && ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOQUIT=false
+ZSH_TMUX_FIXTERM=false
+plugins=(git colored-man-pages colorize common-aliases command-not-found docker-compose docker fzf tmux zsh-completions fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
+
+# Optional work layer (see top of file)
+[[ -r ~/work/config/work.zsh ]] && source ~/work/config/work.zsh
+
+if [[ -r $ZSH/oh-my-zsh.sh ]]; then
+    source $ZSH/oh-my-zsh.sh
 else
-    alias ls="ls -hN --color=auto --group-directories-first"
-    alias diff="diff --color=auto"
-    alias lsa="ls -lah" l="ls -lah" ll="ls -lh" la="ls -lAh"
+    echo "oh-my-zsh is missing: run ./bootstrap.sh from the dotfiles repo" >&2
 fi
+(( $+functions[_tars] )) && compdef _tars tars
 
-if command -v batcat >/dev/null; then alias cat=batcat      # Debian / Ubuntu name
-elif command -v bat >/dev/null; then alias cat=bat; fi
+if (( $+commands[starship] )); then
+    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"   # starship's default is ~/.config/starship.toml
+    eval "$(starship init zsh)"
+fi
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh --cmd j)"
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+
+# ── Options ───────────────────────────────────────────────────────────────────
+setopt SHARE_HISTORY EXTENDED_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS HIST_VERIFY
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT INTERACTIVE_COMMENTS NO_BEEP
 
 # ── Completion ────────────────────────────────────────────────────────────────
-# The dump is only rebuilt once a day; the rest of the time compinit skips its slow security scan
-autoload -Uz compinit
-() {
-    setopt local_options extended_glob
-    local dump="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/zcompdump"
-    if [[ -n $dump(#qN.mh-24) ]]; then compinit -C -d "$dump"; else compinit -d "$dump"; fi
-}
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'          # ignore case
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+zstyle ':completion:*' menu no  # lets fzf-tab capture the unambiguous prefix
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' menu no  # lets fzf-tab capture the unambiguous prefix
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Tab / Shift-Tab walk through the candidates (wrapping around), Enter picks the highlighted one
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --cycle
@@ -83,60 +111,41 @@ zstyle ':fzf-tab:*' fzf-bindings 'tab:down' 'shift-tab:up'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# ── Prompt ────────────────────────────────────────────────────────────────────
-# One line: [~/path](branch|status) ->   Starship draws it (~/.config/starship.toml);
-# without starship you get the same look minus the git part
-if command -v starship >/dev/null; then
-    eval "$(starship init zsh)"
+# Edit the current command line in $EDITOR with ctrl-v
+autoload -Uz edit-command-line; zle -N edit-command-line
+bindkey '^v' edit-command-line
+
+# ── Aliases ───────────────────────────────────────────────────────────────────
+if (( $+commands[eza] )); then
+    alias ls='eza --icons=auto --group-directories-first'
+    alias ll='eza -lh --git --icons=auto --group-directories-first'
+    alias la='eza -lAh --git --icons=auto --group-directories-first'
+    alias l='eza -lah --git --icons=auto --group-directories-first'
+    alias lsa='eza -lah --git --icons=auto --group-directories-first'
+    alias lt='eza --tree --level=2 --icons=auto'
 else
-    PROMPT='%B%F{red}[%F{yellow}%~%F{red}]%F{yellow} -> %b%f'
+    alias ll='ls -lh'
+    alias la='ls -lAh'
+    alias l='ls -CFlah'
 fi
+if (( $+commands[bat] )); then alias cat='bat --paging=never'
+elif (( $+commands[batcat] )); then alias cat='batcat --paging=never'; fi   # Debian / Ubuntu name
+(( $+commands[lazygit] )) && alias lg='lazygit'
+(( $+commands[btop] )) && alias top='btop'
 
-# ── Tools ─────────────────────────────────────────────────────────────────────
-command -v direnv >/dev/null && eval "$(direnv hook zsh)"
-command -v jump >/dev/null && eval "$(jump shell zsh)"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 
-# Machine-specific config (work tokens, internal aliases). Never part of this repo.
-[[ -r $HOME/work/config/zsh ]] && source "$HOME/work/config/zsh"
+unalias 'H' 'T' 'G' 'L' 'M' 'LL' 'CA' 'NE' 'NUL' 'P' 'HL' 'TL' 'S' 'B' 2>/dev/null
 
-# ── Plugins (installed by bootstrap.sh) ───────────────────────────────────────
-plugin_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
+alias e="$EDITOR" v="$EDITOR" sv="sudo nvim"
+alias vim=nvim
+alias gst='git status'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Git aliases (gst, ga, gco, gl, gp, ...) from the oh-my-zsh git plugin
-for p in ohmyzsh/lib/git.zsh ohmyzsh/plugins/git/git.plugin.zsh; do
-    [[ -r $plugin_dir/$p ]] && source "$plugin_dir/$p"
-done
-
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-
-# Everything that sets up keys or wraps widgets. fzf powers every completion (fzf-tab).
-# Order matters: syntax-highlighting must come last.
-_late_init() {
-    command -v fzf >/dev/null && source <(fzf --zsh 2>/dev/null)
-    local p
-    for p in fzf-tab/fzf-tab.plugin.zsh \
-             zsh-autosuggestions/zsh-autosuggestions.zsh \
-             zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; do
-        [[ -r $plugin_dir/$p ]] && source "$plugin_dir/$p"
-    done
-    # Edit the current command line in $EDITOR with ctrl-v
-    autoload -Uz edit-command-line; zle -N edit-command-line
-    bindkey '^v' edit-command-line
-}
-if [[ -r $plugin_dir/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]]; then
-    # zsh-vi-mode resets keybindings on its first prompt, which would undo fzf-tab's Tab,
-    # fzf's ctrl-r and ctrl-v, so all of that runs after it
-    zvm_after_init() { _late_init }
-    source "$plugin_dir/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-else
-    _late_init
-fi
-
-# ── tmux ──────────────────────────────────────────────────────────────────────
-# Start tmux in every terminal, reattaching to the running session when there is one.
-# Skipped when already inside tmux, in IDE terminals, when there is no real terminal
-# (scripts, tests), or with NO_TMUX=1 in the environment.
-# exec makes leaving tmux close the terminal.
-if command -v tmux >/dev/null && [[ -z $TMUX && -z $NO_TMUX && $TERM_PROGRAM != vscode && -t 0 && -t 1 ]]; then
-    exec tmux new-session -A -s 0
-fi
+# Machine-specific config (tokens, aliases for this machine only). Never part of this repo.
+[[ -r $HOME/code/config/zsh ]] && source "$HOME/code/config/zsh"

@@ -2,10 +2,16 @@
 .netrwhist
 .vscode
 
-# Shell state that must never be committed
-.zsh_history
+# Shell and tool state that must never be committed (it holds pasted tokens and passwords)
+*_history
+.lesshst
+.viminfo
+.python_history
+.node_repl_history
 .zcompdump*
 .zsh_sessions/
 
-# Plugin clones live in ~/.local/share, never in the repo (~/.config/tmux links here)
-tmux/.config/tmux/plugins/
+# Local archives and scratch files
+*.zip
+.mypy_cache/
+__pycache__/

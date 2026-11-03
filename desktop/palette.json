@@ -1,0 +1,23 @@
+{
+  "name": "Vivid Black",
+  "background": "#000000",
+  "foreground": "#FFFFFF",
+  "cursorColor": "#FFFFFF",
+  "selectionBackground": "#3A4A6B",
+  "black": "#000000",
+  "red": "#FF5050",
+  "green": "#40FF80",
+  "yellow": "#FFE640",
+  "blue": "#4DA8FF",
+  "purple": "#D878FF",
+  "cyan": "#40F8FF",
+  "white": "#E6E6E6",
+  "brightBlack": "#B0B0B0",
+  "brightRed": "#FF7878",
+  "brightGreen": "#70FFA0",
+  "brightYellow": "#FFF870",
+  "brightBlue": "#70C0FF",
+  "brightPurple": "#EA98FF",
+  "brightCyan": "#80FFFF",
+  "brightWhite": "#FFFFFF"
+}

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Last line of defence before a push: scan every commit that would be published, which also catches
+# a secret committed earlier with --no-verify. This repo is public. See secret-scan.sh.
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+zero=0000000000000000000000000000000000000000
+status=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ "$local_sha" = "$zero" ] && continue                 # deleting a remote branch
+    if [ "$remote_sha" = "$zero" ]; then range=("$local_sha" --not --remotes="$1")   # new branch: everything the remote lacks
+    else range=("$remote_sha..$local_sha"); fi
+    if ! git log -p --no-color -U0 --format= --diff-filter=ACMR "${range[@]}" | "$dir/secret-scan.sh"; then
+        echo "pre-push: refusing to push $local_ref. The commits above contain a credential." >&2
+        status=1
+    fi
+done
+exit "$status"

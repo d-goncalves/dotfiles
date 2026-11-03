@@ -1,0 +1,4 @@
+# Files in this folder that stow must not link into $HOME
+make-iterm-profile\.py
+__pycache__
+\.DS_Store

@@ -1,0 +1,48 @@
+# Prompt: short path, git state from one `git status` call (custom.git), AWS profile when set.
+# Colors use the terminal palette, so they follow the terminal theme (Vivid Black).
+add_newline = false
+command_timeout = 500
+format = "$directory$custom$aws$character"
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[➜](bold red) "
+
+[directory]
+truncation_length = 1
+fish_style_pwd_dir_length = 1
+truncate_to_repo = false
+style = "bold cyan"
+format = "[$path]($style) "
+
+[git_branch]
+disabled = true
+[git_status]
+disabled = true
+
+[custom.git]
+when = "git rev-parse --is-inside-work-tree"
+shell = ["bash", "--noprofile", "--norc"]
+format = "$output "
+command = '''
+b=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD)
+p=$(git status --porcelain=v2 --branch --show-stash 2>/dev/null)
+ahead=$(sed -n 's/^# branch.ab +\([0-9]*\) -\([0-9]*\)/\1/p' <<<"$p"); behind=$(sed -n 's/^# branch.ab +\([0-9]*\) -\([0-9]*\)/\2/p' <<<"$p")
+staged=$(grep -cE '^[12] [MADRC]' <<<"$p"); changed=$(grep -cE '^[12] .[MD]' <<<"$p")
+conf=$(grep -c '^u ' <<<"$p"); untr=$(grep -c '^? ' <<<"$p"); stash=$(git rev-list --walk-reflogs --count refs/stash 2>/dev/null || echo 0)
+E=$(printf '\033'); R="$E[0m"
+f=""
+[ "${behind:-0}" -gt 0 ] && f+="↓$behind"
+[ "${ahead:-0}" -gt 0 ] && f+="↑$ahead"
+[ "$staged" -gt 0 ] && f+="$E[31m●$staged$R"
+[ "$conf" -gt 0 ] && f+="$E[31m✖$conf$R"
+[ "$changed" -gt 0 ] && f+="$E[34m✚$changed$R"
+[ "$untr" -gt 0 ] && f+="…"
+[ "$stash" -gt 0 ] && f+="$E[36m⚑$stash$R"
+[ -z "$f" ] && f="$E[1;32m✓$R"
+printf '(%s%s%s|%s)' "$E[1;35m" "$b" "$R" "$f"
+'''
+
+[aws]
+format = "[$symbol($profile )]($style)"
+symbol = " "

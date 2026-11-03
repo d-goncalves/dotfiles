@@ -1,4 +1,32 @@
-# Generic git config. Identity and commit signing differ per machine,
-# so they live in ~/work/config/.gitconfig (git silently ignores it when missing).
+# Generic git config. Identity and commit signing differ per machine, so they live in
+# ~/code/config/.gitconfig, and an optional work layer in ~/work/config/work.gitconfig.
+# Git silently ignores an include whose file is missing.
+[core]
+	editor = nvim -f
+	# delta when it is installed (Brewfile), plain less otherwise, so a missing tool never breaks `git log`
+	pager = "sh -c 'if command -v delta >/dev/null 2>&1; then exec delta; else exec less -FRX; fi' --"
+[interactive]
+	diffFilter = "if command -v delta >/dev/null 2>&1; then exec delta --color-only; else exec cat; fi"
+[delta]
+	navigate = true
+	line-numbers = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
+[merge]
+	conflictStyle = zdiff3
+
+# Later includes override earlier settings: this machine first, then the work layer for repos under ~/work.
 [include]
-	path = ~/work/config/.gitconfig
+	path = ~/code/config/.gitconfig
+[includeIf "gitdir:~/work/"]
+	path = ~/work/config/work.gitconfig

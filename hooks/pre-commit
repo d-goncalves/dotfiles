@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Refuse to commit anything that looks like a credential. See secret-scan.sh.
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if ! git diff --cached --no-color -U0 --diff-filter=ACMR | "$dir/secret-scan.sh"; then
+    echo "pre-commit: commit blocked. Remove the secret (and rotate it if it was ever real)." >&2
+    exit 1
+fi
+# The iTerm profile is generated from desktop/palette.json; refuse a commit where they disagree
+if command -v python3 >/dev/null 2>&1 && [ -f desktop/macos/make-iterm-profile.py ]; then
+    python3 desktop/macos/make-iterm-profile.py --check >/dev/null || {
+        echo "pre-commit: the iTerm profile does not match desktop/palette.json. Run: python3 desktop/macos/make-iterm-profile.py" >&2
+        exit 1
+    }
+fi

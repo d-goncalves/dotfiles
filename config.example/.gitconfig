@@ -1,0 +1,22 @@
+# Machine-specific git config. Copied here by bootstrap.sh from config.example/.gitconfig,
+# included by ~/.config/git/config, and never part of the dotfiles repo (it may be public).
+# Fill in your identity before the first commit on this machine.
+
+[user]
+	name = Your Name
+	email = you@example.com
+
+# Commit signing (optional). With the 1Password SSH agent (a personal machine; a PC without
+# 1Password just leaves this out, or points at its own key):
+# [user]
+# 	signingkey = ssh-ed25519 AAAA...
+# [gpg]
+# 	format = ssh
+# [gpg "ssh"]
+# 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign   # macOS; Linux: /opt/1Password/op-ssh-sign
+# [commit]
+# 	gpgsign = true
+
+# A different identity for one folder (for example a work employer):
+# [includeIf "gitdir:~/code/work/"]
+# 	path = ~/code/config/work.gitconfig
