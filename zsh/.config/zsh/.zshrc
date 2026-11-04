@@ -4,7 +4,7 @@
 #   2. ~/work/config/work.zsh   optional work layer, maintained separately; before oh-my-zsh so it can set env
 #   3. ~/code/config/zsh        this machine only (tokens, aliases); last, so it wins. Never in this repo.
 
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
 typeset -U path PATH            # no duplicate entries, even in nested shells
 
 # ── Environment ───────────────────────────────────────────────────────────────

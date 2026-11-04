@@ -44,7 +44,7 @@ run() {
 
 if [ "$UPDATE" = 1 ]; then
     log "Updating oh-my-zsh and its plugins"
-    for dir in "$HOME/.oh-my-zsh/" "$HOME/.oh-my-zsh/custom/plugins"/*/; do
+    for dir in "${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/" "${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom/plugins"/*/; do
         [ -d "${dir}.git" ] || continue
         if run git -C "$dir" pull --ff-only -q; then echo "updated $(basename "$dir")"; else echo "could not update $(basename "$dir")" >&2; fi
     done
@@ -193,8 +193,8 @@ fi
 if [ "$PLUGINS" = 1 ]; then
     log "Installing oh-my-zsh and the zsh plugins"
     clone() { if [ ! -d "$2/.git" ]; then run git clone --depth 1 "$1" "$2"; fi; }
-    clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
-    C="$HOME/.oh-my-zsh/custom/plugins"
+    clone https://github.com/ohmyzsh/ohmyzsh.git "${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
+    C="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom/plugins"
     run mkdir -p "$C"
     clone https://github.com/zsh-users/zsh-autosuggestions "$C/zsh-autosuggestions"
     clone https://github.com/zsh-users/zsh-syntax-highlighting "$C/zsh-syntax-highlighting"
