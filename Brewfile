@@ -27,4 +27,4 @@ brew "uv"                # python tooling
 brew "rustup"            # rust toolchain; bootstrap.sh installs the stable one
 
 # Terminal font (Linux gets it from bootstrap.sh; Windows needs it installed on the Windows side)
-cask "font-fira-code-nerd-font" if OS.mac?
+cask "font-jetbrains-mono-nerd-font" if OS.mac?

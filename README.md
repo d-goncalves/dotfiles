@@ -1,8 +1,14 @@
 # dotfiles
 
-My terminal setup for **macOS, Linux and WSL**. One command installs the tools and links the config.
+These are my terminal settings for **macOS, Linux and WSL**. One command installs the tools and links the configuration files.
 
-**zsh** + starship prompt · **Neovim** · **tmux** · **git** · one terminal theme for iTerm2 and Windows Terminal
+The setup has these parts:
+
+- **zsh** with the starship prompt
+- **Neovim**
+- **tmux**
+- **git**
+- One terminal theme for iTerm2 and Windows Terminal
 
 ## Quick start
 
@@ -10,34 +16,42 @@ My terminal setup for **macOS, Linux and WSL**. One command installs the tools a
 git clone https://github.com/d-goncalves/dotfiles ~/dotfiles
 cd ~/dotfiles
 
-./bootstrap.sh                 # tools (Homebrew), config links (stow), oh-my-zsh, nvim plugins, terminal font (Linux)
+./bootstrap.sh                 # install tools (Homebrew), link config files (stow), install oh-my-zsh and nvim plugins, install terminal font (Linux)
 ./bootstrap.sh --extras        # also install Brewfile.extras (homelab and optional tools)
 ./bootstrap.sh --lsp           # also install Brewfile.lsp (language servers for nvim)
-./bootstrap.sh --no-brew       # link configs only, for machines without admin rights
-./bootstrap.sh --no-plugins    # skip oh-my-zsh, its plugins, and the nvim plugin and tool install
-./bootstrap.sh --no-fonts      # skip downloading the terminal font (Linux)
+./bootstrap.sh --no-brew       # only link config files (use this on a machine where you are not an administrator)
+./bootstrap.sh --no-plugins    # do not install oh-my-zsh, its plugins, or the nvim plugins and tools
+./bootstrap.sh --no-fonts      # do not download the terminal font (Linux)
 ./bootstrap.sh --terminal      # WSL: install the font and apply the theme to Windows Terminal
 ./bootstrap.sh --update        # only update oh-my-zsh and the zsh plugins
-./bootstrap.sh --dry-run       # print what would happen, change nothing
+./bootstrap.sh --dry-run       # show what the script will do, but do not change anything
 ```
 
-It installs the tools with Homebrew, links the config with [GNU Stow](https://www.gnu.org/software/stow/), and sets up oh-my-zsh and the Neovim plugins. Safe to re-run.
+The script does these steps:
 
-## What's inside
+1. It installs the tools with Homebrew.
+2. It links the configuration files with [GNU Stow](https://www.gnu.org/software/stow/).
+3. It sets up oh-my-zsh and the Neovim plugins.
 
-|            |                                                                                                               |
-| ---------- | ------------------------------------------------------------------------------------------------------------- |
-| `zsh/`     | Shell: oh-my-zsh, starship prompt, fzf, zoxide                                                                |
-| `nvim/`    | Neovim: LSP, treesitter, telescope, format on save                                                            |
-| `tmux/`    | tmux: `ctrl-a` prefix, vim keys, shared clipboard                                                             |
-| `git/`     | git: delta diffs, rebase on pull, rerere                                                                      |
-| `desktop/` | Per-OS terminal and window manager: `macos/` iTerm2, `linux/` sway and Alacritty, `windows/` Windows Terminal |
-| `hooks/`   | git hooks that refuse commits containing secrets                                                              |
+You can run the script again at any time. It does not cause damage.
 
-## How it's put together
+## Contents
 
-- **One repo, three systems.** Everything shared lives at the top level, and OS-specific config lives under `desktop/`.
-- **Machine-specific settings stay out of the repo.** Git identity, tokens and personal aliases go in `~/code/config`, created from the templates in [`config.example/`](config.example/) and never committed.
-- **Safe to publish.** Commit and push hooks block credentials and shell-history files.
+| Folder     | Description                                                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `zsh/`     | Shell settings: oh-my-zsh, starship prompt, fzf, zoxide                                                                                  |
+| `nvim/`    | Neovim settings: LSP, treesitter, telescope, format on save                                                                              |
+| `tmux/`    | tmux settings: `ctrl-a` prefix, vim keys, shared clipboard                                                                               |
+| `git/`     | git settings: delta diffs, rebase on pull, rerere                                                                                        |
+| `desktop/` | Settings for each OS: `macos/` has iTerm2, `linux/` has sway and Alacritty, `windows/` has Windows Terminal                              |
+| `hooks/`   | git hooks that stop a commit if it contains secrets                                                                                      |
 
-MIT licensed.
+## Structure
+
+- **One repository for three systems.** Shared files are in the top-level folder. Files for one OS are in `desktop/`.
+- **Machine-specific settings are not in the repository.** Put your git identity, tokens and personal aliases in `~/code/config`. Make this folder from the templates in [`config.example/`](config.example/). Do not commit it.
+- **It is safe to publish.** The commit and push hooks stop credentials and shell-history files.
+
+## Licence
+
+This project has an MIT licence.

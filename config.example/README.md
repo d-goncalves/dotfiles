@@ -1,11 +1,13 @@
-# Machine-specific config
+# Machine-specific configuration
 
-These are templates. `bootstrap.sh` copies `zsh` and `.gitconfig` to `~/code/config/` if they are missing, and nothing in `~/code/config/` is ever committed, because this repo is public.
+These files are templates. `bootstrap.sh` copies `zsh` and `.gitconfig` to `~/code/config/` if they are not there.
 
-Shell and git read three layers, each overriding the one before:
+Do not commit anything in `~/code/config/`. This repository is public.
 
-1. **This repo:** generic settings.
-2. **An optional work layer:** `~/work/config/work.zsh` and `~/work/config/work.gitconfig`, maintained separately. The git file only applies to repositories under `~/work`.
-3. **This machine:** `~/code/config/zsh` and `~/code/config/.gitconfig`. Git identity, commit signing, tokens, aliases for this machine only.
+The shell and git read three layers. Each layer overrides the layer before it:
 
-After the first bootstrap on a new machine, edit the name and email in `~/code/config/.gitconfig` before your first commit.
+1. **This repository:** generic settings.
+2. **An optional work layer:** `~/work/config/work.zsh` and `~/work/config/work.gitconfig`. You keep these files separately. The git file applies only to repositories in `~/work`.
+3. **This machine:** `~/code/config/zsh` and `~/code/config/.gitconfig`. Put these settings here: git identity, commit signing, tokens and aliases for this machine only.
+
+After the first bootstrap on a new machine, change the name and email in `~/code/config/.gitconfig`. Do this before your first commit.
